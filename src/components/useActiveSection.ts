@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import type { RefObject } from 'react'
 
-const sections = [
-  { id: 'experience', label: 'Experience' },
-  { id: 'work', label: 'Selected work' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
-] as const
+import sectionLabels from '../../content/sections.json' with { type: 'json' }
 
-type ActiveSection = (typeof sections)[number]['id'] | null
+type SectionId = keyof typeof sectionLabels
+const sections = Object.keys(sectionLabels)
+  .filter((id): id is SectionId => Object.hasOwn(sectionLabels, id))
+  .map((id) => ({ id, label: sectionLabels[id] }))
+
+export type ActiveSection = SectionId | null
 
 export function useActiveSection(header: RefObject<HTMLElement | null>) {
   const [active, setActive] = useState<{ current: ActiveSection; previous: ActiveSection }>({

@@ -4,24 +4,25 @@ import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 
 import { App } from './App'
-import { resumeSchema } from './resumeSchema'
+import type { Resume } from './Resume'
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Root element is missing')
 const snapshot = document.getElementById('resume-data')
 
-let payload: unknown
+let resume: Resume
 if (snapshot) {
-  payload = JSON.parse(snapshot.textContent ?? '')
+  // The build serializes this snapshot from content/resume.json.
+  resume = JSON.parse(snapshot.textContent ?? '') as Resume
 } else if (import.meta.env.DEV) {
-  payload = (await import('../content/resume.json')).default
+  resume = (await import('../content/resume.json')).default
 } else {
   throw new Error('Prerendered resume data is missing')
 }
 
 const app = (
   <StrictMode>
-    <App resume={resumeSchema.parse(payload)} />
+    <App resume={resume} />
   </StrictMode>
 )
 if (snapshot) hydrateRoot(root, app)

@@ -1,7 +1,7 @@
 import { Button, Group } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 
-import type { Resume } from '../resumeSchema'
+import type { Resume } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 

@@ -1,7 +1,7 @@
 import { Anchor, Box, Text, Title } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 
-import type { Position } from '../resumeSchema'
+import type { Position } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 

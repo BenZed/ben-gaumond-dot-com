@@ -1,9 +1,16 @@
 import { Anchor, Badge, Box, List, Stack, Text, Title } from '@mantine/core'
 import { IconArrowUpRight, IconChevronDown } from '@tabler/icons-react'
 
-import { formatMonth } from '../resumeSchema'
-import type { Position } from '../resumeSchema'
+import type { Position } from '../Resume'
 import { SiteIcon } from './SiteIcon'
+
+function formatMonth(value: string): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${value}-01T00:00:00Z`))
+}
 
 export function Experience({ position }: { readonly position: Position }) {
   return (

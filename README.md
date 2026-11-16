@@ -21,9 +21,9 @@ npm run build
 npm run preview
 ```
 
-`check` verifies types, lint, and formatting, then tests prerendering and resume validation. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
+`check` verifies types, lint, and formatting, then tests prerendering. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
-The build writes the static site to `dist`. It validates `content/resume.json` and prerenders the resume into `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the resume data embedded during the build.
+The build writes the static site to `dist`. It prerenders `content/resume.json` into `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the resume data embedded during the build.
 
 The Print resume button uses the browser print dialog and a dedicated print stylesheet. Choose Save as PDF for a PDF copy.
 
@@ -43,13 +43,13 @@ The initial project artwork is decorative typography and CSS, not a screenshot o
 
 ## Source filenames
 
-Match a source file’s name and casing to its primary export. For example, `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, as in `renderResume.test.ts`.
+Match a source file’s name and casing to its primary export. For example, `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, as in `prerender.test.ts`.
 
 Keep conventional names for entry points, config files, declaration files, and modules without a clear primary export.
 
 ## Type safety
 
-Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. Runtime JSON validation complements compile-time checks.
+Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. TypeScript derives the resume types from `content/resume.json`.
 
 `workbench/` is local-only and ignored, including imported reference material. Do not publish or commit it.
 

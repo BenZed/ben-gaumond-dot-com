@@ -1,6 +1,6 @@
 import { Box, Group, Text } from '@mantine/core'
 
-import type { Resume } from '../resumeSchema'
+import type { Resume } from '../Resume'
 
 export function Toolkit({
   profiles,

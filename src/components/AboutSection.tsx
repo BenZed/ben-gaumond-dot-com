@@ -1,6 +1,6 @@
 import { Box, Text } from '@mantine/core'
 
-import type { Resume } from '../resumeSchema'
+import type { Resume } from '../Resume'
 import { Section } from './Section'
 
 export function AboutSection({

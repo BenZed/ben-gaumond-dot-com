@@ -1,4 +1,4 @@
-import { ActionIcon, Menu, useMantineColorScheme } from '@mantine/core'
+import { ActionIcon, Group, Menu, useMantineColorScheme } from '@mantine/core'
 import { useMounted } from '@mantine/hooks'
 import { IconDeviceDesktop, IconMoon, IconSun } from '@tabler/icons-react'
 
@@ -39,9 +39,12 @@ export function ColorModeControl() {
             if (mode) setColorScheme(mode.value)
           }}
         >
-          {modes.map(({ value, label }) => (
+          {modes.map(({ value, label, icon }) => (
             <Menu.RadioItem key={value} value={value} closeMenuOnClick>
-              {label}
+              <Group gap="xs" wrap="nowrap">
+                <SiteIcon icon={icon} size={15} />
+                {label}
+              </Group>
             </Menu.RadioItem>
           ))}
         </Menu.RadioGroup>

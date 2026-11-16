@@ -6,7 +6,11 @@ import { ColorModeControl } from './ColorModeControl'
 import { SiteIcon } from './SiteIcon'
 import { sections, useActiveSection } from './useActiveSection'
 
-function HeaderLabel({ section }: { readonly section: (typeof sections)[number]['id'] | null }) {
+type HeaderLabelProps = {
+  readonly section: (typeof sections)[number]['id'] | null
+}
+
+function HeaderLabel({ section }: HeaderLabelProps) {
   return section === null ? (
     <Box component="span" className="wordmark">
       bg<Box component="span">.</Box>

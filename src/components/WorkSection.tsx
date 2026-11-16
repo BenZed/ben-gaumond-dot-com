@@ -5,7 +5,11 @@ import type { Position } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
-export function WorkSection({ experience }: { readonly experience: readonly Position[] }) {
+export type WorkSectionProps = {
+  readonly experience: readonly Position[]
+}
+
+export function WorkSection({ experience }: WorkSectionProps) {
   const projects = experience.filter((position) => position.projectTitle !== undefined)
   return (
     <Section

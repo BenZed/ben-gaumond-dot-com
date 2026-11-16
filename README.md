@@ -57,6 +57,8 @@ Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalP
 
 ## UI organization
 
+Define props in a named `<ComponentName>Props` type. Export the type for public components and keep it local for private components. Components without props need no props type.
+
 `src/App.tsx` composes page sections and providers. `src/components/` contains the header/footer, resume sections, experience entries, shared Tabler icon wrapper, and appearance control. `src/theme.ts` owns Mantine theme configuration; `src/styles.css` owns the visual palette and editorial layout.
 
 Prefer Mantine components and hooks, including polymorphic semantic elements. Native details/summary semantics are intentionally preserved through `Box` for disclosure behavior without JavaScript. Keep career content in `content/resume.json` rather than in component files.

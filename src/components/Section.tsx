@@ -32,13 +32,12 @@ function SectionRoot({ id, title, eyebrow, headingOrder = 2, className, children
   )
 }
 
-function SectionHeader({
-  aside,
-  className = 'section-heading',
-}: {
+export type SectionHeaderProps = {
   readonly aside?: ReactNode
   readonly className?: string
-}) {
+}
+
+function SectionHeader({ aside, className = 'section-heading' }: SectionHeaderProps) {
   const section = useContext(SectionContext)
   if (!section) throw new Error('Section.Header must be rendered inside Section')
 

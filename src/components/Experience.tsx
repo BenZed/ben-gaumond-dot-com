@@ -12,7 +12,11 @@ function formatMonth(value: string): string {
   }).format(new Date(`${value}-01T00:00:00Z`))
 }
 
-export function Experience({ position }: { readonly position: Position }) {
+export type ExperienceProps = {
+  readonly position: Position
+}
+
+export function Experience({ position }: ExperienceProps) {
   return (
     <Box component="article" className="experience-row" id={position.id}>
       <Stack className="experience-date" gap={14} align="flex-start">

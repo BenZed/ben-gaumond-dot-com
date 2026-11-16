@@ -5,7 +5,11 @@ import type { Resume } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
-export function ContactSection({ profiles }: { readonly profiles: Resume['basics']['profiles'] }) {
+export type ContactSectionProps = {
+  readonly profiles: Resume['basics']['profiles']
+}
+
+export function ContactSection({ profiles }: ContactSectionProps) {
   return (
     <Section
       id="contact"

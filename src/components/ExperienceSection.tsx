@@ -4,7 +4,11 @@ import type { Position } from '../Resume'
 import { Experience } from './Experience'
 import { Section } from './Section'
 
-export function ExperienceSection({ experience }: { readonly experience: readonly Position[] }) {
+export type ExperienceSectionProps = {
+  readonly experience: readonly Position[]
+}
+
+export function ExperienceSection({ experience }: ExperienceSectionProps) {
   return (
     <Section
       id="experience"

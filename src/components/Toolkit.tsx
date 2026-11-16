@@ -2,13 +2,12 @@ import { Box, Group, Text } from '@mantine/core'
 
 import type { Resume } from '../Resume'
 
-export function Toolkit({
-  profiles,
-  technologies,
-}: {
+export type ToolkitProps = {
   readonly profiles: Resume['basics']['profiles']
   readonly technologies: Resume['technologies']
-}) {
+}
+
+export function Toolkit({ profiles, technologies }: ToolkitProps) {
   return (
     <>
       <Box className="print-contact">

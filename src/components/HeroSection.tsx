@@ -10,7 +10,11 @@ import {
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
-export function HeroSection({ summary }: { readonly summary: string }) {
+export type HeroSectionProps = {
+  readonly summary: string
+}
+
+export function HeroSection({ summary }: HeroSectionProps) {
   return (
     <Section
       id="intro"

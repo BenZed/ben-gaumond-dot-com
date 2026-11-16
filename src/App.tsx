@@ -10,8 +10,8 @@ import {
   createTheme,
 } from '@mantine/core'
 
-import { resume, formatMonth } from './resume'
-import type { Position } from './resume'
+import { formatMonth } from './resume'
+import type { Position, Resume } from './resume'
 
 const theme = createTheme({
   primaryColor: 'forest',
@@ -85,7 +85,7 @@ function Experience({ position }: { readonly position: Position }) {
   )
 }
 
-export function App() {
+export function App({ resume }: { readonly resume: Resume }) {
   const projects = resume.experience.filter((position) => position.projectTitle !== undefined)
   return (
     <MantineProvider theme={theme} forceColorScheme="light">

@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Vite serves the UI at http://127.0.0.1:5173 and proxies `/api` to Fastify at http://127.0.0.1:3000. Both processes stop together. Ports are local by default; `HOST` and `PORT` configure the Fastify server. If changing the API development port, update the Vite proxy too.
+Use http://127.0.0.1:5173 during development. Vite serves the HTML shell with hot reload, and the browser fetches the resume from `/` with `Accept: application/json`. Vite forwards that request and requests for `/health` to Fastify at http://127.0.0.1:3000. Both processes stop together. `HOST` configures the Fastify bind address, and `PORT` configures both the Fastify port and Vite's proxy target port.
 
 ## Checks and production
 
@@ -21,23 +21,31 @@ npm run build
 npm start
 ```
 
-`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and API/content validation tests. `npm run fmt` formats source files without optional semicolons and sorts imports while preserving side-effect import order.
+`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and server and content validation tests. `npm run fmt` formats source files without optional semicolons and sorts imports while preserving side-effect import order.
 
-Vite builds the client in `dist/client` and bundles the Fastify server in `dist/server`. The build also pre-renders the resume into the client HTML. Use extensionless imports for local TypeScript modules. `npm start` serves the full site on port 3000. Deploy the full `dist` directory, `package.json`, and lockfile to a Node host with production dependencies installed. For containers, set `HOST=0.0.0.0`. Domain/DNS and hosting are not configured yet.
+Vite builds the browser assets and HTML shell in `dist/client` and bundles the server in `dist/server`. Use extensionless imports for local TypeScript modules. `npm start` serves the full site on port 3000. Deploy the full `dist` directory, `package.json`, and lockfile to a Node host with production dependencies installed. For containers, set `HOST=0.0.0.0`. Domain/DNS and hosting are not configured yet.
 
-The static page remains readable before JavaScript loads. React hydrates it for interactive controls. The Print resume button uses the browser print dialog and a dedicated print stylesheet; choose Save as PDF for a PDF copy.
+Fastify renders the resume on each HTML request so it reads before JavaScript loads. React hydrates from the resume data included in that response. The Print resume button uses the browser print dialog and a dedicated print stylesheet. Choose Save as PDF for a PDF copy.
 
 ## Content
 
-Edit `content/resume.json` first. It is the source of truth for the website and future LinkedIn updates. See `content/README.md` for provenance and unresolved content questions. The data is validated with a strict Zod schema during builds and server startup. After changing content, rebuild production so the API and HTML use the same snapshot.
+Edit `content/resume.json` first. It is the source of truth for the website and future LinkedIn updates. See `content/README.md` for provenance and unresolved content questions. The build includes the source in the server bundle, and Fastify validates it at startup. Both HTTP representations use that validated data.
 
 - `basics.summary` and `basics.approach`: concise website copy derived from the imported biography.
 - `experience[].highlights`: concise website bullets derived from the role descriptions.
 - `experience[].description`: preserved source paragraphs, available in expandable role details.
-- `GET /api/resume`: canonical resume JSON.
-- `GET /api/health`: server health.
 
 The initial project artwork is decorative typography and CSS, not a screenshot of the games. External project links came from the profile and may depend on third-party availability.
+
+## Server conventions
+
+Each resource has one canonical URL. Use the HTTP `Accept` header to select among the representations at that URL. Routes that negotiate send `Vary: Accept` and return `406 Not Acceptable` when the client accepts none of the available representations. For requests without a preference, use the resource's default representation.
+
+`GET /` defaults to HTML and also offers `application/json`. `GET /health` serves a JSON health status.
+
+```sh
+curl -H 'Accept: application/json' http://127.0.0.1:3000/
+```
 
 ## Type safety
 

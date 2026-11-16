@@ -1,7 +1,5 @@
 import { z } from 'zod'
 
-import source from '../content/resume.json' with { type: 'json' }
-
 const month = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/u)
 const text = z.string().trim().min(1)
 const webUrl = z.url({ protocol: /^https$/u })
@@ -48,7 +46,7 @@ export const resumeSchema = z
     },
   )
 
-export const resume = resumeSchema.parse(source)
+export type Resume = z.infer<typeof resumeSchema>
 export type Position = z.infer<typeof positionSchema>
 export function formatMonth(value: string): string {
   return new Intl.DateTimeFormat('en-CA', {

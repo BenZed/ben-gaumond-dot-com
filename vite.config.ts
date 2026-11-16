@@ -1,4 +1,7 @@
+import { ColorSchemeScript } from '@mantine/core'
 import react from '@vitejs/plugin-react'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import { defineConfig } from 'vite'
 
 import { html, resumeRepresentation } from './server/representations'
@@ -7,7 +10,20 @@ const serverTarget = `http://127.0.0.1:${process.env['PORT'] ?? 3000}`
 
 const clientConfig = defineConfig({
   appType: 'mpa',
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'initial-color-scheme',
+      transformIndexHtml: {
+        order: 'pre',
+        handler: (html) =>
+          html.replace(
+            '<head>',
+            `<head>${renderToStaticMarkup(createElement(ColorSchemeScript, { defaultColorScheme: 'auto' }))}`,
+          ),
+      },
+    },
+  ],
   build: { outDir: 'dist/client' },
   server: {
     fs: {

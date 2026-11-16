@@ -21,7 +21,7 @@ npm run build
 npm start
 ```
 
-`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and server and content validation tests. `npm run fmt` formats source files without optional semicolons and sorts imports while preserving side-effect import order.
+`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and server and content validation tests. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
 Vite builds the browser assets and HTML shell in `dist/client` and bundles the server in `dist/server`. Use extensionless imports for local TypeScript modules. `npm start` serves the full site on port 3000. Deploy the full `dist` directory, `package.json`, and lockfile to a Node host with production dependencies installed. For containers, set `HOST=0.0.0.0`. Domain/DNS and hosting are not configured yet.
 
@@ -54,3 +54,11 @@ Both browser and server use `strict`, `noUncheckedIndexedAccess`, `exactOptional
 `workbench/` is local-only and ignored, including imported reference material. Do not publish or commit it.
 
 `skipLibCheck` is enabled because Mantine’s dependency declarations conflict with `exactOptionalPropertyTypes`. Application code retains all strict checks; third-party `.d.ts` internals are excluded from declaration checking.
+
+## UI organization
+
+`src/App.tsx` composes page sections and providers. `src/components/` contains the header/footer, resume sections, experience entries, shared Tabler icon wrapper, and appearance control. `src/theme.ts` owns Mantine theme configuration; `src/styles.css` owns the visual palette and editorial layout.
+
+Prefer Mantine components and hooks, including polymorphic semantic elements. Native details/summary semantics are intentionally preserved through `Box` for disclosure behavior without JavaScript. Keep career content in `content/resume.json` rather than in component files.
+
+Each page section composes `Section` and one `Section.Header`. `Section` owns the semantic region, stable ID, heading ID, and heading level; the header consumes that context for its title, eyebrow, and optional aside. Keep layout-specific content in the composing section. The hero uses heading level 1, and subsequent sections default to level 2. The top navigation stays visible during scrolling and displays the active section on the left. URL synchronization during manual scrolling and scene animations remain future work.

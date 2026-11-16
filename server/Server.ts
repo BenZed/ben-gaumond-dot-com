@@ -5,7 +5,7 @@ import fastifyStatic from '@fastify/static'
 import Fastify from 'fastify'
 import type { FastifyInstance, FastifyListenOptions } from 'fastify'
 
-import { appPlaceholder, renderResume } from './render-resume'
+import { appPlaceholder, renderResume } from './renderResume'
 import { html, json, negotiate, resumeRepresentation } from './representations'
 import { resume } from './resume'
 

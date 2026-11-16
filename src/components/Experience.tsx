@@ -1,8 +1,8 @@
 import { Anchor, Badge, Box, List, Stack, Text, Title } from '@mantine/core'
 import { IconArrowUpRight, IconChevronDown } from '@tabler/icons-react'
 
-import { formatMonth } from '../resume'
-import type { Position } from '../resume'
+import { formatMonth } from '../resumeSchema'
+import type { Position } from '../resumeSchema'
 import { SiteIcon } from './SiteIcon'
 
 export function Experience({ position }: { readonly position: Position }) {

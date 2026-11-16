@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server'
 
 import { App } from '../src/App'
-import type { Resume } from '../src/resume'
+import type { Resume } from '../src/resumeSchema'
 
 export const appPlaceholder = '<div id="root"><!--app-html--></div>'
 

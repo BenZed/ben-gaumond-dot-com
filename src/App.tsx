@@ -8,7 +8,7 @@ import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
 import { Toolkit } from './components/Toolkit'
 import { WorkSection } from './components/WorkSection'
-import type { Resume } from './resume'
+import type { Resume } from './resumeSchema'
 import { theme } from './theme'
 
 export function App({ resume }: { readonly resume: Resume }) {

@@ -1,6 +1,6 @@
 import { Box } from '@mantine/core'
 
-import type { Position } from '../resume'
+import type { Position } from '../resumeSchema'
 import { Experience } from './Experience'
 import { Section } from './Section'
 

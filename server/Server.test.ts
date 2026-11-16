@@ -6,7 +6,7 @@ import { test } from 'node:test'
 
 import type { InjectOptions } from 'fastify'
 
-import { resumeSchema } from '../src/resume'
+import { resumeSchema } from '../src/resumeSchema'
 import { resume } from './resume'
 import { Server } from './Server'
 

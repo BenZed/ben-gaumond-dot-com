@@ -5,9 +5,9 @@ import { IconDeviceDesktop, IconMoon, IconSun } from '@tabler/icons-react'
 import { SiteIcon } from './SiteIcon'
 
 const modes = [
-  { value: 'light', label: 'Light mode', icon: IconSun },
-  { value: 'dark', label: 'Dark mode', icon: IconMoon },
-  { value: 'auto', label: 'System mode', icon: IconDeviceDesktop },
+  { value: 'light', label: 'Light', icon: IconSun },
+  { value: 'dark', label: 'Dark', icon: IconMoon },
+  { value: 'auto', label: 'System', icon: IconDeviceDesktop },
 ] as const
 
 export function ColorModeControl() {

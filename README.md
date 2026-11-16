@@ -1,6 +1,6 @@
 # Ben Gaumond
 
-A resume website for bengaumond.com, built with React, Mantine, strict TypeScript, Vite, and Fastify.
+A resume website for bengaumond.com, built with React, Mantine, strict TypeScript, and Vite.
 
 ## Development
 
@@ -11,25 +11,29 @@ npm ci
 npm run dev
 ```
 
-Use http://127.0.0.1:5173 during development. Vite serves the HTML shell with hot reload, and the browser fetches the resume from `/` with `Accept: application/json`. Vite forwards that request and requests for `/health` to Fastify at http://127.0.0.1:3000. Both processes stop together. `HOST` configures the Fastify bind address, and `PORT` configures both the Fastify port and Vite's proxy target port.
+Use http://127.0.0.1:5173 during development. Vite serves the app with hot reload and loads the resume from `content/resume.json`. Use extensionless imports for local TypeScript modules.
 
 ## Checks and production
 
 ```sh
 npm run check
 npm run build
-npm start
+npm run preview
 ```
 
-`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and server and content validation tests. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
+`check` verifies types, lint, and formatting, then tests prerendering and resume validation. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
-Vite builds the browser assets and HTML shell in `dist/client` and bundles the server in `dist/server`. Use extensionless imports for local TypeScript modules. `npm start` serves the full site on port 3000. Deploy the full `dist` directory, `package.json`, and lockfile to a Node host with production dependencies installed. For containers, set `HOST=0.0.0.0`. Domain/DNS and hosting are not configured yet.
+The build writes the static site to `dist`. It validates `content/resume.json` and prerenders the resume into `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the resume data embedded during the build.
 
-Fastify renders the resume on each HTML request so it reads before JavaScript loads. React hydrates from the resume data included in that response. The Print resume button uses the browser print dialog and a dedicated print stylesheet. Choose Save as PDF for a PDF copy.
+The Print resume button uses the browser print dialog and a dedicated print stylesheet. Choose Save as PDF for a PDF copy.
+
+## GitHub Pages
+
+In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow publishes `dist` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.
 
 ## Content
 
-Edit `content/resume.json` first. It is the source of truth for the website and future LinkedIn updates. See `content/README.md` for provenance and unresolved content questions. The build includes the source in the server bundle, and Fastify validates it at startup. Both HTTP representations use that validated data.
+Edit `content/resume.json` first. It is the source of truth for the website and future LinkedIn updates. See `content/README.md` for provenance and unresolved content questions.
 
 - `basics.summary` and `basics.approach`: concise website copy derived from the imported biography.
 - `experience[].highlights`: concise website bullets derived from the role descriptions.
@@ -37,23 +41,15 @@ Edit `content/resume.json` first. It is the source of truth for the website and 
 
 The initial project artwork is decorative typography and CSS, not a screenshot of the games. External project links came from the profile and may depend on third-party availability.
 
-## Server conventions
-
-Each resource has one canonical URL. Use the HTTP `Accept` header to select among the representations at that URL. Routes that negotiate send `Vary: Accept` and return `406 Not Acceptable` when the client accepts none of the available representations. For requests without a preference, use the resource's default representation.
-
-`GET /` defaults to HTML and also offers `application/json`. `GET /health` serves a JSON health status.
-
-```sh
-curl -H 'Accept: application/json' http://127.0.0.1:3000/
-```
-
 ## Source filenames
 
-Match a source file’s name and casing to its primary export. For example, `Server.ts` exports `Server`, and `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, such as `Server.test.ts`.
+Match a source file’s name and casing to its primary export. For example, `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, as in `renderResume.test.ts`.
+
+Keep conventional names for entry points, config files, declaration files, and modules without a clear primary export.
 
 ## Type safety
 
-Both browser and server use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. Runtime JSON validation complements compile-time checks.
+Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. Runtime JSON validation complements compile-time checks.
 
 `workbench/` is local-only and ignored, including imported reference material. Do not publish or commit it.
 

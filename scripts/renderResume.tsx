@@ -3,9 +3,10 @@ import { renderToString } from 'react-dom/server'
 import { App } from '../src/App'
 import type { Resume } from '../src/resumeSchema'
 
-export const appPlaceholder = '<div id="root"><!--app-html--></div>'
+const appPlaceholder = '<div id="root"><!--app-html--></div>'
 
 export function renderResume(template: string, resume: Resume) {
+  if (!template.includes(appPlaceholder)) throw new Error('Missing resume HTML placeholder')
   const markup = renderToString(<App resume={resume} />)
   // Escape tag openers so a value cannot close the script element.
   const snapshot = JSON.stringify(resume).replaceAll('<', '\\u003c')

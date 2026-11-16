@@ -8,9 +8,10 @@ import {
   Text,
   Title,
   createTheme,
-} from '@mantine/core';
-import { resume, formatMonth } from './resume.js';
-import type { Position } from './resume.js';
+} from '@mantine/core'
+
+import { resume, formatMonth } from './resume'
+import type { Position } from './resume'
 
 const theme = createTheme({
   primaryColor: 'forest',
@@ -32,7 +33,7 @@ const theme = createTheme({
     'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   headings: { fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: '400' },
   defaultRadius: 'sm',
-});
+})
 
 function Experience({ position }: { readonly position: Position }) {
   return (
@@ -81,11 +82,11 @@ function Experience({ position }: { readonly position: Position }) {
         </details>
       </div>
     </article>
-  );
+  )
 }
 
 export function App() {
-  const projects = resume.experience.filter((position) => position.projectTitle !== undefined);
+  const projects = resume.experience.filter((position) => position.projectTitle !== undefined)
   return (
     <MantineProvider theme={theme} forceColorScheme="light">
       <a className="skip-link" href="#main">
@@ -277,5 +278,5 @@ export function App() {
         </footer>
       </Container>
     </MantineProvider>
-  );
+  )
 }

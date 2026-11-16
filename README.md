@@ -21,9 +21,9 @@ npm run build
 npm start
 ```
 
-`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and API/content validation tests. `npm run fmt` formats source files.
+`check` runs TypeScript, type-aware Oxlint, Oxfmt verification, and API/content validation tests. `npm run fmt` formats source files without optional semicolons and sorts imports while preserving side-effect import order.
 
-The build emits a Vite client in `dist/client`, pre-renders the resume into its HTML, and compiles the Fastify server into `dist/server`. `npm start` serves the full site on port 3000. Deploy the full `dist` directory, `package.json`, and lockfile to a Node host with production dependencies installed. For containers, set `HOST=0.0.0.0`. Domain/DNS and hosting are not configured yet.
+Vite builds the client in `dist/client` and bundles the Fastify server in `dist/server`. The build also pre-renders the resume into the client HTML. Use extensionless imports for local TypeScript modules. `npm start` serves the full site on port 3000. Deploy the full `dist` directory, `package.json`, and lockfile to a Node host with production dependencies installed. For containers, set `HOST=0.0.0.0`. Domain/DNS and hosting are not configured yet.
 
 The static page remains readable before JavaScript loads. React hydrates it for interactive controls. The Print resume button uses the browser print dialog and a dedicated print stylesheet; choose Save as PDF for a PDF copy.
 
@@ -41,7 +41,7 @@ The initial project artwork is decorative typography and CSS, not a screenshot o
 
 ## Type safety
 
-Both browser and server use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null assertions, unsafe type flows, and unhandled/misused promises. Runtime JSON validation complements compile-time checks.
+Both browser and server use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. Runtime JSON validation complements compile-time checks.
 
 `workbench/` is local-only and ignored, including imported reference material. Do not publish or commit it.
 

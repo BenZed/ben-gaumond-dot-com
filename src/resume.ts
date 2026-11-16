@@ -1,9 +1,10 @@
-import { z } from 'zod';
-import source from '../content/resume.json' with { type: 'json' };
+import { z } from 'zod'
 
-const month = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/u);
-const text = z.string().trim().min(1);
-const webUrl = z.url({ protocol: /^https$/u });
+import source from '../content/resume.json' with { type: 'json' }
+
+const month = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/u)
+const text = z.string().trim().min(1)
+const webUrl = z.url({ protocol: /^https$/u })
 const positionSchema = z
   .strictObject({
     id: text,
@@ -22,7 +23,7 @@ const positionSchema = z
   })
   .refine((position) => position.end === null || position.end >= position.start, {
     message: 'End date must not precede start date',
-  });
+  })
 
 export const resumeSchema = z
   .strictObject({
@@ -45,14 +46,14 @@ export const resumeSchema = z
     {
       message: 'Position IDs must be unique',
     },
-  );
+  )
 
-export const resume = resumeSchema.parse(source);
-export type Position = z.infer<typeof positionSchema>;
+export const resume = resumeSchema.parse(source)
+export type Position = z.infer<typeof positionSchema>
 export function formatMonth(value: string): string {
   return new Intl.DateTimeFormat('en-CA', {
     month: 'short',
     year: 'numeric',
     timeZone: 'UTC',
-  }).format(new Date(`${value}-01T00:00:00Z`));
+  }).format(new Date(`${value}-01T00:00:00Z`))
 }

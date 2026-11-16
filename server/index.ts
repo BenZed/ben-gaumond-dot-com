@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 
 import { z } from 'zod'
 
-import { Server } from './app'
+import { Server } from './Server'
 
 const port = z.coerce
   .number()

@@ -47,6 +47,10 @@ Each resource has one canonical URL. Use the HTTP `Accept` header to select amon
 curl -H 'Accept: application/json' http://127.0.0.1:3000/
 ```
 
+## Source filenames
+
+Match a source file’s name and casing to its primary export. For example, `Server.ts` exports `Server`, and `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, such as `Server.test.ts`.
+
 ## Type safety
 
 Both browser and server use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. Runtime JSON validation complements compile-time checks.

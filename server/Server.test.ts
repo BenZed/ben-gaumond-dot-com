@@ -4,12 +4,20 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
+import type { InjectOptions } from 'fastify'
+
 import { resumeSchema } from '../src/resume'
-import { Server } from './app'
 import { resume } from './resume'
+import { Server } from './Server'
+
+class TestServer extends Server {
+  inject(options: InjectOptions | string) {
+    return this.app.inject(options)
+  }
+}
 
 await test('the resume negotiates JSON and unknown routes return 404', async () => {
-  const app = new Server()
+  const app = new TestServer({})
   try {
     const response = await app.inject({ url: '/', headers: { accept: 'application/json' } })
     assert.equal(response.statusCode, 200)
@@ -40,7 +48,7 @@ await test('the same URL selects rendered HTML or JSON by Accept preference', as
     join(staticRoot, 'index.html'),
     '<!doctype html><div id="root"><!--app-html--></div>',
   )
-  const app = new Server({ staticRoot })
+  const app = new TestServer({ staticRoot })
   try {
     for (const accept of [undefined, '*/*', 'text/*', 'text/html, application/json;q=0.8']) {
       const headers = accept === undefined ? {} : { accept }

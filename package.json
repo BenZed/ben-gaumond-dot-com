@@ -11,7 +11,7 @@
     "lint": "oxlint --type-aware --deny-warnings --report-unused-disable-directives-severity=error .",
     "fmt": "oxfmt --write .",
     "fmt:check": "oxfmt --check .",
-    "test": "node --import tsx --test server/app.test.ts",
+    "test": "node --import tsx --test server/Server.test.ts",
     "check": "npm run typecheck && npm run lint && npm run fmt:check && npm test"
   },
   "dependencies": {

@@ -37,6 +37,14 @@ npm run preview
 
 The export rebuilds the site from `content/resume.json` and uses its print layout to write a US Letter PDF to `dist/resume.pdf`. Open the preview and select **Download resume** to test the link locally. A regular `npm run build` recreates `dist` without the PDF.
 
+Use `--output` (or `-o`) to choose a different file. Relative paths are resolved from the project directory. The export creates parent directories as needed.
+
+```sh
+npm run resume:pdf -- --output 'workbench/resume for review.pdf'
+```
+
+Build scripts can import `generateResumePDF({ output })` from `scripts/generateResumePDF.ts` once the site is built. It returns the absolute path to the generated PDF.
+
 ## GitHub Pages
 
 In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow runs `npm run resume:pdf` and publishes `dist` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.

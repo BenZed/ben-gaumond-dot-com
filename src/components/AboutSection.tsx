@@ -1,7 +1,10 @@
 import { Box, Text } from '@mantine/core'
+import { useMemo } from 'react'
 
 import type { Resume } from '../Resume'
 import { Section } from './Section'
+
+const technologyListFormatter = new Intl.ListFormat('en-US')
 
 export type AboutSectionProps = {
   readonly about: Resume['about']
@@ -10,6 +13,8 @@ export type AboutSectionProps = {
 }
 
 export function AboutSection({ about, location, technologies }: AboutSectionProps) {
+  const technologyList = useMemo(() => technologyListFormatter.format(technologies), [technologies])
+
   return (
     <Section
       id={about.section.id}
@@ -22,7 +27,7 @@ export function AboutSection({ about, location, technologies }: AboutSectionProp
         <Text component="p">{about.paragraphs[0]}</Text>
         <Text component="p">{about.approach}</Text>
         <Text component="p" className="about-footnote">
-          {new Intl.ListFormat('en-US').format(technologies)} · {location}
+          {technologyList} · {location}
         </Text>
       </Box>
     </Section>

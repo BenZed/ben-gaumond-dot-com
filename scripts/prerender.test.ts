@@ -122,7 +122,6 @@ test('offers an inline player for an embeddable project without loading the ifra
   expect(markup).not.toContain(project.embedUrl)
 })
 
-
 test.each(['featured', 'grouped'] as const)(
   'rejects unknown %s tool IDs during prerendering',
   async (list) => {

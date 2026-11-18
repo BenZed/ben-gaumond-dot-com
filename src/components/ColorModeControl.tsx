@@ -24,7 +24,6 @@ export function ColorModeControl() {
     <Menu position="bottom-end" offset={8} shadow="sm">
       <Menu.Target>
         <ActionIcon
-          className={styles['color-mode-button']}
           variant="subtle"
           aria-label={`Color mode: ${activeMode.label}`}
           disabled={!mounted}

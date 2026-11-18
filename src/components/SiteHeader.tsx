@@ -1,4 +1,5 @@
-import { Anchor, Box } from '@mantine/core'
+import { ActionIcon, Anchor, Box, Group } from '@mantine/core'
+import { IconDownload } from '@tabler/icons-react'
 import { useRef } from 'react'
 
 import { useActiveSection } from '../hooks/useActiveSection'
@@ -6,6 +7,7 @@ import type { ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { ProfileMark } from './ProfileMark'
 import { SectionNavigation } from './SectionNavigation'
+import { SiteIcon } from './SiteIcon'
 
 import styles from './SiteHeader.module.css'
 
@@ -56,7 +58,20 @@ export function SiteHeader({ name, sections }: SiteHeaderProps) {
         </Box>
       </Anchor>
       <SectionNavigation sections={sections} activeId={current} />
-      <ColorModeControl />
+      <Group className={styles['header-actions']} gap="xs" wrap="nowrap">
+        <ColorModeControl />
+        <ActionIcon
+          component="a"
+          href="./resume.pdf"
+          download
+          aria-label="Download resume"
+          title="Download resume"
+          variant="subtle"
+          size={36}
+        >
+          <SiteIcon icon={IconDownload} />
+        </ActionIcon>
+      </Group>
     </Box>
   )
 }

@@ -1,20 +1,5 @@
-.color-mode-button {
-  flex-shrink: 0;
-  color: var(--site-muted);
-}
-.color-mode-button:hover,
-.color-mode-button[aria-expanded='true'] {
-  color: var(--site-text);
-  background: var(--site-panel);
-}
 .color-mode-menu {
   color: var(--site-text);
   background: var(--site-background);
   border-color: var(--site-border);
-}
-@media (max-width: 880px) {
-  .color-mode-button {
-    grid-column: 2;
-    grid-row: 1;
-  }
 }

@@ -37,7 +37,7 @@ export function App({ basics, experience, work, about, contact, tools, toolkit }
         />
 
         <Box component="main" id="main">
-          <HeroSection basics={basics} experienceId={experience.section.id} />
+          <HeroSection basics={basics} />
 
           <PrintContact profiles={contact.profiles} />
 

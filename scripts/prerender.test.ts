@@ -8,7 +8,11 @@ test('the prerendered page includes resume HTML and matching hydration data', as
   const page = await prerender(template, resume)
   expect(page).toMatch(/<main\b/u)
   expect(page).toContain(resume.basics.summary)
-  expect(page).toMatch(/<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")[^>]*>/u)
+  const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
+  assert.ok(header)
+  expect(header).toMatch(
+    /<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="Download resume")[^>]*>/u,
+  )
   expect(resume.toolkit.featuredToolIds).not.toContain('extendscript')
   expect(
     resume.toolkit.areas.find(({ toolIds }) => toolIds.includes('after-effects'))?.toolIds,

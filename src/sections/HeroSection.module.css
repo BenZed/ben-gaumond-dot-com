@@ -12,11 +12,7 @@
   font-size: 17px;
   line-height: 1.8;
   color: var(--site-muted);
-  margin: 0 0 29px;
-}
-.hero-actions .hero-button {
-  font-size: 12px;
-  font-weight: 500;
+  margin: 0;
 }
 @media (max-width: 800px) {
   .hero {
@@ -35,9 +31,6 @@
   }
 }
 @media print {
-  .hero-actions {
-    display: none;
-  }
   .hero {
     padding: 0 0 20px;
   }
@@ -48,7 +41,6 @@
   .hero-summary {
     max-width: none;
     font-size: 12px;
-    margin-bottom: 0;
   }
 }
 

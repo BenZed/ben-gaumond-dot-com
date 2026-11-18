@@ -48,6 +48,14 @@
   line-height: 1;
   letter-spacing: -0.045em;
 }
+.header-actions > :is(a, button) {
+  flex-shrink: 0;
+  color: var(--site-muted);
+}
+.header-actions > :is(a, button):is(:hover, [aria-expanded='true']) {
+  color: var(--site-text);
+  background: var(--site-panel);
+}
 @keyframes header-write-off {
   from {
     clip-path: inset(0 -4px 0 0);
@@ -71,6 +79,10 @@
     grid-template-rows: 2.25rem auto;
     gap: 4px 12px;
     padding-block: 5px;
+  }
+  .header-actions {
+    grid-column: 2;
+    grid-row: 1;
   }
 }
 @media (prefers-reduced-motion: reduce) {

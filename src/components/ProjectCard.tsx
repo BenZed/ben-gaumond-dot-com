@@ -1,9 +1,8 @@
-import { Anchor, Box, Stack, Text, Title } from '@mantine/core'
-import { IconArrowUpRight } from '@tabler/icons-react'
+import { Box, Stack, Text, Title } from '@mantine/core'
 
 import type { Position, Resume } from '../Resume'
+import { ExternalLink } from './ExternalLink'
 import { IframePlayer } from './IframePlayer'
-import { SiteIcon } from './SiteIcon'
 
 import typography from '../Typography.module.css'
 import styles from './ProjectCard.module.css'
@@ -54,9 +53,7 @@ export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
             {project.embedUrl && project.projectTitle && (
               <IframePlayer src={project.embedUrl} title={project.projectTitle} />
             )}
-            <Anchor href={projectUrl} className={typography['text-link']}>
-              Explore the project <SiteIcon icon={IconArrowUpRight} />
-            </Anchor>
+            <ExternalLink href={projectUrl} label="Explore the project" />
           </Stack>
         )}
       </Box>

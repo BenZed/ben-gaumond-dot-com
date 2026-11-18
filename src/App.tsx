@@ -33,6 +33,7 @@ export function App({ basics, experience, work, about, tools, toolkit }: AppProp
         <SiteHeader
           name={basics.name}
           linkedinUrl={basics.linkedinUrl}
+          siteRepositoryUrl={basics.siteRepositoryUrl}
           sections={[experience.section, work.section, about.section]}
         />
 

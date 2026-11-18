@@ -93,3 +93,15 @@
     display: none;
   }
 }
+
+@media (max-width: 380px) {
+  .site-header {
+    column-gap: 0.5rem;
+  }
+  .header-actions {
+    gap: 0;
+  }
+  .active-section-label {
+    font-size: 1.625rem;
+  }
+}

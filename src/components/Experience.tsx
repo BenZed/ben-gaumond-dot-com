@@ -1,10 +1,10 @@
-import { Anchor, Badge, Box, Group, List, Stack, Text, Title } from '@mantine/core'
-import { IconArrowUpRight, IconChevronDown } from '@tabler/icons-react'
+import { Badge, Box, Group, List, Stack, Text, Title } from '@mantine/core'
+import { IconChevronDown } from '@tabler/icons-react'
 
 import type { Position } from '../Resume'
+import { ExternalLink } from './ExternalLink'
 import { SiteIcon } from './SiteIcon'
 
-import typography from '../Typography.module.css'
 import styles from './Experience.module.css'
 
 function formatMonth(value: string): string {
@@ -75,10 +75,10 @@ export function Experience({ position }: ExperienceProps) {
                 </Group>
               )}
               {url && (
-                <Anchor href={url} className={typography['text-link']}>
-                  Visit {position.projectTitle !== undefined ? 'the project' : position.company}{' '}
-                  <SiteIcon icon={IconArrowUpRight} />
-                </Anchor>
+                <ExternalLink
+                  href={url}
+                  label={`Visit ${position.projectTitle !== undefined ? 'the project' : position.company}`}
+                />
               )}
             </Box>
           </Box>

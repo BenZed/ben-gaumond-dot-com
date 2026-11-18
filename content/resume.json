@@ -11,7 +11,8 @@
     "location": "Vancouver, British Columbia, Canada",
     "linkedinUrl": "https://www.linkedin.com/in/ben-gaumond/",
     "shortLocation": "Vancouver, BC",
-    "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation."
+    "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation.",
+    "siteRepositoryUrl": "https://github.com/BenZed/ben-gaumond-dot-com"
   },
   "toolkit": {
     "label": "Core toolkit",

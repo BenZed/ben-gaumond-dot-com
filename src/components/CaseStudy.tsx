@@ -1,9 +1,8 @@
 import { Anchor, Box, Group, Stack, Text, Title } from '@mantine/core'
-import { IconArrowUpRight } from '@tabler/icons-react'
 
 import type { Position, Resume } from '../Resume'
+import { ExternalLink } from './ExternalLink'
 import { ProjectCard } from './ProjectCard'
-import { SiteIcon } from './SiteIcon'
 
 import typography from '../Typography.module.css'
 import styles from './CaseStudy.module.css'
@@ -41,11 +40,7 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
           ) : null,
         )}
       </Box>
-      {study.url && (
-        <Anchor href={study.url} className={typography['text-link']}>
-          View project <SiteIcon icon={IconArrowUpRight} />
-        </Anchor>
-      )}
+      {study.url && <ExternalLink href={study.url} label="View project" />}
       {relatedRoles.length > 0 && (
         <Group className={styles['related-roles']} gap="sm">
           {relatedRoles.map((position) => (

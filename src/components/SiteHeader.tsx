@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useActiveSection } from '../hooks/useActiveSection'
 import type { Resume, ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
+import { ExternalLink } from './ExternalLink'
 import { HeaderTooltip } from './HeaderTooltip'
 import { ProfileMark } from './ProfileMark'
 import { SectionNavigation } from './SectionNavigation'
@@ -32,10 +33,11 @@ function HeaderLabel({ label }: HeaderLabelProps) {
 export type SiteHeaderProps = {
   readonly name: string
   readonly linkedinUrl: Resume['basics']['linkedinUrl']
+  readonly siteRepositoryUrl: Resume['basics']['siteRepositoryUrl']
   readonly sections: readonly ResumeSection[]
 }
 
-export function SiteHeader({ name, linkedinUrl, sections }: SiteHeaderProps) {
+export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: SiteHeaderProps) {
   const header = useRef<HTMLElement>(null)
   const { current, previous } = useActiveSection(header, sections)
   const changing = current !== previous
@@ -76,6 +78,7 @@ export function SiteHeader({ name, linkedinUrl, sections }: SiteHeaderProps) {
             <SiteIcon icon={IconBrandLinkedin} />
           </ActionIcon>
         </HeaderTooltip>
+        <ExternalLink href={siteRepositoryUrl} label="Site source on GitHub" iconOnly />
         <HeaderTooltip label={downloadLabel}>
           <ActionIcon
             component="a"

@@ -7,7 +7,7 @@ export type ProfileMarkProps = {
 export function ProfileMark({ size }: ProfileMarkProps) {
   return (
     <Image
-      src="./git-profile-logo.png"
+      src="./totally-what-i-look-like.png"
       alt=""
       w={size}
       h={size}

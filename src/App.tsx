@@ -1,5 +1,4 @@
 import { Anchor, Box, Container, MantineProvider } from '@mantine/core'
-import { Fragment } from 'react'
 
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
@@ -18,20 +17,6 @@ export type AppProps = {
 
 export function App({ resume }: AppProps) {
   const { basics, experience, work, about, contact, technologies, heroNote, toolkit } = resume
-  const sections = [
-    { section: experience.section, content: <ExperienceSection experience={experience} /> },
-    {
-      section: work.section,
-      content: <WorkSection work={work} positions={experience.positions} />,
-    },
-    {
-      section: about.section,
-      content: (
-        <AboutSection about={about} location={basics.location} technologies={technologies} />
-      ),
-    },
-    { section: contact.section, content: <ContactSection contact={contact} /> },
-  ]
   return (
     <MantineProvider theme={theme} defaultColorScheme="auto">
       <Anchor className="skip-link" href="#main">
@@ -41,14 +26,15 @@ export function App({ resume }: AppProps) {
         <SiteHeader
           name={basics.name}
           wordmark={basics.wordmark}
-          sections={sections.map(({ section }) => section)}
+          sections={[experience.section, work.section, about.section, contact.section]}
         />
         <Box component="main" id="main">
           <HeroSection basics={basics} note={heroNote} experienceId={experience.section.id} />
           <Toolkit toolkit={toolkit} profiles={contact.profiles} technologies={technologies} />
-          {sections.map(({ section, content }) => (
-            <Fragment key={section.id}>{content}</Fragment>
-          ))}
+          <ExperienceSection experience={experience} />
+          <WorkSection work={work} positions={experience.positions} />
+          <AboutSection about={about} location={basics.location} technologies={technologies} />
+          <ContactSection contact={contact} />
         </Box>
         <SiteFooter name={basics.name} role={basics.role} />
       </Container>

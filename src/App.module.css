@@ -1,0 +1,34 @@
+.page-shell {
+  padding-inline: 40px;
+}
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  padding: 12px;
+  background: var(--site-action);
+  color: var(--site-on-action);
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 16px;
+}
+@media (max-width: 800px) {
+  .page-shell {
+    padding-inline: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .page-shell {
+    padding-inline: 22px;
+  }
+}
+@media print {
+  .page-shell {
+    max-width: none;
+    padding: 0;
+  }
+  .skip-link {
+    display: none;
+  }
+}

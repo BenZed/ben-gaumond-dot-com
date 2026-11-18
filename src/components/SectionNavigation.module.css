@@ -1,0 +1,63 @@
+.section-nav {
+  display: flex;
+  gap: 32px;
+  margin-left: auto;
+}
+.section-nav a,
+.header-contact {
+  font-size: 13px;
+  font-weight: 550;
+  text-decoration: none;
+}
+.section-nav a:hover,
+.header-contact:hover {
+  text-decoration: underline;
+}
+.section-nav .header-contact {
+  margin-left: 8px;
+}
+.header-contact svg {
+  margin-left: 12px;
+}
+@media (max-width: 800px) {
+  .section-nav {
+    gap: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .section-nav {
+    gap: 12px;
+  }
+  .section-nav a {
+    font-size: 10px;
+  }
+}
+.section-nav a {
+  color: inherit;
+}
+.section-nav a[aria-current='location'] {
+  color: var(--site-accent);
+  text-decoration: underline;
+}
+.contact-label-compact {
+  display: none;
+}
+@media (max-width: 880px) {
+  .section-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-left: 0;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .section-nav .header-contact {
+    margin-left: 0;
+  }
+  .header-contact svg,
+  .contact-label-wide {
+    display: none;
+  }
+  .contact-label-compact {
+    display: inline;
+  }
+}

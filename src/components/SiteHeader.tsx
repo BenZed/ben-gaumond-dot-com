@@ -6,6 +6,8 @@ import type { ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { SectionNavigation } from './SectionNavigation'
 
+import styles from './SiteHeader.module.css'
+
 type HeaderLabelProps = {
   readonly label: string | undefined
   readonly wordmark: string
@@ -13,12 +15,12 @@ type HeaderLabelProps = {
 
 function HeaderLabel({ label, wordmark }: HeaderLabelProps) {
   return label === undefined ? (
-    <Box component="span" className="wordmark">
+    <Box component="span" className={styles['wordmark']}>
       {wordmark}
       <Box component="span">.</Box>
     </Box>
   ) : (
-    <Box component="span" className="active-section-label">
+    <Box component="span" className={styles['active-section-label']}>
       {label}
     </Box>
   )
@@ -36,13 +38,13 @@ export function SiteHeader({ name, wordmark, sections }: SiteHeaderProps) {
   const changing = current !== previous
 
   return (
-    <Box component="header" className="site-header" ref={header}>
-      <Anchor className="header-title" href="#top" aria-label={`${name}, back to top`}>
+    <Box component="header" className={styles['site-header']} ref={header}>
+      <Anchor className={styles['header-title']} href="#top" aria-label={`${name}, back to top`}>
         {changing && (
           <Box
             component="span"
             key={`out-${previous}`}
-            className="header-title-out"
+            className={styles['header-title-out']}
             aria-hidden="true"
           >
             <HeaderLabel
@@ -54,7 +56,7 @@ export function SiteHeader({ name, wordmark, sections }: SiteHeaderProps) {
         <Box
           component="span"
           key={`in-${current}`}
-          className={changing ? 'header-title-in' : undefined}
+          className={changing ? styles['header-title-in'] : undefined}
           aria-hidden="true"
         >
           <HeaderLabel

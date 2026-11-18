@@ -9,7 +9,9 @@ import { ContactSection } from './sections/ContactSection'
 import { ExperienceSection } from './sections/ExperienceSection'
 import { HeroSection } from './sections/HeroSection'
 import { WorkSection } from './sections/WorkSection'
-import { theme } from './theme'
+import { cssVariablesResolver, theme } from './theme'
+
+import styles from './App.module.css'
 
 export type AppProps = Resume
 
@@ -24,12 +26,16 @@ export function App({
   toolkit,
 }: AppProps) {
   return (
-    <MantineProvider theme={theme} defaultColorScheme="auto">
-      <Anchor className="skip-link" href="#main">
+    <MantineProvider
+      theme={theme}
+      cssVariablesResolver={cssVariablesResolver}
+      defaultColorScheme="auto"
+    >
+      <Anchor className={styles['skip-link']} href="#main">
         Skip to content
       </Anchor>
 
-      <Container size={1120} className="page-shell" id="top">
+      <Container size={1120} className={styles['page-shell']} id="top">
         <SiteHeader
           name={basics.name}
           wordmark={basics.wordmark}

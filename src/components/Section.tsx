@@ -2,6 +2,9 @@ import { Box, Text, Title } from '@mantine/core'
 import { createContext, useContext } from 'react'
 import type { ReactNode } from 'react'
 
+import typography from '../Typography.module.css'
+import styles from './Section.module.css'
+
 type SectionHeading = {
   readonly title: ReactNode
   readonly eyebrow?: ReactNode
@@ -10,7 +13,7 @@ type SectionHeading = {
 
 export type SectionProps = SectionHeading & {
   readonly id: string
-  readonly className?: string
+  readonly className?: string | undefined
   readonly children: ReactNode
 }
 
@@ -20,12 +23,7 @@ const SectionContext = createContext<SectionContextValue | null>(null)
 function SectionRoot({ id, title, eyebrow, headingOrder = 2, className, children }: SectionProps) {
   return (
     <SectionContext.Provider value={{ title, eyebrow, headingOrder, headingId: `${id}-title` }}>
-      <Box
-        component="section"
-        id={id}
-        aria-labelledby={`${id}-title`}
-        className={['resume-section', className].filter(Boolean).join(' ')}
-      >
+      <Box component="section" id={id} aria-labelledby={`${id}-title`} className={className}>
         {children}
       </Box>
     </SectionContext.Provider>
@@ -34,18 +32,31 @@ function SectionRoot({ id, title, eyebrow, headingOrder = 2, className, children
 
 export type SectionHeaderProps = {
   readonly aside?: ReactNode
-  readonly className?: string
+  readonly classNames?: { readonly eyebrow?: string | undefined }
+  readonly className?: string | undefined
 }
 
-function SectionHeader({ aside, className = 'section-heading' }: SectionHeaderProps) {
+function SectionHeader({
+  aside,
+  classNames,
+  className = styles['section-heading'],
+}: SectionHeaderProps) {
   const section = useContext(SectionContext)
   if (!section) throw new Error('Section.Header must be rendered inside Section')
 
   return (
-    <Box component="header" className={['section-header', className].filter(Boolean).join(' ')}>
+    <Box
+      component="header"
+      className={[styles['section-header'], className].filter(Boolean).join(' ')}
+    >
       <Box>
         {section.eyebrow && (
-          <Text component="p" className="eyebrow">
+          <Text
+            component="p"
+            className={[typography['eyebrow'], styles['eyebrow'], classNames?.eyebrow]
+              .filter(Boolean)
+              .join(' ')}
+          >
             {section.eyebrow}
           </Text>
         )}
@@ -54,7 +65,7 @@ function SectionHeader({ aside, className = 'section-heading' }: SectionHeaderPr
         </Title>
       </Box>
       {aside && (
-        <Box component="span" className="section-aside">
+        <Box component="span" className={styles['section-aside']}>
           {aside}
         </Box>
       )}

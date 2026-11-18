@@ -4,6 +4,8 @@ import { IconDeviceDesktop, IconMoon, IconSun } from '@tabler/icons-react'
 
 import { SiteIcon } from './SiteIcon'
 
+import styles from './ColorModeControl.module.css'
+
 const modes = [
   { value: 'light', label: 'Light', icon: IconSun },
   { value: 'dark', label: 'Dark', icon: IconMoon },
@@ -22,7 +24,7 @@ export function ColorModeControl() {
     <Menu position="bottom-end" offset={8} shadow="sm">
       <Menu.Target>
         <ActionIcon
-          className="color-mode-button"
+          className={styles['color-mode-button']}
           variant="subtle"
           aria-label={`Color mode: ${activeMode.label}`}
           disabled={!mounted}
@@ -31,7 +33,7 @@ export function ColorModeControl() {
           <SiteIcon icon={activeMode.icon} />
         </ActionIcon>
       </Menu.Target>
-      <Menu.Dropdown className="color-mode-menu" aria-label="Color mode">
+      <Menu.Dropdown className={styles['color-mode-menu']} aria-label="Color mode">
         <Menu.RadioGroup
           value={selected}
           onChange={(value) => {

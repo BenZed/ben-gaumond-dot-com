@@ -1,0 +1,116 @@
+.experience-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 35px;
+  padding: 34px 0;
+  border-top: 1px solid var(--site-border);
+}
+.experience-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding-top: 6px;
+  font-size: 11px;
+  color: var(--site-muted);
+}
+h3.company {
+  font-size: 1.8125rem;
+  letter-spacing: -0.035em;
+  margin-bottom: 7px;
+}
+.position-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.position-location {
+  font-size: 10px;
+  color: var(--site-muted);
+}
+.position-location span {
+  margin: 0 6px;
+}
+.highlights {
+  --list-lh: 1.85;
+  padding-left: 16px;
+  margin: 20px 0;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--site-secondary);
+}
+.highlights li {
+  padding-left: 4px;
+  margin-bottom: 6px;
+}
+.role-details {
+  font-size: 12px;
+}
+.role-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 550;
+  padding: 6px 0;
+  width: 160px;
+  list-style: none;
+}
+.role-details summary::-webkit-details-marker {
+  display: none;
+}
+.role-details[open] .disclosure-icon {
+  transform: rotate(180deg);
+}
+.role-description {
+  padding-top: 6px;
+  color: var(--site-secondary);
+  line-height: 1.85;
+}
+.role-description p {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 8px 0 14px;
+}
+@media (max-width: 800px) {
+  .experience-row {
+    grid-template-columns: 175px 1fr;
+    gap: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .experience-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-block: 28px;
+  }
+  .experience-date {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+  }
+  .highlights {
+    font-size: 14px;
+  }
+  .position-location {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+}
+@media print {
+  .role-details {
+    display: none;
+  }
+  .experience-row {
+    grid-template-columns: 140px 1fr;
+    padding: 20px 0;
+    break-inside: avoid;
+  }
+  h3.company {
+    font-size: 23px;
+  }
+  .highlights {
+    font-size: 11px;
+    margin-bottom: 0;
+  }
+}

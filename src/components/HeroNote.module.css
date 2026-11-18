@@ -1,0 +1,103 @@
+.hero-note {
+  --site-line: #71320e;
+  --site-border: #aa480e;
+  --site-copper: #241409;
+  background: #ff690a;
+  color: #241409;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  aspect-ratio: 0.87;
+  border: 1px solid var(--site-border);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.note-index {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1.35;
+}
+.craft-diagram {
+  flex: 1;
+  position: relative;
+  min-height: 215px;
+}
+.orbit {
+  display: block;
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  border: 1px solid var(--site-line);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+}
+.orbit-one {
+  transform: translate(-65%, -60%);
+}
+.orbit-two {
+  transform: translate(-35%, -60%);
+}
+.orbit-three {
+  transform: translate(-50%, -32%);
+}
+.diagram-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font:
+    italic 37px Georgia,
+    serif;
+  letter-spacing: -3px;
+}
+.orbit-dot {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: var(--site-copper);
+  border-radius: 50%;
+  top: 22%;
+  left: 67%;
+}
+.note-bottom {
+  border-top: 1px solid var(--site-border);
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 10px;
+}
+.craft-path {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+@media (max-width: 800px) {
+  .hero-note {
+    padding: 20px;
+  }
+  .orbit {
+    width: 125px;
+    height: 125px;
+  }
+  .note-index {
+    font-size: 17px;
+  }
+  .note-bottom {
+    font-size: 9px;
+  }
+}
+@media (max-width: 600px) {
+  .hero-note {
+    display: none;
+  }
+}
+@media print {
+  .hero-note {
+    display: none;
+  }
+}

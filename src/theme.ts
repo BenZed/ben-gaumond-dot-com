@@ -1,4 +1,30 @@
-import { Badge, Button, createTheme } from '@mantine/core'
+import { Badge, Button, Title, createTheme } from '@mantine/core'
+import type { CSSVariablesResolver } from '@mantine/core'
+
+import typography from './Typography.module.css'
+
+export const cssVariablesResolver: CSSVariablesResolver = () => ({
+  variables: {
+    '--site-background': 'light-dark(#faf4eb, #191613)',
+    '--site-text': 'light-dark(#29221c, #f5e9da)',
+    '--site-secondary': 'light-dark(#61554b, #d1bdab)',
+    '--site-muted': 'light-dark(#706154, #bea791)',
+    '--site-heading': 'light-dark(#b34300, #ff8a38)',
+    '--site-accent': 'light-dark(#a33d00, #ff8a38)',
+    '--site-panel': 'light-dark(#f1e4d4, #2b211a)',
+    '--site-border': 'light-dark(#ddcbbb, #514031)',
+    '--site-copper': 'light-dark(#d95000, #ff690a)',
+    '--site-focus': 'light-dark(#a33d00, #ffad6c)',
+    '--site-action': 'light-dark(#ff690a, #ff8a38)',
+    '--site-action-hover': 'light-dark(#ed5b00, #ffa15b)',
+    '--site-on-action': '#241409',
+    '--site-art-warm': 'light-dark(#f2b47e, #643114)',
+    '--site-art-cool': 'light-dark(#e9d8c3, #382b20)',
+    '--site-art-ink': 'light-dark(#472a18, #ffe4c6)',
+  },
+  light: {},
+  dark: {},
+})
 
 export const theme = createTheme({
   primaryColor: 'ember',
@@ -23,6 +49,7 @@ export const theme = createTheme({
   },
   defaultRadius: 'sm',
   components: {
+    Title: Title.extend({ classNames: { root: typography['title'] ?? '' } }),
     Button: Button.extend({
       vars: (_theme, props) => ({
         root:

@@ -1,0 +1,19 @@
+.work-section {
+  border-top: 1px solid var(--site-border);
+  margin-top: 30px;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+@media (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .work-section {
+    margin-top: 10px;
+  }
+}

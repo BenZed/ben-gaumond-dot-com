@@ -4,6 +4,8 @@ import { Experience } from '../components/Experience'
 import { Section } from '../components/Section'
 import type { Resume } from '../Resume'
 
+import styles from '../components/Section.module.css'
+
 export type ExperienceSectionProps = {
   readonly experience: Resume['experience']
 }
@@ -12,7 +14,7 @@ export function ExperienceSection({ experience }: ExperienceSectionProps) {
   return (
     <Section
       id={experience.section.id}
-      className="section"
+      className={styles['section']}
       eyebrow={experience.section.eyebrow}
       title={experience.section.title}
     >

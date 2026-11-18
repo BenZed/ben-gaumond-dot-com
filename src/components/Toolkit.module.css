@@ -1,0 +1,49 @@
+.print-contact {
+  display: none;
+}
+.technology-strip {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 24px 0;
+  border-block: 1px solid var(--site-border);
+}
+.technology-strip .toolkit-eyebrow {
+  margin: 0;
+  color: var(--site-muted);
+}
+.technology-strip .tools {
+  font-size: 15px;
+  font-weight: 550;
+}
+.strip-note {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--site-muted);
+}
+@media (max-width: 800px) {
+  .strip-note {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .technology-strip {
+    gap: 22px;
+    padding-block: 22px;
+    flex-wrap: wrap;
+  }
+  .technology-strip .tools {
+    gap: 22px;
+    font-size: 13px;
+  }
+}
+@media print {
+  .print-contact {
+    display: block;
+    font-size: 10px;
+    margin-bottom: 16px;
+  }
+  .technology-strip {
+    padding: 12px 0;
+  }
+}

@@ -4,9 +4,9 @@ import { test } from 'node:test'
 import resume from '../content/resume.json' with { type: 'json' }
 import { prerender } from './prerender'
 
-await test('the prerendered page includes resume HTML and matching hydration data', () => {
+await test('the prerendered page includes resume HTML and matching hydration data', async () => {
   const template = '<!doctype html><div id="root"><!--app-html--></div>'
-  const page = prerender(template, resume)
+  const page = await prerender(template, resume)
   assert.match(page, /<main\b/u)
   assert.ok(page.includes(resume.basics.summary))
 

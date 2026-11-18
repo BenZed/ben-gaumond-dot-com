@@ -6,6 +6,8 @@ import { Section } from '../components/Section'
 import { SiteIcon } from '../components/SiteIcon'
 import type { Resume } from '../Resume'
 
+import styles from './HeroSection.module.css'
+
 export type HeroSectionProps = {
   readonly basics: Pick<
     Resume['basics'],
@@ -19,7 +21,7 @@ export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
   return (
     <Section
       id={basics.section.id}
-      className="hero"
+      className={styles['hero']}
       headingOrder={1}
       eyebrow={
         <>
@@ -28,23 +30,33 @@ export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
       }
       title={basics.section.title}
     >
-      <Section.Header className="hero-heading" />
-      <Box className="hero-copy">
-        <Text component="p" className="hero-summary">
+      <Section.Header
+        className={styles['hero-heading']}
+        classNames={{ eyebrow: styles['hero-eyebrow'] }}
+      />
+      <Box className={styles['hero-copy']}>
+        <Text component="p" className={styles['hero-summary']}>
           {basics.summary}
         </Text>
-        <Group gap="sm" className="hero-actions">
+        <Group gap="sm" className={styles['hero-actions']}>
           <Button
             component="a"
             href={`#${experienceId}`}
+            classNames={{ root: styles['hero-button'] }}
             color="ember.9"
             size="md"
             rightSection={<SiteIcon icon={IconArrowDown} />}
           >
             Explore my experience
           </Button>
-          <Button variant="subtle" color="ember.9" size="md" onClick={() => window.print()}>
-            Print resume <SiteIcon icon={IconPrinter} className="print-icon" />
+          <Button
+            variant="subtle"
+            classNames={{ root: styles['hero-button'] }}
+            color="ember.9"
+            size="md"
+            onClick={() => window.print()}
+          >
+            Print resume <SiteIcon icon={IconPrinter} className={styles['print-icon']} />
           </Button>
         </Group>
       </Box>

@@ -4,6 +4,9 @@ import { ProjectCard } from '../components/ProjectCard'
 import { Section } from '../components/Section'
 import type { Position, Resume } from '../Resume'
 
+import sectionStyles from '../components/Section.module.css'
+import styles from './WorkSection.module.css'
+
 export type WorkSectionProps = {
   readonly work: Resume['work']
   readonly positions: readonly Position[]
@@ -14,12 +17,12 @@ export function WorkSection({ work, positions }: WorkSectionProps) {
   return (
     <Section
       id={work.section.id}
-      className="section work-section"
+      className={[sectionStyles['section'], styles['work-section']].join(' ')}
       eyebrow={work.section.eyebrow}
       title={work.section.title}
     >
       <Section.Header aside={work.aside} />
-      <Box className="project-grid">
+      <Box className={styles['project-grid']}>
         {projects.map((project, index) => (
           <ProjectCard key={project.id} project={project} artwork={work.artwork} index={index} />
         ))}

@@ -1,0 +1,113 @@
+.project-card {
+  border: 1px solid var(--site-border);
+}
+.project-art {
+  height: 225px;
+  position: relative;
+  overflow: hidden;
+  background: var(--site-art-warm);
+  color: var(--site-art-ink);
+  padding: 32px;
+}
+.project-art-1 {
+  background: var(--site-art-cool);
+}
+.art-label {
+  position: relative;
+  font:
+    49px/0.95 Georgia,
+    serif;
+  letter-spacing: -3px;
+  z-index: 1;
+}
+.art-label em {
+  font-weight: 400;
+}
+.art-number {
+  position: absolute;
+  bottom: 22px;
+  right: 24px;
+  font-size: 10px;
+}
+.drawing-circle {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 2px solid currentColor;
+  border-radius: 48% 51% 43% 47%;
+  right: 38px;
+  top: 32px;
+  opacity: 0.4;
+  transform: rotate(-20deg);
+}
+.drawing-square {
+  position: absolute;
+  width: 95px;
+  height: 95px;
+  border: 2px solid currentColor;
+  right: 80px;
+  top: 72px;
+  transform: rotate(25deg);
+  opacity: 0.45;
+}
+.drawing-line {
+  position: absolute;
+  width: 180px;
+  height: 60px;
+  border-bottom: 2px solid currentColor;
+  border-radius: 50%;
+  bottom: 25px;
+  left: -20px;
+  transform: rotate(-18deg);
+  opacity: 0.4;
+}
+.project-art-1 .drawing-circle {
+  right: 40px;
+  top: 70px;
+  width: 125px;
+  height: 125px;
+}
+.project-art-1 .drawing-square {
+  top: 36px;
+  right: 60px;
+  transform: rotate(-15deg);
+}
+.project-copy {
+  padding: 28px;
+}
+.project-copy .project-eyebrow {
+  font-size: 9px;
+  margin-bottom: 10px;
+}
+.project-copy h3 {
+  font-size: 29px;
+  letter-spacing: -0.025em;
+}
+.project-copy p:not(.project-eyebrow) {
+  font-size: 13px;
+  color: var(--site-muted);
+  line-height: 1.8;
+  min-height: 68px;
+}
+.project-copy > p:not(.project-eyebrow) {
+  margin: 1em 0;
+}
+@media (max-width: 600px) {
+  .project-art {
+    height: 210px;
+  }
+  .project-copy p:not(.project-eyebrow) {
+    min-height: 0;
+  }
+}
+@media print {
+  .project-art {
+    display: none;
+  }
+  .project-card {
+    break-inside: avoid;
+  }
+  .project-copy {
+    padding: 16px;
+  }
+}

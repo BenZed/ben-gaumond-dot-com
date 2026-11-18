@@ -1,0 +1,34 @@
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 35px 0;
+  font-size: 10px;
+  color: var(--site-muted);
+}
+.site-footer span span {
+  margin: 0 10px;
+}
+.site-footer a {
+  text-decoration: none;
+}
+.site-footer > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: inherit;
+}
+@media (max-width: 600px) {
+  .site-footer {
+    font-size: 9px;
+  }
+}
+@media print {
+  .site-footer {
+    display: none;
+  }
+}
+
+.site-footer > a {
+  color: inherit;
+}

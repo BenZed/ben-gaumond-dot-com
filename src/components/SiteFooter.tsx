@@ -3,6 +3,8 @@ import { IconArrowUp } from '@tabler/icons-react'
 
 import { SiteIcon } from './SiteIcon'
 
+import styles from './SiteFooter.module.css'
+
 export type SiteFooterProps = {
   readonly name: string
   readonly role: string
@@ -10,7 +12,7 @@ export type SiteFooterProps = {
 
 export function SiteFooter({ name, role }: SiteFooterProps) {
   return (
-    <Box component="footer" className="site-footer">
+    <Box component="footer" className={styles['site-footer']}>
       <Box component="span">
         {name}{' '}
         <Box component="span" aria-hidden="true">

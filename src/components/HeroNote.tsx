@@ -5,6 +5,8 @@ import { Fragment } from 'react'
 import type { Resume } from '../Resume'
 import { SiteIcon } from './SiteIcon'
 
+import styles from './HeroNote.module.css'
+
 export type HeroNoteProps = {
   readonly note: Resume['heroNote']
   readonly wordmark: string
@@ -12,8 +14,8 @@ export type HeroNoteProps = {
 
 export function HeroNote({ note, wordmark }: HeroNoteProps) {
   return (
-    <Box component="aside" className="hero-note" aria-label={note.label}>
-      <Box component="span" className="note-index">
+    <Box component="aside" className={styles['hero-note']} aria-label={note.label}>
+      <Box component="span" className={styles['note-index']}>
         {note.lines.map((line, index) => (
           <Fragment key={line}>
             {index > 0 && <br />}
@@ -21,17 +23,17 @@ export function HeroNote({ note, wordmark }: HeroNoteProps) {
           </Fragment>
         ))}
       </Box>
-      <Box className="craft-diagram" aria-hidden="true">
-        <Box component="span" className="orbit orbit-one" />
-        <Box component="span" className="orbit orbit-two" />
-        <Box component="span" className="orbit orbit-three" />
-        <Box component="span" className="diagram-center">
+      <Box className={styles['craft-diagram']} aria-hidden="true">
+        <Box component="span" className={[styles['orbit'], styles['orbit-one']].join(' ')} />
+        <Box component="span" className={[styles['orbit'], styles['orbit-two']].join(' ')} />
+        <Box component="span" className={[styles['orbit'], styles['orbit-three']].join(' ')} />
+        <Box component="span" className={styles['diagram-center']}>
           {wordmark}.
         </Box>
-        <Box component="span" className="orbit-dot" />
+        <Box component="span" className={styles['orbit-dot']} />
       </Box>
-      <Box className="note-bottom">
-        <Box component="span" className="craft-path">
+      <Box className={styles['note-bottom']}>
+        <Box component="span" className={styles['craft-path']}>
           {note.steps.map((step, index) => (
             <Fragment key={step}>
               {index > 0 && <SiteIcon icon={IconArrowRight} size={12} />}

@@ -1,6 +1,6 @@
 import '@fontsource-variable/archivo/wdth.css'
 import '@fontsource-variable/instrument-sans'
-import '@mantine/core/styles.css'
+import '@mantine/core/styles.layer.css'
 import './src/styles.css'
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'

@@ -15,7 +15,8 @@ concurrency:
 jobs:
   build:
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    # Match an Ubuntu release supported by the locked Playwright version.
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       pages: read

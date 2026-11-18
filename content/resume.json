@@ -20,7 +20,7 @@
   "toolkit": {
     "label": "Core toolkit",
     "note": "Web applications, animation pipelines, and interactive games.",
-    "featuredToolIds": ["typescript", "react", "node-js", "after-effects", "blender", "spine-2d"],
+    "featuredToolIds": ["typescript", "react", "node-js", "after-effects", "spine-2d", "blender"],
     "areas": [
       {
         "label": "Full-stack web development",
@@ -34,53 +34,63 @@
       },
       {
         "label": "Interactive development",
-        "toolIds": ["c-sharp", "unity", "cocos-creator", "spine-2d"],
+        "toolIds": ["spine-2d", "c-sharp", "unity", "cocos-creator"],
         "summary": "Build interactive games with reusable behaviors, editor tools for artists, and dynamic asset loading for mobile devices."
       }
     ]
   },
-  "tools": {
-    "typescript": {
+  "tools": [
+    {
+      "id": "typescript",
       "label": "TypeScript",
       "url": "https://www.typescriptlang.org/"
     },
-    "react": {
+    {
+      "id": "react",
       "label": "React",
       "url": "https://react.dev/"
     },
-    "node-js": {
+    {
+      "id": "node-js",
       "label": "Node.js",
       "url": "https://nodejs.org/"
     },
-    "after-effects": {
+    {
+      "id": "after-effects",
       "label": "Adobe After Effects",
       "url": "https://www.adobe.com/products/aftereffects.html"
     },
-    "extendscript": {
+    {
+      "id": "extendscript",
       "label": "ExtendScript",
       "url": "https://helpx.adobe.com/after-effects/using/scripts.html"
     },
-    "blender": {
+    {
+      "id": "spine-2d",
+      "label": "Spine 2D",
+      "url": "https://esotericsoftware.com/"
+    },
+    {
+      "id": "blender",
       "label": "Blender",
       "url": "https://www.blender.org/"
     },
-    "c-sharp": {
+    {
+      "id": "c-sharp",
       "label": "C#",
       "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
     },
-    "unity": {
+    {
+      "id": "unity",
       "label": "Unity",
       "url": "https://unity.com/"
     },
-    "cocos-creator": {
+    {
+      "id": "cocos-creator",
       "label": "Cocos Creator",
       "url": "https://www.cocos.com/en/creator"
-    },
-    "spine-2d": {
-      "label": "Spine 2D",
-      "url": "https://esotericsoftware.com/"
     }
-  },
+  ],
   "experience": {
     "section": {
       "id": "experience",

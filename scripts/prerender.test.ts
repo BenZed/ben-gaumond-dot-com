@@ -13,7 +13,9 @@ test('the prerendered page includes resume HTML and matching hydration data', as
   expect(
     resume.toolkit.areas.find(({ toolIds }) => toolIds.includes('after-effects'))?.toolIds,
   ).toContain('extendscript')
-  const extendScriptLink = `href="${resume.tools.extendscript.url}">${resume.tools.extendscript.label}</a>`
+  const extendScript = resume.tools.find(({ id }) => id === 'extendscript')
+  assert.ok(extendScript)
+  const extendScriptLink = `href="${extendScript.url}">${extendScript.label}</a>`
   expect(page.split(extendScriptLink)).toHaveLength(2)
 
   const snapshot = /<script type="application\/json" id="resume-data">(.*?)<\/script>/u.exec(
@@ -32,15 +34,20 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   const skilledRole = fixture.experience.positions[1]
   assert.ok(area && study && emptyRole && skilledRole)
 
-  fixture.tools.typescript = {
+  const compiler = {
     label: 'Example compiler',
     url: 'https://example.com/tools/compiler',
   }
-  fixture.tools.react = { label: 'Example framework', url: 'https://example.com/tools/framework' }
-  fixture.tools.extendscript = {
+  const framework = { label: 'Example framework', url: 'https://example.com/tools/framework' }
+  const extendScript = {
     label: 'Example ExtendScript',
     url: 'https://example.com/tools/extendscript',
   }
+  fixture.tools = [
+    { id: 'typescript', ...compiler },
+    { id: 'react', ...framework },
+    { id: 'extendscript', ...extendScript },
+  ]
   fixture.toolkit.featuredToolIds = ['react', 'typescript']
   fixture.toolkit.areas = [area]
   area.toolIds = ['extendscript', 'typescript']
@@ -75,12 +82,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
       /<a\b[^>]*\bhref="(https:\/\/example\.com\/tools\/[^"]+)"[^>]*>([^<]+)<\/a>/gu,
     ),
   ].map(([, url, label]) => ({ label, url }))
-  expect(toolLinks).toEqual([
-    fixture.tools.react,
-    fixture.tools.typescript,
-    fixture.tools.extendscript,
-    fixture.tools.typescript,
-  ])
+  expect(toolLinks).toEqual([framework, compiler, extendScript, compiler])
   const featured = markup.split(fixture.toolkit.label)[1]?.split(fixture.toolkit.note)[0]
   assert.ok(featured)
   expect(featured).not.toMatch(/ExtendScript/u)

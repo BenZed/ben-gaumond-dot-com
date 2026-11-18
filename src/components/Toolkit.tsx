@@ -2,16 +2,15 @@ import { Anchor, Box, Group, SimpleGrid, Stack, Text } from '@mantine/core'
 import { Fragment } from 'react'
 
 import { resolveTools } from '../resolveTools'
-import type { ResolvedTool } from '../resolveTools'
-import type { Resume } from '../Resume'
+import type { Resume, Tool } from '../Resume'
 
 import typography from '../Typography.module.css'
 import styles from './Toolkit.module.css'
 
 export type ToolkitProps = {
   readonly toolkit: Resume['toolkit']
-  readonly tools: Resume['tools']
-  readonly featuredTools: readonly ResolvedTool[]
+  readonly tools: readonly Tool[]
+  readonly featuredTools: readonly Tool[]
 }
 
 export function Toolkit({ toolkit, tools, featuredTools }: ToolkitProps) {

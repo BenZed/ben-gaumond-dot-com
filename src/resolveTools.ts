@@ -1,18 +1,11 @@
-import type { Resume } from './Resume'
+import type { Tool } from './Resume'
 
-type Tool = Resume['tools'][keyof Resume['tools']]
-
-export type ResolvedTool = Tool & { readonly id: string }
-
-export function resolveTools(
-  tools: Readonly<Partial<Record<string, Tool>>>,
-  ids: readonly string[],
-): ResolvedTool[] {
+export function resolveTools(tools: readonly Tool[], ids: readonly string[]): Tool[] {
   return ids.map((id) => {
-    const tool = tools[id]
-    if (!Object.hasOwn(tools, id) || tool === undefined) {
+    const tool = tools.find((entry) => entry.id === id)
+    if (tool === undefined) {
       throw new Error(`Unknown toolkit tool ID: "${id}"`)
     }
-    return { ...tool, id }
+    return tool
   })
 }

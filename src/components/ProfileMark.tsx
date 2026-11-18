@@ -7,7 +7,7 @@ export type ProfileMarkProps = {
 export function ProfileMark({ size }: ProfileMarkProps) {
   return (
     <Image
-      src="./profile-logo-cigar.png"
+      src="./git-profile-logo.png"
       alt=""
       w={size}
       h={size}

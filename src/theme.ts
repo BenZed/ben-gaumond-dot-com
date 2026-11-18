@@ -16,9 +16,11 @@ export const theme = createTheme({
       '#842f00',
     ],
   },
-  fontFamily:
-    'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-  headings: { fontFamily: '"Archivo Black", "Arial Black", Impact, sans-serif', fontWeight: '400' },
+  fontFamily: '"Instrument Sans Variable", Helvetica, Arial, sans-serif',
+  headings: {
+    fontFamily: '"Archivo Variable", "Arial Black", Impact, sans-serif',
+    fontWeight: '900',
+  },
   defaultRadius: 'sm',
   components: {
     Button: Button.extend({

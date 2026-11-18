@@ -1,4 +1,5 @@
-import '@fontsource/archivo-black/latin-400.css'
+import '@fontsource-variable/archivo/wdth.css'
+import '@fontsource-variable/instrument-sans'
 import '@mantine/core/styles.css'
 import './src/styles.css'
 import { StrictMode } from 'react'

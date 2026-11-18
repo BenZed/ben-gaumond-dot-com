@@ -157,6 +157,11 @@ summary {
   grid-column: 1;
   grid-row: 1;
 }
+.mantine-Title-root,
+.active-section-label {
+  font-stretch: 82%;
+  word-spacing: 0.08em;
+}
 .hero-copy {
   grid-column: 1;
   grid-row: 2;
@@ -164,7 +169,7 @@ summary {
 .hero h1 {
   font-size: clamp(3.5rem, 7.5vw, 6rem);
   line-height: 0.98;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.04em;
   margin: 0 0 30px;
 }
 .hero-summary {
@@ -798,6 +803,7 @@ h3.company {
 .active-section-label {
   font-family: var(--mantine-font-family-headings);
   font-size: clamp(1.5rem, 3.4vw, 2.125rem);
+  font-weight: var(--mantine-h1-font-weight);
   line-height: 1.05;
   letter-spacing: -0.045em;
 }

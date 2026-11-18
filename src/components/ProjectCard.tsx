@@ -1,19 +1,25 @@
-import { Anchor, Box, Text, Title } from '@mantine/core'
+import { Anchor, Box, Stack, Text, Title } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 
 import type { Position, Resume } from '../Resume'
+import { IframePlayer } from './IframePlayer'
 import { SiteIcon } from './SiteIcon'
 
 import typography from '../Typography.module.css'
 import styles from './ProjectCard.module.css'
 
 export type ProjectCardProps = {
-  readonly project: Pick<Position, 'company' | 'start' | 'projectTitle' | 'highlights' | 'url'>
+  readonly project: Pick<
+    Position,
+    'company' | 'start' | 'projectTitle' | 'highlights' | 'url' | 'embedUrl'
+  >
   readonly artwork: Resume['work']['artwork']
   readonly index: number
 }
 
 export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
+  const projectUrl = project.url ?? project.embedUrl
+
   return (
     <Box component="article" className={styles['project-card']}>
       <Box
@@ -43,10 +49,15 @@ export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
         </Text>
         <Title order={4}>{project.projectTitle}</Title>
         <Text component="p">{project.highlights[0]}</Text>
-        {project.url && (
-          <Anchor href={project.url} className={typography['text-link']}>
-            Explore the project <SiteIcon icon={IconArrowUpRight} />
-          </Anchor>
+        {projectUrl && (
+          <Stack align="flex-start" gap="xs">
+            {project.embedUrl && project.projectTitle && (
+              <IframePlayer src={project.embedUrl} title={project.projectTitle} />
+            )}
+            <Anchor href={projectUrl} className={typography['text-link']}>
+              Explore the project <SiteIcon icon={IconArrowUpRight} />
+            </Anchor>
+          </Stack>
         )}
       </Box>
     </Box>

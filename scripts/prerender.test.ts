@@ -1,6 +1,7 @@
 import { assert, expect, test } from 'vitest'
 
 import resume from '../content/resume.json' with { type: 'json' }
+import type { Resume } from '../src/Resume'
 import { prerender } from './prerender'
 
 test('the prerendered page includes resume HTML and matching hydration data', async () => {
@@ -107,6 +108,20 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   assert.ok(emptyRoleMarkup)
   expect(emptyRoleMarkup).not.toMatch(/<details\b/u)
 })
+test('offers an inline player for an embeddable project without loading the iframe', async () => {
+  const fixture: Resume = structuredClone(resume)
+  const project = fixture.experience.positions.find(({ id }) => id === 'pbs-scribbles-ink-s1')
+  assert.ok(project?.url)
+  project.embedUrl = 'https://example.com/embed/in-and-out'
+
+  const page = await prerender('<div id="root"><!--app-html--></div>', fixture)
+  const [markup = ''] = page.split('<script type="application/json"')
+  expect(markup).toContain('Play inline')
+  expect(markup).toContain(`href="${project.url}"`)
+  expect(markup).not.toContain('<iframe')
+  expect(markup).not.toContain(project.embedUrl)
+})
+
 
 test.each(['featured', 'grouped'] as const)(
   'rejects unknown %s tool IDs during prerendering',

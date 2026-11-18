@@ -43,6 +43,7 @@ summary {
   :root[data-mantine-color-scheme],
   :root {
     color-scheme: light;
+    background: white;
   }
   @page {
     margin: 16mm;

@@ -1,4 +1,4 @@
-import { Box, Group, Text } from '@mantine/core'
+import { Anchor, Box, Group, Text } from '@mantine/core'
 
 import type { Resume } from '../Resume'
 
@@ -16,8 +16,11 @@ export function Toolkit({ toolkit, profiles, technologies }: ToolkitProps) {
     <>
       <Box className={styles['print-contact']}>
         {profiles.map((profile) => (
-          <Text component="p" key={profile.network}>
-            {profile.network}: {profile.url}
+          <Text component="p" key={profile.network} size="xs">
+            {profile.network}:{' '}
+            <Anchor href={profile.url} inherit>
+              {profile.url}
+            </Anchor>
           </Text>
         ))}
       </Box>

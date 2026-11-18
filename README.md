@@ -27,6 +27,17 @@ The build writes the static site to `dist`. It prerenders `content/resume.json` 
 
 The Print resume button uses the browser print dialog and a dedicated print stylesheet. Choose Save as PDF for a PDF copy.
 
+## Local PDF export
+
+Install headless Chromium once after `npm ci`, or again when Playwright is upgraded.
+
+```sh
+npx playwright install chromium --only-shell
+npm run resume:pdf
+```
+
+The command rebuilds the site from `content/resume.json` and uses the same print layout to write a US Letter PDF to `workbench/resume.pdf`. Rerunning it replaces the previous PDF. GitHub Pages publishes only `dist`.
+
 ## GitHub Pages
 
 In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow publishes `dist` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.

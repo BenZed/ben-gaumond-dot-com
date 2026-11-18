@@ -6,6 +6,14 @@ export type ProfileMarkProps = {
 
 export function ProfileMark({ size }: ProfileMarkProps) {
   return (
-    <Image src="./profile-logo.png" alt="" w={size} h={size} radius="sm" width={160} height={160} />
+    <Image
+      src="./profile-logo-cigar.png"
+      alt=""
+      w={size}
+      h={size}
+      radius="sm"
+      width={160}
+      height={160}
+    />
   )
 }

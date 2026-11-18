@@ -28,10 +28,6 @@ body {
   background: var(--site-background);
   color: var(--site-text);
 }
-a {
-  text-underline-offset: 5px;
-}
-
 /* Suppress WebKit's default tap flash over interactive elements. */
 a,
 button,

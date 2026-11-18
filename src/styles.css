@@ -308,6 +308,7 @@ h2.mantine-Title-root {
   line-height: 1.15;
 }
 .section-aside {
+  white-space: pre-line;
   font-size: 11px;
   line-height: 1.8;
   color: var(--site-muted);

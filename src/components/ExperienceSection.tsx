@@ -13,18 +13,10 @@ export function ExperienceSection({ experience }: ExperienceSectionProps) {
     <Section
       id={experience.section.id}
       className="section"
-      eyebrow="01 / Experience"
+      eyebrow={experience.section.eyebrow}
       title={experience.section.title}
     >
-      <Section.Header
-        aside={
-          <>
-            Software. Creative tools.
-            <br />
-            Interactive experiences.
-          </>
-        }
-      />
+      <Section.Header aside={experience.aside} />
       <Box>
         {experience.positions.map((position) => (
           <Experience key={position.id} position={position} />

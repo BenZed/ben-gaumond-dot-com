@@ -3,11 +3,12 @@ import { Box, Group, Text } from '@mantine/core'
 import type { Resume } from '../Resume'
 
 export type ToolkitProps = {
+  readonly toolkit: Resume['toolkit']
   readonly profiles: Resume['contact']['profiles']
   readonly technologies: Resume['technologies']
 }
 
-export function Toolkit({ profiles, technologies }: ToolkitProps) {
+export function Toolkit({ toolkit, profiles, technologies }: ToolkitProps) {
   return (
     <>
       <Box className="print-contact">
@@ -19,7 +20,7 @@ export function Toolkit({ profiles, technologies }: ToolkitProps) {
       </Box>
       <Box className="technology-strip">
         <Box component="span" className="eyebrow">
-          Core toolkit
+          {toolkit.label}
         </Box>
         <Group gap="xl">
           {technologies.map((technology) => (
@@ -29,7 +30,7 @@ export function Toolkit({ profiles, technologies }: ToolkitProps) {
           ))}
         </Group>
         <Box component="span" className="strip-note">
-          From the interface to the infrastructure.
+          {toolkit.note}
         </Box>
       </Box>
     </>

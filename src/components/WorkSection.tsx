@@ -16,7 +16,7 @@ export function WorkSection({ work, positions }: WorkSectionProps) {
     <Section
       id={work.section.id}
       className="section work-section"
-      eyebrow="02 / Selected work"
+      eyebrow={work.section.eyebrow}
       title={work.section.title}
     >
       <Section.Header aside={work.aside} />
@@ -28,9 +28,9 @@ export function WorkSection({ work, positions }: WorkSectionProps) {
               <Box component="span" className="drawing-circle" />
               <Box component="span" className="drawing-square" />
               <Box component="span" className="art-label">
-                scribbles
+                {work.artwork.label}
                 <br />
-                <em>& ink.</em>
+                <em>{work.artwork.accent}</em>
               </Box>
               <Box component="span" className="art-number">
                 0{index + 1}
@@ -38,7 +38,7 @@ export function WorkSection({ work, positions }: WorkSectionProps) {
             </Box>
             <Box className="project-copy">
               <Text component="p" className="eyebrow">
-                PBS / {project.start.slice(0, 4)}
+                {project.company} / {project.start.slice(0, 4)}
               </Text>
               <Title order={3}>{project.projectTitle}</Title>
               <Text component="p">{project.highlights[0]}</Text>

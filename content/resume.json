@@ -5,18 +5,32 @@
       "title": "Ben Gaumond."
     },
     "name": "Ben Gaumond",
+    "role": "Software developer",
+    "wordmark": "bg",
     "pronouns": "He/Him",
     "headline": "TypeScript | React | NodeJs",
     "location": "Vancouver, British Columbia, Canada",
+    "shortLocation": "Vancouver, BC",
     "summary": "I build software for the web, interactive experiences, and the people behind them. My path began in animation and grew into full-stack development."
+  },
+  "heroNote": {
+    "label": "Areas of work",
+    "lines": ["A creative foundation.", "An engineering practice."],
+    "steps": ["Animation", "interaction", "systems"]
+  },
+  "toolkit": {
+    "label": "Core toolkit",
+    "note": "From the interface to the infrastructure."
   },
   "technologies": ["TypeScript", "React", "Node.js"],
   "experience": {
     "section": {
       "id": "experience",
       "label": "Experience",
-      "title": "A history of making things work."
+      "title": "A history of making things work.",
+      "eyebrow": "01 / Experience"
     },
+    "aside": "Software. Creative tools.\nInteractive experiences.",
     "positions": [
       {
         "company": "eDynamic Learning",
@@ -126,15 +140,18 @@
     "section": {
       "id": "work",
       "label": "Selected work",
-      "title": "Code with a creative side."
+      "title": "Code with a creative side.",
+      "eyebrow": "02 / Selected work"
     },
-    "aside": "Interactive drawing for PBS Kids"
+    "aside": "Interactive drawing for PBS Kids",
+    "artwork": { "label": "scribbles", "accent": "& ink." }
   },
   "about": {
     "section": {
       "id": "about",
       "label": "About",
-      "title": "Creative roots. Practical engineering."
+      "title": "Creative roots. Practical engineering.",
+      "eyebrow": "03 / Approach"
     },
     "paragraphs": [
       "In my early days, I gravitated toward development rather unconventionally through my experiences as an animator. Adding programmatic expressions to animatable properties became a solution to speed up the creation of many animation projects.",
@@ -149,6 +166,7 @@
       "id": "contact",
       "label": "Contact",
       "title": "Let’s talk about what comes next.",
+      "eyebrow": "Keep in touch",
       "wideLabel": "Let’s connect"
     },
     "profiles": [

@@ -6,17 +6,22 @@ import {
   IconMapPin,
   IconPrinter,
 } from '@tabler/icons-react'
+import { Fragment } from 'react'
 
 import type { Resume } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
 export type HeroSectionProps = {
-  readonly basics: Pick<Resume['basics'], 'section' | 'summary'>
+  readonly basics: Pick<
+    Resume['basics'],
+    'section' | 'summary' | 'role' | 'shortLocation' | 'wordmark'
+  >
+  readonly note: Resume['heroNote']
   readonly experienceId: string
 }
 
-export function HeroSection({ basics, experienceId }: HeroSectionProps) {
+export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
   return (
     <Section
       id={basics.section.id}
@@ -24,7 +29,7 @@ export function HeroSection({ basics, experienceId }: HeroSectionProps) {
       headingOrder={1}
       eyebrow={
         <>
-          <SiteIcon icon={IconMapPin} size={14} /> Software developer · Vancouver, BC
+          <SiteIcon icon={IconMapPin} size={14} /> {basics.role} · {basics.shortLocation}
         </>
       }
       title={basics.section.title}
@@ -49,25 +54,32 @@ export function HeroSection({ basics, experienceId }: HeroSectionProps) {
           </Button>
         </Group>
       </Box>
-      <Box component="aside" className="hero-note" aria-label="Areas of work">
+      <Box component="aside" className="hero-note" aria-label={note.label}>
         <Box component="span" className="note-index">
-          A creative foundation.
-          <br />
-          An engineering practice.
+          {note.lines.map((line, index) => (
+            <Fragment key={line}>
+              {index > 0 && <br />}
+              {line}
+            </Fragment>
+          ))}
         </Box>
         <Box className="craft-diagram" aria-hidden="true">
           <Box component="span" className="orbit orbit-one" />
           <Box component="span" className="orbit orbit-two" />
           <Box component="span" className="orbit orbit-three" />
           <Box component="span" className="diagram-center">
-            bg.
+            {basics.wordmark}.
           </Box>
           <Box component="span" className="orbit-dot" />
         </Box>
         <Box className="note-bottom">
           <Box component="span" className="craft-path">
-            Animation <SiteIcon icon={IconArrowRight} size={12} /> interaction{' '}
-            <SiteIcon icon={IconArrowRight} size={12} /> systems
+            {note.steps.map((step, index) => (
+              <Fragment key={step}>
+                {index > 0 && <SiteIcon icon={IconArrowRight} size={12} />}
+                {step}
+              </Fragment>
+            ))}
           </Box>
           <SiteIcon icon={IconArrowUpRight} />
         </Box>

@@ -9,12 +9,14 @@ import { useActiveSection } from './useActiveSection'
 
 type HeaderLabelProps = {
   readonly label: string | undefined
+  readonly wordmark: string
 }
 
-function HeaderLabel({ label }: HeaderLabelProps) {
+function HeaderLabel({ label, wordmark }: HeaderLabelProps) {
   return label === undefined ? (
     <Box component="span" className="wordmark">
-      bg<Box component="span">.</Box>
+      {wordmark}
+      <Box component="span">.</Box>
     </Box>
   ) : (
     <Box component="span" className="active-section-label">
@@ -24,17 +26,19 @@ function HeaderLabel({ label }: HeaderLabelProps) {
 }
 
 export type SiteHeaderProps = {
+  readonly name: string
+  readonly wordmark: string
   readonly sections: readonly ResumeSection[]
 }
 
-export function SiteHeader({ sections }: SiteHeaderProps) {
+export function SiteHeader({ name, wordmark, sections }: SiteHeaderProps) {
   const header = useRef<HTMLElement>(null)
   const { current, previous } = useActiveSection(header, sections)
   const changing = current !== previous
 
   return (
     <Box component="header" className="site-header" ref={header}>
-      <Anchor className="header-title" href="#top" aria-label="Ben Gaumond, back to top">
+      <Anchor className="header-title" href="#top" aria-label={`${name}, back to top`}>
         {changing && (
           <Box
             component="span"
@@ -42,7 +46,10 @@ export function SiteHeader({ sections }: SiteHeaderProps) {
             className="header-title-out"
             aria-hidden="true"
           >
-            <HeaderLabel label={sections.find(({ id }) => id === previous)?.label} />
+            <HeaderLabel
+              wordmark={wordmark}
+              label={sections.find(({ id }) => id === previous)?.label}
+            />
           </Box>
         )}
         <Box
@@ -51,7 +58,10 @@ export function SiteHeader({ sections }: SiteHeaderProps) {
           className={changing ? 'header-title-in' : undefined}
           aria-hidden="true"
         >
-          <HeaderLabel label={sections.find(({ id }) => id === current)?.label} />
+          <HeaderLabel
+            wordmark={wordmark}
+            label={sections.find(({ id }) => id === current)?.label}
+          />
         </Box>
       </Anchor>
       <Group component="nav" aria-label="Main navigation" wrap="nowrap">

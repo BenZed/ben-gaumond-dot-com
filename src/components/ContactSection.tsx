@@ -14,7 +14,7 @@ export function ContactSection({ contact }: ContactSectionProps) {
     <Section
       id={contact.section.id}
       className="contact-section"
-      eyebrow="Keep in touch"
+      eyebrow={contact.section.eyebrow}
       title={contact.section.title}
     >
       <Section.Header className="contact-heading" />

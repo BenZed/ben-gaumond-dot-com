@@ -12,15 +12,24 @@ import { WorkSection } from './components/WorkSection'
 import type { Resume } from './Resume'
 import { theme } from './theme'
 
-export function App({ resume }: { readonly resume: Resume }) {
-  const { basics, experience, work, about, contact, technologies } = resume
+export type AppProps = {
+  readonly resume: Resume
+}
+
+export function App({ resume }: AppProps) {
+  const { basics, experience, work, about, contact, technologies, heroNote, toolkit } = resume
   const sections = [
     { section: experience.section, content: <ExperienceSection experience={experience} /> },
     {
       section: work.section,
       content: <WorkSection work={work} positions={experience.positions} />,
     },
-    { section: about.section, content: <AboutSection about={about} location={basics.location} /> },
+    {
+      section: about.section,
+      content: (
+        <AboutSection about={about} location={basics.location} technologies={technologies} />
+      ),
+    },
     { section: contact.section, content: <ContactSection contact={contact} /> },
   ]
   return (
@@ -29,15 +38,19 @@ export function App({ resume }: { readonly resume: Resume }) {
         Skip to content
       </Anchor>
       <Container size={1120} className="page-shell" id="top">
-        <SiteHeader sections={sections.map(({ section }) => section)} />
+        <SiteHeader
+          name={basics.name}
+          wordmark={basics.wordmark}
+          sections={sections.map(({ section }) => section)}
+        />
         <Box component="main" id="main">
-          <HeroSection basics={basics} experienceId={experience.section.id} />
-          <Toolkit profiles={contact.profiles} technologies={technologies} />
+          <HeroSection basics={basics} note={heroNote} experienceId={experience.section.id} />
+          <Toolkit toolkit={toolkit} profiles={contact.profiles} technologies={technologies} />
           {sections.map(({ section, content }) => (
             <Fragment key={section.id}>{content}</Fragment>
           ))}
         </Box>
-        <SiteFooter name={basics.name} />
+        <SiteFooter name={basics.name} role={basics.role} />
       </Container>
     </MantineProvider>
   )

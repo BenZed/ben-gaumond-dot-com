@@ -66,7 +66,7 @@ async function writeResumePdf(pdf: Buffer, outputPath: string) {
   }
 }
 
-/** Execute */
+// CLI entry point
 const entry = process.argv[1]
 if (entry && pathToFileURL(entry).href === import.meta.url) {
   const { values } = parseArgs({

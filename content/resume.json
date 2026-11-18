@@ -77,7 +77,7 @@
         "id": "pbs-scribbles-ink-s2",
         "employmentType": "Contract Full-time",
         "description": [
-          "Lead developer for the second iteration of PBS’s “Scribbles and Ink” interactive drawing game for children.",
+          "Lead developer for the second iteration of PBS's “Scribbles and Ink” interactive drawing game for children.",
           "In the second iteration, I was in charge of a small team (2) to expand on the prior successful property.",
           "As a design goal, the game was to be created in a modular manner that would simplify the creation of additional material in the form of behavioral components and editor tools for artists.",
           "This involved a complete rewrite of the original codebase and provided an excellent opportunity to gain experience communicating with artists.",
@@ -102,7 +102,7 @@
         "id": "pbs-scribbles-ink-s1",
         "employmentType": "Contract Full-time",
         "description": [
-          "Developer for the first iteration of PBS’s “Scribbles and Ink” interactive drawing game for children:",
+          "Developer for the first iteration of PBS's “Scribbles and Ink” interactive drawing game for children:",
           "https://pbskids.org/scribblesandink/in-and-out",
           "S&I was an interesting project, a mobile experience where users draw while interacting with professionally animated characters.",
           "As a design goal, the experience needed to be playable on a wide range of devices. There was a great deal of interesting memory management and dynamic asset loading problems due to conflicts with the serializable nature of the editor of the game engine the game was authored in that were fun to solve."
@@ -157,7 +157,7 @@
       "In my early days, I gravitated toward development rather unconventionally through my experiences as an animator. Adding programmatic expressions to animatable properties became a solution to speed up the creation of many animation projects.",
       "From there, I gravitated toward full stack web development and have been as software developer for 10 years.",
       "In my experience, a finished product is an exercise in efficient time management. My mind gravitates to implementations that have maximum logical purity, or most optimally abstracted, but one never has an infinite amount of time to finish a product, especially in the case of working by yourself.",
-      "A lot of the wisdom I’ve gained as a developer is knowing what corners to cut to in order to optimize the balance between speed and technical debt."
+      "A lot of the wisdom I've gained as a developer is knowing what corners to cut to in order to optimize the balance between speed and technical debt."
     ],
     "approach": "I care about thoughtful systems and the practical decisions that get them shipped. My work balances clear abstractions, delivery speed, and the technical debt a team can afford."
   },
@@ -165,9 +165,9 @@
     "section": {
       "id": "contact",
       "label": "Contact",
-      "title": "Let’s talk about what comes next.",
+      "title": "Let's talk about what comes next.",
       "eyebrow": "Keep in touch",
-      "wideLabel": "Let’s connect"
+      "wideLabel": "Let's connect"
     },
     "profiles": [
       {

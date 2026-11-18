@@ -17,16 +17,7 @@ import styles from './App.module.css'
 
 export type AppProps = Resume
 
-export function App({
-  basics,
-  experience,
-  work,
-  about,
-  contact,
-  tools,
-  heroNote,
-  toolkit,
-}: AppProps) {
+export function App({ basics, experience, work, about, contact, tools, toolkit }: AppProps) {
   const featuredTools = resolveTools(tools, toolkit.featuredToolIds)
 
   return (
@@ -46,7 +37,7 @@ export function App({
         />
 
         <Box component="main" id="main">
-          <HeroSection basics={basics} note={heroNote} experienceId={experience.section.id} />
+          <HeroSection basics={basics} experienceId={experience.section.id} />
 
           <PrintContact profiles={contact.profiles} />
 

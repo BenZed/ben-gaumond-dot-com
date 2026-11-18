@@ -2,7 +2,7 @@
   "basics": {
     "section": {
       "id": "intro",
-      "title": "Ben Gaumond."
+      "title": "Ben Gaumond"
     },
     "name": "Ben Gaumond",
     "role": "Software developer",
@@ -11,11 +11,6 @@
     "location": "Vancouver, British Columbia, Canada",
     "shortLocation": "Vancouver, BC",
     "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation."
-  },
-  "heroNote": {
-    "label": "Areas of work",
-    "lines": ["Tools for artists.", "Games for kids."],
-    "steps": ["Animation", "games", "web software"]
   },
   "toolkit": {
     "label": "Core toolkit",

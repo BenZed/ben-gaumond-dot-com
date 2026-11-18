@@ -80,7 +80,7 @@ Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalP
 
 Define props in a named `<ComponentName>Props` type. Export the type for public components and keep it local for private components. Components without props need no props type.
 
-`src/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `src/sections/` and custom hooks in `src/hooks/`. Put UI pieces with a distinct responsibility in `src/components/`, such as the shared `Section` primitive, `ProjectCard`, and `HeroNote`. `src/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `src/styles.css` contains document-wide styles.
+`src/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `src/sections/` and custom hooks in `src/hooks/`. Put UI pieces with a distinct responsibility in `src/components/`, such as the shared `Section` primitive and `ProjectCard`. `src/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `src/styles.css` contains document-wide styles.
 
 Prefer Mantine components and hooks, including polymorphic semantic elements. Native details/summary semantics are intentionally preserved through `Box` for disclosure behavior without JavaScript. Keep career content in `content/resume.json` rather than in component files.
 

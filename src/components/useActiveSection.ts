@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react'
 import type { RefObject } from 'react'
 
-import sectionLabels from '../../content/sections.json' with { type: 'json' }
+import type { ResumeSection } from '../Resume'
 
-type SectionId = keyof typeof sectionLabels
-const sections = Object.keys(sectionLabels)
-  .filter((id): id is SectionId => Object.hasOwn(sectionLabels, id))
-  .map((id) => ({ id, label: sectionLabels[id] }))
+export type ActiveSection = ResumeSection['id'] | null
 
-export type ActiveSection = SectionId | null
-
-export function useActiveSection(header: RefObject<HTMLElement | null>) {
+export function useActiveSection(
+  header: RefObject<HTMLElement | null>,
+  sections: readonly ResumeSection[],
+) {
   const [active, setActive] = useState<{ current: ActiveSection; previous: ActiveSection }>({
     current: null,
     previous: null,
@@ -28,7 +26,7 @@ export function useActiveSection(header: RefObject<HTMLElement | null>) {
       const { scrollHeight, clientHeight } = document.documentElement
       // The final section can be shorter than the space below the bar.
       const atBottom = window.scrollY > 0 && window.scrollY + clientHeight >= scrollHeight - 1
-      const next = atBottom ? 'contact' : (current?.id ?? null)
+      const next = (atBottom ? sections.at(-1) : current)?.id ?? null
 
       setActive((state) =>
         state.current === next ? state : { current: next, previous: state.current },
@@ -50,9 +48,7 @@ export function useActiveSection(header: RefObject<HTMLElement | null>) {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
-  }, [header])
+  }, [header, sections])
 
   return active
 }
-
-export { sections }

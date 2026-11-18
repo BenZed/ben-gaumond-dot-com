@@ -3,7 +3,7 @@ import { Box, Group, Text } from '@mantine/core'
 import type { Resume } from '../Resume'
 
 export type ToolkitProps = {
-  readonly profiles: Resume['basics']['profiles']
+  readonly profiles: Resume['contact']['profiles']
   readonly technologies: Resume['technologies']
 }
 

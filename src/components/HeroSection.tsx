@@ -7,17 +7,19 @@ import {
   IconPrinter,
 } from '@tabler/icons-react'
 
+import type { Resume } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
 export type HeroSectionProps = {
-  readonly summary: string
+  readonly basics: Pick<Resume['basics'], 'section' | 'summary'>
+  readonly experienceId: string
 }
 
-export function HeroSection({ summary }: HeroSectionProps) {
+export function HeroSection({ basics, experienceId }: HeroSectionProps) {
   return (
     <Section
-      id="intro"
+      id={basics.section.id}
       className="hero"
       headingOrder={1}
       eyebrow={
@@ -25,23 +27,17 @@ export function HeroSection({ summary }: HeroSectionProps) {
           <SiteIcon icon={IconMapPin} size={14} /> Software developer · Vancouver, BC
         </>
       }
-      title={
-        <>
-          Ben
-          <br />
-          <Box component="span">Gaumond.</Box>
-        </>
-      }
+      title={basics.section.title}
     >
       <Section.Header className="hero-heading" />
       <Box className="hero-copy">
         <Text component="p" className="hero-summary">
-          {summary}
+          {basics.summary}
         </Text>
         <Group gap="sm" className="hero-actions">
           <Button
             component="a"
-            href="#experience"
+            href={`#${experienceId}`}
             color="ember.9"
             size="md"
             rightSection={<SiteIcon icon={IconArrowDown} />}

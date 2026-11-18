@@ -35,9 +35,10 @@ In the GitHub repository, open **Settings → Pages** and select **GitHub Action
 
 Edit `content/resume.json` first. It is the source of truth for the website and future LinkedIn updates. See `content/README.md` for provenance and unresolved content questions.
 
-- `basics.summary` and `basics.approach`: concise website copy derived from the imported biography.
-- `experience[].highlights`: concise website bullets derived from the role descriptions.
-- `experience[].description`: preserved source paragraphs, available in expandable role details.
+- `basics.summary` and `about.approach` are concise website copy derived from the imported biography.
+- `experience.positions[].highlights` contains concise website bullets derived from the role descriptions.
+- `experience.positions[].description` preserves source paragraphs for expandable role details.
+- Each section’s `section` field defines its anchor ID and navigation label.
 
 The initial project artwork is decorative typography and CSS, not a screenshot of the games. External project links came from the profile and may depend on third-party availability.
 

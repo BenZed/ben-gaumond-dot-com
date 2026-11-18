@@ -4,29 +4,24 @@ import type { Resume } from '../Resume'
 import { Section } from './Section'
 
 export type AboutSectionProps = {
-  readonly basics: Pick<Resume['basics'], 'about' | 'approach' | 'location'>
+  readonly about: Resume['about']
+  readonly location: string
 }
 
-export function AboutSection({ basics }: AboutSectionProps) {
+export function AboutSection({ about, location }: AboutSectionProps) {
   return (
     <Section
-      id="about"
+      id={about.section.id}
       className="section about-section"
       eyebrow="03 / Approach"
-      title={
-        <>
-          Creative roots.
-          <br />
-          Practical engineering.
-        </>
-      }
+      title={about.section.title}
     >
       <Section.Header className="about-heading" />
       <Box className="about-copy">
-        <Text component="p">{basics.about[0]}</Text>
-        <Text component="p">{basics.approach}</Text>
+        <Text component="p">{about.paragraphs[0]}</Text>
+        <Text component="p">{about.approach}</Text>
         <Text component="p" className="about-footnote">
-          TypeScript, React, and Node.js · {basics.location}
+          TypeScript, React, and Node.js · {location}
         </Text>
       </Box>
     </Section>

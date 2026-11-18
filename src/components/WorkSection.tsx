@@ -1,24 +1,25 @@
 import { Anchor, Box, Text, Title } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 
-import type { Position } from '../Resume'
+import type { Position, Resume } from '../Resume'
 import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
 export type WorkSectionProps = {
-  readonly experience: readonly Position[]
+  readonly work: Resume['work']
+  readonly positions: readonly Position[]
 }
 
-export function WorkSection({ experience }: WorkSectionProps) {
-  const projects = experience.filter((position) => position.projectTitle !== undefined)
+export function WorkSection({ work, positions }: WorkSectionProps) {
+  const projects = positions.filter((position) => position.projectTitle !== undefined)
   return (
     <Section
-      id="work"
+      id={work.section.id}
       className="section work-section"
       eyebrow="02 / Selected work"
-      title="Code with a creative side."
+      title={work.section.title}
     >
-      <Section.Header aside="Interactive drawing for PBS Kids" />
+      <Section.Header aside={work.aside} />
       <Box className="project-grid">
         {projects.map((project, index) => (
           <Box component="article" className="project-card" key={project.id}>

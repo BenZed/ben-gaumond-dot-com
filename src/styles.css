@@ -167,9 +167,6 @@ summary {
   letter-spacing: -0.065em;
   margin: 0 0 30px;
 }
-.hero h1 span {
-  color: var(--site-heading);
-}
 .hero-summary {
   max-width: 450px;
   font-size: 17px;
@@ -541,9 +538,6 @@ h3.company {
   font-size: clamp(38px, 5vw, 60px);
   margin-bottom: 30px;
 }
-.contact-section h2 em {
-  color: var(--site-heading);
-}
 .contact-section .mantine-Button-root {
   font-size: 13px;
   font-weight: 500;
@@ -724,12 +718,6 @@ h3.company {
   .hero h1 {
     font-size: 48px;
     margin-bottom: 16px;
-  }
-  .hero h1 br {
-    display: none;
-  }
-  .hero h1 span::before {
-    content: ' ';
   }
   .hero-summary {
     max-width: none;

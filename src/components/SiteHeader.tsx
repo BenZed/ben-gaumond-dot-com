@@ -2,29 +2,34 @@ import { Anchor, Box, Group } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 import { useRef } from 'react'
 
+import type { ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { SiteIcon } from './SiteIcon'
-import { sections, useActiveSection } from './useActiveSection'
+import { useActiveSection } from './useActiveSection'
 
 type HeaderLabelProps = {
-  readonly section: (typeof sections)[number]['id'] | null
+  readonly label: string | undefined
 }
 
-function HeaderLabel({ section }: HeaderLabelProps) {
-  return section === null ? (
+function HeaderLabel({ label }: HeaderLabelProps) {
+  return label === undefined ? (
     <Box component="span" className="wordmark">
       bg<Box component="span">.</Box>
     </Box>
   ) : (
     <Box component="span" className="active-section-label">
-      {sections.find(({ id }) => id === section)?.label}
+      {label}
     </Box>
   )
 }
 
-export function SiteHeader() {
+export type SiteHeaderProps = {
+  readonly sections: readonly ResumeSection[]
+}
+
+export function SiteHeader({ sections }: SiteHeaderProps) {
   const header = useRef<HTMLElement>(null)
-  const { current, previous } = useActiveSection(header)
+  const { current, previous } = useActiveSection(header, sections)
   const changing = current !== previous
 
   return (
@@ -37,7 +42,7 @@ export function SiteHeader() {
             className="header-title-out"
             aria-hidden="true"
           >
-            <HeaderLabel section={previous} />
+            <HeaderLabel label={sections.find(({ id }) => id === previous)?.label} />
           </Box>
         )}
         <Box
@@ -46,29 +51,29 @@ export function SiteHeader() {
           className={changing ? 'header-title-in' : undefined}
           aria-hidden="true"
         >
-          <HeaderLabel section={current} />
+          <HeaderLabel label={sections.find(({ id }) => id === current)?.label} />
         </Box>
       </Anchor>
       <Group component="nav" aria-label="Main navigation" wrap="nowrap">
-        {sections.map(({ id, label }) => (
+        {sections.map((section) => (
           <Anchor
-            key={id}
-            href={`#${id}`}
-            aria-current={current === id ? 'location' : undefined}
-            className={id === 'contact' ? 'header-contact' : undefined}
+            key={section.id}
+            href={`#${section.id}`}
+            aria-current={current === section.id ? 'location' : undefined}
+            className={'wideLabel' in section ? 'header-contact' : undefined}
           >
-            {id === 'contact' ? (
+            {'wideLabel' in section ? (
               <>
                 <Box component="span" className="contact-label-wide">
-                  Let’s connect
+                  {section.wideLabel}
                 </Box>
                 <Box component="span" className="contact-label-compact">
-                  Contact
+                  {section.label}
                 </Box>
                 <SiteIcon icon={IconArrowUpRight} />
               </>
             ) : (
-              label
+              section.label
             )}
           </Anchor>
         ))}

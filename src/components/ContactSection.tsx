@@ -6,26 +6,20 @@ import { Section } from './Section'
 import { SiteIcon } from './SiteIcon'
 
 export type ContactSectionProps = {
-  readonly profiles: Resume['basics']['profiles']
+  readonly contact: Resume['contact']
 }
 
-export function ContactSection({ profiles }: ContactSectionProps) {
+export function ContactSection({ contact }: ContactSectionProps) {
   return (
     <Section
-      id="contact"
+      id={contact.section.id}
       className="contact-section"
       eyebrow="Keep in touch"
-      title={
-        <>
-          Let’s talk about
-          <br />
-          <em>what comes next.</em>
-        </>
-      }
+      title={contact.section.title}
     >
       <Section.Header className="contact-heading" />
       <Group>
-        {profiles.map((profile) => (
+        {contact.profiles.map((profile) => (
           <Button
             key={profile.network}
             component="a"

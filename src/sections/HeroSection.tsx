@@ -1,16 +1,10 @@
 import { Box, Button, Group, Text } from '@mantine/core'
-import {
-  IconArrowDown,
-  IconArrowUpRight,
-  IconArrowRight,
-  IconMapPin,
-  IconPrinter,
-} from '@tabler/icons-react'
-import { Fragment } from 'react'
+import { IconArrowDown, IconMapPin, IconPrinter } from '@tabler/icons-react'
 
+import { HeroNote } from '../components/HeroNote'
+import { Section } from '../components/Section'
+import { SiteIcon } from '../components/SiteIcon'
 import type { Resume } from '../Resume'
-import { Section } from './Section'
-import { SiteIcon } from './SiteIcon'
 
 export type HeroSectionProps = {
   readonly basics: Pick<
@@ -54,36 +48,7 @@ export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
           </Button>
         </Group>
       </Box>
-      <Box component="aside" className="hero-note" aria-label={note.label}>
-        <Box component="span" className="note-index">
-          {note.lines.map((line, index) => (
-            <Fragment key={line}>
-              {index > 0 && <br />}
-              {line}
-            </Fragment>
-          ))}
-        </Box>
-        <Box className="craft-diagram" aria-hidden="true">
-          <Box component="span" className="orbit orbit-one" />
-          <Box component="span" className="orbit orbit-two" />
-          <Box component="span" className="orbit orbit-three" />
-          <Box component="span" className="diagram-center">
-            {basics.wordmark}.
-          </Box>
-          <Box component="span" className="orbit-dot" />
-        </Box>
-        <Box className="note-bottom">
-          <Box component="span" className="craft-path">
-            {note.steps.map((step, index) => (
-              <Fragment key={step}>
-                {index > 0 && <SiteIcon icon={IconArrowRight} size={12} />}
-                {step}
-              </Fragment>
-            ))}
-          </Box>
-          <SiteIcon icon={IconArrowUpRight} />
-        </Box>
-      </Box>
+      <HeroNote note={note} wordmark={basics.wordmark} />
     </Section>
   )
 }

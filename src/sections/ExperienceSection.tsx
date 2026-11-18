@@ -1,8 +1,8 @@
 import { Box } from '@mantine/core'
 
+import { Experience } from '../components/Experience'
+import { Section } from '../components/Section'
 import type { Resume } from '../Resume'
-import { Experience } from './Experience'
-import { Section } from './Section'
 
 export type ExperienceSectionProps = {
   readonly experience: Resume['experience']

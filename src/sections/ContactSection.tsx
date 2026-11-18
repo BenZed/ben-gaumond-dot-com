@@ -1,9 +1,9 @@
 import { Button, Group } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 
+import { Section } from '../components/Section'
+import { SiteIcon } from '../components/SiteIcon'
 import type { Resume } from '../Resume'
-import { Section } from './Section'
-import { SiteIcon } from './SiteIcon'
 
 export type ContactSectionProps = {
   readonly contact: Resume['contact']

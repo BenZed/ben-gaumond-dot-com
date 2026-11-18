@@ -1,15 +1,15 @@
 import { Anchor, Box, Container, MantineProvider } from '@mantine/core'
 import { Fragment } from 'react'
 
-import { AboutSection } from './components/AboutSection'
-import { ContactSection } from './components/ContactSection'
-import { ExperienceSection } from './components/ExperienceSection'
-import { HeroSection } from './components/HeroSection'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
 import { Toolkit } from './components/Toolkit'
-import { WorkSection } from './components/WorkSection'
 import type { Resume } from './Resume'
+import { AboutSection } from './sections/AboutSection'
+import { ContactSection } from './sections/ContactSection'
+import { ExperienceSection } from './sections/ExperienceSection'
+import { HeroSection } from './sections/HeroSection'
+import { WorkSection } from './sections/WorkSection'
 import { theme } from './theme'
 
 export type AppProps = {

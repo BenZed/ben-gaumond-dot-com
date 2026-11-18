@@ -2,10 +2,10 @@ import { Anchor, Box, Group } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 import { useRef } from 'react'
 
+import { useActiveSection } from '../hooks/useActiveSection'
 import type { ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { SiteIcon } from './SiteIcon'
-import { useActiveSection } from './useActiveSection'
 
 type HeaderLabelProps = {
   readonly label: string | undefined

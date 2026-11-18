@@ -1,8 +1,8 @@
 import { Box, Text } from '@mantine/core'
 import { useMemo } from 'react'
 
+import { Section } from '../components/Section'
 import type { Resume } from '../Resume'
-import { Section } from './Section'
 
 const technologyListFormatter = new Intl.ListFormat('en-US')
 

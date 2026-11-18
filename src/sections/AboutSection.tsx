@@ -4,8 +4,6 @@ import { useMemo } from 'react'
 import { Section } from '../components/Section'
 import type { Resume } from '../Resume'
 
-const technologyListFormatter = new Intl.ListFormat('en-US')
-
 export type AboutSectionProps = {
   readonly about: Resume['about']
   readonly location: Resume['basics']['location']
@@ -13,7 +11,10 @@ export type AboutSectionProps = {
 }
 
 export function AboutSection({ about, location, technologies }: AboutSectionProps) {
-  const technologyList = useMemo(() => technologyListFormatter.format(technologies), [technologies])
+  const technologyList = useMemo(
+    () => new Intl.ListFormat('en-US').format(technologies),
+    [technologies],
+  )
 
   return (
     <Section

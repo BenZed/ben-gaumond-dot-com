@@ -13,9 +13,14 @@ test('the prerendered page includes resume HTML and matching hydration data', as
   expect(header).toMatch(
     /<a\b(?=[^>]*\bhref="\.\/ben-gaumond-resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="Download resume")[^>]*>/u,
   )
+  const linkedinLink = header.match(/<a\b[^>]*\baria-label="LinkedIn"[^>]*>/u)?.[0]
+  expect(linkedinLink).toContain(`href="${resume.basics.linkedinUrl}"`)
+  expect(page).toContain(`href="${resume.basics.linkedinUrl}">${resume.basics.linkedinUrl}</a>`)
+  expect(header).not.toContain('href="#contact"')
+  expect(page).not.toContain('<section id="contact"')
   expect(resume.toolkit.featuredToolIds).not.toContain('extendscript')
   expect(
-    resume.toolkit.areas.find(({ toolIds }) => toolIds.includes('after-effects'))?.toolIds,
+    resume.toolkit.areas.find(({ label }) => label === 'Animation and production tooling')?.toolIds,
   ).toContain('extendscript')
   const extendScript = resume.tools.find(({ id }) => id === 'extendscript')
   assert.ok(extendScript)

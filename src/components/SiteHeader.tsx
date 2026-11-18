@@ -1,9 +1,9 @@
 import { ActionIcon, Anchor, Box, Group } from '@mantine/core'
-import { IconDownload } from '@tabler/icons-react'
+import { IconBrandLinkedin, IconDownload } from '@tabler/icons-react'
 import { useRef } from 'react'
 
 import { useActiveSection } from '../hooks/useActiveSection'
-import type { ResumeSection } from '../Resume'
+import type { Resume, ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { ProfileMark } from './ProfileMark'
 import { SectionNavigation } from './SectionNavigation'
@@ -27,10 +27,11 @@ function HeaderLabel({ label }: HeaderLabelProps) {
 
 export type SiteHeaderProps = {
   readonly name: string
+  readonly linkedinUrl: Resume['basics']['linkedinUrl']
   readonly sections: readonly ResumeSection[]
 }
 
-export function SiteHeader({ name, sections }: SiteHeaderProps) {
+export function SiteHeader({ name, linkedinUrl, sections }: SiteHeaderProps) {
   const header = useRef<HTMLElement>(null)
   const { current, previous } = useActiveSection(header, sections)
   const changing = current !== previous
@@ -58,8 +59,18 @@ export function SiteHeader({ name, sections }: SiteHeaderProps) {
         </Box>
       </Anchor>
       <SectionNavigation sections={sections} activeId={current} />
-      <Group className={styles['header-actions']} gap="xs" wrap="nowrap">
+      <Group className={styles['header-actions']} gap={4} wrap="nowrap">
         <ColorModeControl />
+        <ActionIcon
+          component="a"
+          href={linkedinUrl}
+          aria-label="LinkedIn"
+          title="LinkedIn"
+          variant="subtle"
+          size={36}
+        >
+          <SiteIcon icon={IconBrandLinkedin} />
+        </ActionIcon>
         <ActionIcon
           component="a"
           href="./ben-gaumond-resume.pdf"

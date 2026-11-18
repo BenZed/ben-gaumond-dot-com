@@ -1,26 +1,20 @@
-import { Anchor, Box, Text } from '@mantine/core'
+import { Anchor, Text } from '@mantine/core'
 
 import type { Resume } from '../Resume'
 
 import styles from './PrintContact.module.css'
 
 export type PrintContactProps = {
-  readonly profiles: Resume['contact']['profiles']
+  readonly linkedinUrl: Resume['basics']['linkedinUrl']
 }
 
-export function PrintContact({ profiles }: PrintContactProps) {
-  if (profiles.length === 0) return null
-
+export function PrintContact({ linkedinUrl }: PrintContactProps) {
   return (
-    <Box className={styles['profiles']}>
-      {profiles.map(({ network, url }) => (
-        <Text component="p" key={network} size="xs">
-          {network}:{' '}
-          <Anchor href={url} inherit>
-            {url}
-          </Anchor>
-        </Text>
-      ))}
-    </Box>
+    <Text component="p" className={styles['print-contact']} size="xs">
+      LinkedIn:{' '}
+      <Anchor href={linkedinUrl} inherit>
+        {linkedinUrl}
+      </Anchor>
+    </Text>
   )
 }

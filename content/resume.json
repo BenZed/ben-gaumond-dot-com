@@ -9,6 +9,7 @@
     "pronouns": "He/Him",
     "headline": "Full-stack developer building creative tools and interactive experiences",
     "location": "Vancouver, British Columbia, Canada",
+    "linkedinUrl": "https://www.linkedin.com/in/ben-gaumond/",
     "shortLocation": "Vancouver, BC",
     "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation."
   },
@@ -243,20 +244,5 @@
       "I like a clean abstraction, and I've lost enough time chasing one to know what it costs. I put that effort where someone will feel it, like giving an artist a way to add content without waiting on a developer."
     ],
     "approach": "I think most engineering decisions come down to choosing a degree of wrong you can live with. There's always another way to structure the code, and there is, inconveniently, a deadline. I spend the extra time on changes that make the next person's work easier."
-  },
-  "contact": {
-    "section": {
-      "id": "contact",
-      "label": "Contact",
-      "title": "Let's talk about what comes next.",
-      "eyebrow": "Keep in touch",
-      "wideLabel": "Let's connect"
-    },
-    "profiles": [
-      {
-        "network": "LinkedIn",
-        "url": "https://www.linkedin.com/in/ben-gaumond/"
-      }
-    ]
   }
 }

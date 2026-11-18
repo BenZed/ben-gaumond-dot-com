@@ -7,7 +7,6 @@ import { Toolkit } from './components/Toolkit'
 import { resolveTools } from './resolveTools'
 import type { Resume } from './Resume'
 import { AboutSection } from './sections/AboutSection'
-import { ContactSection } from './sections/ContactSection'
 import { ExperienceSection } from './sections/ExperienceSection'
 import { HeroSection } from './sections/HeroSection'
 import { WorkSection } from './sections/WorkSection'
@@ -17,7 +16,7 @@ import styles from './App.module.css'
 
 export type AppProps = Resume
 
-export function App({ basics, experience, work, about, contact, tools, toolkit }: AppProps) {
+export function App({ basics, experience, work, about, tools, toolkit }: AppProps) {
   const featuredTools = resolveTools(tools, toolkit.featuredToolIds)
 
   return (
@@ -33,13 +32,14 @@ export function App({ basics, experience, work, about, contact, tools, toolkit }
       <Container size={1120} className={styles['page-shell']} id="top">
         <SiteHeader
           name={basics.name}
-          sections={[experience.section, work.section, about.section, contact.section]}
+          linkedinUrl={basics.linkedinUrl}
+          sections={[experience.section, work.section, about.section]}
         />
 
         <Box component="main" id="main">
           <HeroSection basics={basics} />
 
-          <PrintContact profiles={contact.profiles} />
+          <PrintContact linkedinUrl={basics.linkedinUrl} />
 
           <Toolkit toolkit={toolkit} tools={tools} featuredTools={featuredTools} />
 
@@ -52,8 +52,6 @@ export function App({ basics, experience, work, about, contact, tools, toolkit }
             location={basics.location}
             technologyLabels={featuredTools.map(({ label }) => label)}
           />
-
-          <ContactSection contact={contact} />
         </Box>
 
         <SiteFooter name={basics.name} role={basics.role} />

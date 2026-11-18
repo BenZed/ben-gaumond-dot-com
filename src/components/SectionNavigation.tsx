@@ -1,8 +1,6 @@
-import { Anchor, Box, Group } from '@mantine/core'
-import { IconArrowUpRight } from '@tabler/icons-react'
+import { Anchor, Group } from '@mantine/core'
 
 import type { ResumeSection } from '../Resume'
-import { SiteIcon } from './SiteIcon'
 
 import styles from './SectionNavigation.module.css'
 
@@ -24,21 +22,8 @@ export function SectionNavigation({ sections, activeId }: SectionNavigationProps
           key={section.id}
           href={`#${section.id}`}
           aria-current={activeId === section.id ? 'location' : undefined}
-          className={'wideLabel' in section ? styles['header-contact'] : undefined}
         >
-          {'wideLabel' in section ? (
-            <>
-              <Box component="span" className={styles['contact-label-wide']}>
-                {section.wideLabel}
-              </Box>
-              <Box component="span" className={styles['contact-label-compact']}>
-                {section.label}
-              </Box>
-              <SiteIcon icon={IconArrowUpRight} />
-            </>
-          ) : (
-            section.label
-          )}
+          {section.label}
         </Anchor>
       ))}
     </Group>

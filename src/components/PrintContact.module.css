@@ -1,9 +1,9 @@
-.profiles {
+.print-contact {
   display: none;
 }
 
 @media print {
-  .profiles {
+  .print-contact {
     display: block;
     margin-bottom: 1rem;
   }

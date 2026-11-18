@@ -4,6 +4,7 @@ import { PrintContact } from './components/PrintContact'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
 import { Toolkit } from './components/Toolkit'
+import { resolveTools } from './resolveTools'
 import type { Resume } from './Resume'
 import { AboutSection } from './sections/AboutSection'
 import { ContactSection } from './sections/ContactSection'
@@ -22,10 +23,12 @@ export function App({
   work,
   about,
   contact,
-  technologies,
+  tools,
   heroNote,
   toolkit,
 }: AppProps) {
+  const featuredTools = resolveTools(tools, toolkit.featuredToolIds)
+
   return (
     <MantineProvider
       theme={theme}
@@ -47,13 +50,17 @@ export function App({
 
           <PrintContact profiles={contact.profiles} />
 
-          <Toolkit toolkit={toolkit} technologies={technologies} />
+          <Toolkit toolkit={toolkit} tools={tools} featuredTools={featuredTools} />
 
           <ExperienceSection experience={experience} />
 
           <WorkSection work={work} positions={experience.positions} />
 
-          <AboutSection about={about} location={basics.location} technologies={technologies} />
+          <AboutSection
+            about={about}
+            location={basics.location}
+            technologyLabels={featuredTools.map(({ label }) => label)}
+          />
 
           <ContactSection contact={contact} />
         </Box>

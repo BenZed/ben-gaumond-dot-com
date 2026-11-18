@@ -56,7 +56,7 @@ Edit `content/resume.json` first. It is the source of truth for the website and 
 - `basics.summary` and `about.approach` are concise website copy derived from the imported biography.
 - `experience.positions[].highlights` contains concise website bullets derived from the role descriptions.
 - `experience.positions[].description` preserves source paragraphs for expandable role details.
-- `toolkit.areas` groups technologies by the work they support. The flat `technologies` list stays concise for print.
+- `tools` maps stable IDs to tool labels and URLs. `toolkit.featuredToolIds` orders the compact list and the About footnote. Each `toolkit.areas[].toolIds` orders the links in its group.
 - `work.caseStudies` links projects to experience entries by position ID. Add an `outcome` or a public `url` when available.
 - Each `section` field defines its anchor ID and heading. Navigable sections also define their navigation label.
 

@@ -9,6 +9,12 @@ test('the prerendered page includes resume HTML and matching hydration data', as
   expect(page).toMatch(/<main\b/u)
   expect(page).toContain(resume.basics.summary)
   expect(page).toMatch(/<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")[^>]*>/u)
+  expect(resume.toolkit.featuredToolIds).not.toContain('extendscript')
+  expect(
+    resume.toolkit.areas.find(({ toolIds }) => toolIds.includes('after-effects'))?.toolIds,
+  ).toContain('extendscript')
+  const extendScriptLink = `href="${resume.tools.extendscript.url}">${resume.tools.extendscript.label}</a>`
+  expect(page.split(extendScriptLink)).toHaveLength(2)
 
   const snapshot = /<script type="application\/json" id="resume-data">(.*?)<\/script>/u.exec(
     page,
@@ -78,7 +84,12 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   const featured = markup.split(fixture.toolkit.label)[1]?.split(fixture.toolkit.note)[0]
   assert.ok(featured)
   expect(featured).not.toMatch(/ExtendScript/u)
-  expect(markup).toMatch(/Example framework and Example compiler/u)
+  const aboutMarkup = markup.split(`id="${fixture.about.section.id}"`)[1]?.split('</section>')[0]
+  assert.ok(aboutMarkup)
+  expect(aboutMarkup.replaceAll('<!-- -->', '')).toContain(
+    `Example framework and Example compiler · ${fixture.basics.location}`,
+  )
+  expect(aboutMarkup).not.toContain('Example ExtendScript')
   expect(markup).toContain(`href="${study.url}"`)
   expect(markup).toContain(`href="#${skilledRole.id}"`)
   const emptyRoleMarkup = markup.split(`id="${emptyRole.id}"`)[1]?.split('</article>')[0]
@@ -86,10 +97,17 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   expect(emptyRoleMarkup).not.toMatch(/<details\b/u)
 })
 
-test('rejects unknown tool IDs during prerendering', async () => {
-  const fixture = structuredClone(resume)
-  fixture.toolkit.featuredToolIds = ['missing-tool']
-  await expect(prerender('<div id="root"><!--app-html--></div>', fixture)).rejects.toThrow(
-    /Unknown toolkit tool ID: "missing-tool"/u,
-  )
-})
+test.each(['featured', 'grouped'] as const)(
+  'rejects unknown %s tool IDs during prerendering',
+  async (list) => {
+    const fixture = structuredClone(resume)
+    const area = fixture.toolkit.areas[0]
+    assert.ok(area)
+    const ids = list === 'featured' ? fixture.toolkit.featuredToolIds : area.toolIds
+    ids.push('missing-tool')
+
+    await expect(prerender('<div id="root"><!--app-html--></div>', fixture)).rejects.toThrow(
+      /Unknown toolkit tool ID: "missing-tool"/u,
+    )
+  },
+)

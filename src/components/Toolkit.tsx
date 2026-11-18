@@ -18,6 +18,7 @@ export function Toolkit({ toolkit, profiles, technologies }: ToolkitProps) {
           </Text>
         ))}
       </Box>
+
       <Box className="technology-strip">
         <Box component="span" className="eyebrow">
           {toolkit.label}

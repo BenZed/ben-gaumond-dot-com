@@ -24,7 +24,7 @@ if (snapshot) {
 
 const app = (
   <StrictMode>
-    <App resume={resume} />
+    <App {...resume} />
   </StrictMode>
 )
 if (snapshot) hydrateRoot(root, app)

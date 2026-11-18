@@ -10,7 +10,7 @@ const appPlaceholder = '<div id="root"><!--app-html--></div>'
 
 export function prerender(template: string, resume: Resume) {
   if (!template.includes(appPlaceholder)) throw new Error('Missing resume HTML placeholder')
-  const markup = renderToString(<App resume={resume} />)
+  const markup = renderToString(<App {...resume} />)
   // Escape tag openers so a value cannot close the script element.
   const snapshot = JSON.stringify(resume).replaceAll('<', '\\u003c')
   return template.replace(

@@ -18,7 +18,7 @@ export const theme = createTheme({
   },
   fontFamily:
     'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-  headings: { fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: '400' },
+  headings: { fontFamily: '"Archivo Black", "Arial Black", Impact, sans-serif', fontWeight: '400' },
   defaultRadius: 'sm',
   components: {
     Button: Button.extend({

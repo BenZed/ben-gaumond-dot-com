@@ -1,3 +1,4 @@
+import '@fontsource/archivo-black/latin-400.css'
 import '@mantine/core/styles.css'
 import './src/styles.css'
 import { StrictMode } from 'react'

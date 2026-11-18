@@ -1,11 +1,10 @@
-import { Anchor, Box, Group } from '@mantine/core'
-import { IconArrowUpRight } from '@tabler/icons-react'
+import { Anchor, Box } from '@mantine/core'
 import { useRef } from 'react'
 
 import { useActiveSection } from '../hooks/useActiveSection'
 import type { ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
-import { SiteIcon } from './SiteIcon'
+import { SectionNavigation } from './SectionNavigation'
 
 type HeaderLabelProps = {
   readonly label: string | undefined
@@ -64,30 +63,7 @@ export function SiteHeader({ name, wordmark, sections }: SiteHeaderProps) {
           />
         </Box>
       </Anchor>
-      <Group component="nav" aria-label="Main navigation" wrap="nowrap">
-        {sections.map((section) => (
-          <Anchor
-            key={section.id}
-            href={`#${section.id}`}
-            aria-current={current === section.id ? 'location' : undefined}
-            className={'wideLabel' in section ? 'header-contact' : undefined}
-          >
-            {'wideLabel' in section ? (
-              <>
-                <Box component="span" className="contact-label-wide">
-                  {section.wideLabel}
-                </Box>
-                <Box component="span" className="contact-label-compact">
-                  {section.label}
-                </Box>
-                <SiteIcon icon={IconArrowUpRight} />
-              </>
-            ) : (
-              section.label
-            )}
-          </Anchor>
-        ))}
-      </Group>
+      <SectionNavigation sections={sections} activeId={current} />
       <ColorModeControl />
     </Box>
   )

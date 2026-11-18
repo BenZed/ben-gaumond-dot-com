@@ -15,7 +15,7 @@ type HeaderLabelProps = {
 
 function HeaderLabel({ label }: HeaderLabelProps) {
   return label === undefined ? (
-    <ProfileMark size="1.875rem" />
+    <ProfileMark size="var(--header-title-size)" radius="50%" />
   ) : (
     <Box component="span" className={styles['active-section-label']}>
       {label}

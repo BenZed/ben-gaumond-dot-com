@@ -8,29 +8,46 @@
     "role": "Software developer",
     "wordmark": "bg",
     "pronouns": "He/Him",
-    "headline": "TypeScript | React | NodeJs",
+    "headline": "Full-stack developer building creative tools and interactive experiences",
     "location": "Vancouver, British Columbia, Canada",
     "shortLocation": "Vancouver, BC",
-    "summary": "I build software for the web, interactive experiences, and the people behind them. My path began in animation and grew into full-stack development."
+    "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation."
   },
   "heroNote": {
     "label": "Areas of work",
-    "lines": ["A creative foundation.", "An engineering practice."],
-    "steps": ["Animation", "interaction", "systems"]
+    "lines": ["Tools for artists.", "Games for kids."],
+    "steps": ["Animation", "games", "web software"]
   },
   "toolkit": {
     "label": "Core toolkit",
-    "note": "From the interface to the infrastructure."
+    "note": "Web applications, animation pipelines, and interactive games.",
+    "areas": [
+      {
+        "label": "Full-stack web development",
+        "tools": ["TypeScript", "React", "Node.js"],
+        "summary": "Build web interfaces and internal applications that fit how artists and producers work."
+      },
+      {
+        "label": "Animation and production tooling",
+        "tools": ["Adobe After Effects", "ExtendScript"],
+        "summary": "Automate renders, script animation workflows, and build tools for studio production."
+      },
+      {
+        "label": "Interactive development",
+        "tools": ["Spine 2D"],
+        "summary": "Build interactive games with reusable behaviors, editor tools for artists, and dynamic asset loading for mobile devices."
+      }
+    ]
   },
-  "technologies": ["TypeScript", "React", "Node.js"],
+  "technologies": ["TypeScript", "React", "Node.js", "Adobe After Effects", "Spine 2D"],
   "experience": {
     "section": {
       "id": "experience",
       "label": "Experience",
-      "title": "A history of making things work.",
+      "title": "From animation to software engineering",
       "eyebrow": "01 / Experience"
     },
-    "aside": "Software. Creative tools.\nInteractive experiences.",
+    "aside": "Software engineering, technical direction, and game development",
     "positions": [
       {
         "company": "eDynamic Learning",
@@ -40,9 +57,9 @@
         "location": "Canada · Remote",
         "id": "edynamic-learning",
         "employmentType": "Permanent Full-time",
-        "description": ["Simulations development"],
+        "description": [],
         "skills": [],
-        "highlights": ["Simulations development."]
+        "highlights": ["Develop interactive simulations for educational software."]
       },
       {
         "company": "Global Mechanic",
@@ -54,17 +71,19 @@
         "id": "global-mechanic",
         "employmentType": "Permanent Full-time",
         "description": [
-          "By far my favorite professional experience. I was the Technical Director of a small animation company with wonderful people for a number of years.",
-          "My duties as a Technical Director were much more varied than they would have been at a larger company. I managed security and technical support, I oversaw employee onboarding and technical workflow for producers and artists.",
-          "My favorite duties involved a great deal of programming.",
-          "Balancing other tasks, I also implemented a number of iterations of the company website and a number of very quick one-off websites that were related to requests for proposals or deliverables to clients.",
-          "The largest ongoing project was being the lead designer of many versions of internal animation workflow pipeline related tools. These applications were large, complex and gave me the opportunity to become very well versed in many aspects of full stack web development."
+          "I had the most fun at Global Mechanic, a small animation studio where technical direction covered everything from onboarding and tech support to building software for artists and producers.",
+          "The work I kept coming back to was the animation pipeline. I led the design of successive versions of the studio's internal tools and learned full-stack development by working on applications tied to how a production actually ran.",
+          "I also rebuilt the studio website several times and put together short-turnaround sites for proposals and client deliverables."
         ],
-        "skills": ["Adobe Photoshop", "Problem Solving"],
+        "skills": [
+          "Full-stack web development",
+          "Animation pipeline tooling",
+          "Technical direction"
+        ],
         "highlights": [
-          "Managed security, technical support, employee onboarding, and technical workflows for producers and artists.",
-          "Implemented multiple company websites and short-turnaround sites for proposals and client deliverables.",
-          "Led design of internal animation pipeline tools involving complex full-stack applications."
+          "Led the design of multiple generations of full-stack tools for the studio's animation pipeline.",
+          "Managed security, technical support, and onboarding while overseeing production workflows for artists and producers.",
+          "Built several versions of the studio website and short-turnaround sites for proposals and client deliverables."
         ]
       },
       {
@@ -77,18 +96,15 @@
         "id": "pbs-scribbles-ink-s2",
         "employmentType": "Contract Full-time",
         "description": [
-          "Lead developer for the second iteration of PBS's “Scribbles and Ink” interactive drawing game for children.",
-          "In the second iteration, I was in charge of a small team (2) to expand on the prior successful property.",
-          "As a design goal, the game was to be created in a modular manner that would simplify the creation of additional material in the form of behavioral components and editor tools for artists.",
-          "This involved a complete rewrite of the original codebase and provided an excellent opportunity to gain experience communicating with artists.",
-          "Much of the documentation for the game engine is in another language, which presented the (honestly quite fun) challenge of coding in the dark.",
-          "I was also tasked with implementing and later interacting with Google Analytics for various statistics of interest to the client. Not particularly challenging, but it was something of a career milestone to see actual data on how well the game was doing."
+          "I led development on Far and Away, the second Scribbles and Ink drawing game for PBS KIDS. The sequel needed a way to keep adding content, so our small team rewrote the original codebase around reusable behaviors and editor tools that artists could use.",
+          "Much of the engine documentation was in another language. Coding in the dark was, honestly, quite fun.",
+          "I also set up Google Analytics and used the data to answer questions for the client. Seeing how a game I'd worked on was actually being played felt like a career milestone."
         ],
-        "skills": ["Problem Solving", "Game Design"],
+        "skills": ["Game development", "Editor tooling", "Google Analytics"],
         "highlights": [
-          "Led development of the second interactive drawing game and a small team.",
-          "Rewrote the codebase with modular behavioral components and artist editor tools to support new content.",
-          "Implemented Google Analytics for client reporting."
+          "Led a small development team on Far and Away, a PBS KIDS game that lets kids draw and interact with animated characters.",
+          "Rewrote the original codebase around reusable behaviors and built editor tools to make it easier for artists to add content.",
+          "Set up Google Analytics and used it to report on how the game was being played."
         ],
         "projectTitle": "Far and Away"
       },
@@ -102,15 +118,13 @@
         "id": "pbs-scribbles-ink-s1",
         "employmentType": "Contract Full-time",
         "description": [
-          "Developer for the first iteration of PBS's “Scribbles and Ink” interactive drawing game for children:",
-          "https://pbskids.org/scribblesandink/in-and-out",
-          "S&I was an interesting project, a mobile experience where users draw while interacting with professionally animated characters.",
-          "As a design goal, the experience needed to be playable on a wide range of devices. There was a great deal of interesting memory management and dynamic asset loading problems due to conflicts with the serializable nature of the editor of the game engine the game was authored in that were fun to solve."
+          "In and Out was the first Scribbles and Ink game for PBS KIDS. Kids could draw on a mobile device while interacting with animated characters.",
+          "The tricky part was getting it to run on a wide range of devices. I worked through how the engine's editor serialized assets so we could load them dynamically and manage memory at runtime."
         ],
-        "skills": ["Problem Solving", "Spine 2D"],
+        "skills": ["Game development", "Dynamic asset loading", "Memory management", "Spine 2D"],
         "highlights": [
-          "Developed an interactive drawing experience featuring professionally animated characters.",
-          "Solved memory management and dynamic asset loading challenges to support a wide range of devices."
+          "Developed In and Out, a PBS KIDS mobile drawing game with interactive animated characters.",
+          "Worked around the engine editor's serialization constraints to load assets dynamically and manage memory across devices."
         ],
         "projectTitle": "In and Out"
       },
@@ -124,14 +138,13 @@
         "id": "somedia-networks",
         "employmentType": "Permanent Part-time",
         "description": [
-          "My first professional experience as a developer. There was a great deal of interacting programmatically with Adobe After Effects rendering.",
-          "This provided some interesting challenges due to the age of the javascript engine that powered the scripting of After Effects at the time.",
-          "It later led to the development of a library that allows developers to interact with the After Effects scripting engine from Node.js, which became my most popular GitHub repository and led to some contract work down the line."
+          "My first developer job involved automating renders in Adobe After Effects. Its scripting engine was already old enough to have opinions about which JavaScript I was allowed to write.",
+          "That work later led me to build an open-source Node.js library for running scripts inside After Effects. Publishing it led to contract work."
         ],
-        "skills": ["After Effects Scripting Engine", "Grit"],
+        "skills": ["After Effects scripting", "Render automation", "Node.js"],
         "highlights": [
-          "Automated Adobe After Effects rendering using its scripting engine.",
-          "Work later led to a library connecting Node.js to the After Effects scripting environment."
+          "Automated Adobe After Effects rendering through Adobe's scripting engine.",
+          "Later published a Node.js library that runs scripts inside After Effects and exchanges JSON-compatible data between the two environments."
         ]
       }
     ]
@@ -140,26 +153,50 @@
     "section": {
       "id": "work",
       "label": "Selected work",
-      "title": "Code with a creative side.",
+      "title": "Selected projects",
       "eyebrow": "02 / Selected work"
     },
-    "aside": "Interactive drawing for PBS Kids",
-    "artwork": { "label": "scribbles", "accent": "& ink." }
+    "aside": "Games, studio tools, and open-source software",
+    "artwork": { "label": "scribbles", "accent": "& ink." },
+    "caseStudies": [
+      {
+        "positionIds": ["pbs-scribbles-ink-s1", "pbs-scribbles-ink-s2"],
+        "title": "Scribbles and Ink",
+        "summary": "Two drawing games for PBS KIDS, with a different engineering challenge in each release.",
+        "challenge": "In and Out had to run across a wide range of devices. Far and Away needed to make it easier for artists to create more content.",
+        "contribution": "I solved asset-loading and memory problems for the first game. For the sequel, I led a small team through a rewrite that introduced reusable behaviors and editor tools for artists.",
+        "outcome": "Both games shipped. For Far and Away, I also set up analytics so we could see how people were playing."
+      },
+      {
+        "positionIds": ["global-mechanic"],
+        "title": "Global Mechanic's animation pipeline",
+        "summary": "Internal production tools for a small animation studio.",
+        "challenge": "The tools had to fit the production workflows of artists and producers, whose day-to-day technical needs I also supported.",
+        "contribution": "I led the design of successive versions of the studio's full-stack animation pipeline tools. It was my largest ongoing development project there."
+      },
+      {
+        "positionIds": ["somedia-networks"],
+        "title": "after-effects",
+        "summary": "An open-source Node.js library for scripting Adobe After Effects.",
+        "challenge": "Node.js and After Effects run separate JavaScript engines. Each process has its own runtime state.",
+        "contribution": "I packaged a bridge that sends JavaScript functions to After Effects and exchanges JSON-compatible arguments and results. The library supports synchronous calls and asynchronous calls that return promises.",
+        "outcome": "Publishing the library led to contract work.",
+        "url": "https://github.com/BenZed/after-effects"
+      }
+    ]
   },
   "about": {
     "section": {
       "id": "about",
       "label": "About",
-      "title": "Creative roots. Practical engineering.",
+      "title": "How I work",
       "eyebrow": "03 / Approach"
     },
     "paragraphs": [
-      "In my early days, I gravitated toward development rather unconventionally through my experiences as an animator. Adding programmatic expressions to animatable properties became a solution to speed up the creation of many animation projects.",
-      "From there, I gravitated toward full stack web development and have been as software developer for 10 years.",
-      "In my experience, a finished product is an exercise in efficient time management. My mind gravitates to implementations that have maximum logical purity, or most optimally abstracted, but one never has an infinite amount of time to finish a product, especially in the case of working by yourself.",
-      "A lot of the wisdom I've gained as a developer is knowing what corners to cut to in order to optimize the balance between speed and technical debt."
+      "I learned to program as an animator. Writing expressions let me automate some of the motion I'd been setting up by hand. I still like finding the part of a creative workflow where a little code can save someone a lot of fiddling.",
+      "I like a clean abstraction, and I've lost enough time chasing one to know what it costs. I put that effort where someone will feel it, like giving an artist a way to add content without waiting on a developer."
     ],
-    "approach": "I care about thoughtful systems and the practical decisions that get them shipped. My work balances clear abstractions, delivery speed, and the technical debt a team can afford."
+    "approach": "I think most engineering decisions come down to choosing a degree of wrong you can live with. There's always another way to structure the code, and there is, inconveniently, a deadline. I spend the extra time on changes that make the next person's work easier."
   },
   "contact": {
     "section": {

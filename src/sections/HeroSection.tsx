@@ -11,7 +11,7 @@ import styles from './HeroSection.module.css'
 export type HeroSectionProps = {
   readonly basics: Pick<
     Resume['basics'],
-    'section' | 'summary' | 'role' | 'shortLocation' | 'wordmark'
+    'section' | 'summary' | 'role' | 'shortLocation' | 'wordmark' | 'pronouns'
   >
   readonly note: Resume['heroNote']
   readonly experienceId: string
@@ -25,7 +25,8 @@ export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
       headingOrder={1}
       eyebrow={
         <>
-          <SiteIcon icon={IconMapPin} size={14} /> {basics.role} · {basics.shortLocation}
+          <SiteIcon icon={IconMapPin} size={14} /> {basics.role} · {basics.shortLocation} ·{' '}
+          {basics.pronouns}
         </>
       }
       title={basics.section.title}

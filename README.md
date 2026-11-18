@@ -49,7 +49,9 @@ Edit `content/resume.json` first. It is the source of truth for the website and 
 - `basics.summary` and `about.approach` are concise website copy derived from the imported biography.
 - `experience.positions[].highlights` contains concise website bullets derived from the role descriptions.
 - `experience.positions[].description` preserves source paragraphs for expandable role details.
-- Each section’s `section` field defines its anchor ID and navigation label.
+- `toolkit.areas` groups technologies by the work they support. The flat `technologies` list stays concise for print.
+- `work.caseStudies` links projects to experience entries by position ID. Add an `outcome` or a public `url` when available.
+- Each `section` field defines its anchor ID and heading. Navigable sections also define their navigation label.
 
 The initial project artwork is decorative typography and CSS, not a screenshot of the games. External project links came from the profile and may depend on third-party availability.
 

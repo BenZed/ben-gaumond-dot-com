@@ -1,0 +1,54 @@
+.study {
+  border-top: 1px solid var(--site-border);
+  padding-block: 1.5rem;
+}
+
+.details {
+  display: grid;
+  gap: 0.875rem;
+  margin: 0;
+}
+
+.details dd {
+  margin: 0;
+  color: var(--site-secondary);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+@media screen and (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.print-project-links {
+  display: none;
+}
+
+@media print {
+  .print-project-links {
+    display: flex;
+  }
+  .study {
+    break-inside: avoid;
+    padding-block: 0.625rem;
+    gap: 0.25rem;
+    font-size: 0.6875rem;
+  }
+  .study h3 {
+    font-size: 1rem;
+  }
+  .study p {
+    font-size: inherit;
+  }
+  .details,
+  .related-roles,
+  .project-grid {
+    display: none;
+  }
+}

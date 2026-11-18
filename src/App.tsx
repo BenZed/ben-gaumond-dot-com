@@ -1,5 +1,6 @@
 import { Anchor, Box, Container, MantineProvider } from '@mantine/core'
 
+import { PrintContact } from './components/PrintContact'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
 import { Toolkit } from './components/Toolkit'
@@ -45,7 +46,9 @@ export function App({
         <Box component="main" id="main">
           <HeroSection basics={basics} note={heroNote} experienceId={experience.section.id} />
 
-          <Toolkit toolkit={toolkit} profiles={contact.profiles} technologies={technologies} />
+          <PrintContact profiles={contact.profiles} />
+
+          <Toolkit toolkit={toolkit} technologies={technologies} />
 
           <ExperienceSection experience={experience} />
 

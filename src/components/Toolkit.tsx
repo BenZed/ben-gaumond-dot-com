@@ -1,4 +1,4 @@
-import { Anchor, Box, Group, Text } from '@mantine/core'
+import { Box, Group, SimpleGrid, Stack, Text } from '@mantine/core'
 
 import type { Resume } from '../Resume'
 
@@ -7,24 +7,12 @@ import styles from './Toolkit.module.css'
 
 export type ToolkitProps = {
   readonly toolkit: Resume['toolkit']
-  readonly profiles: Resume['contact']['profiles']
   readonly technologies: Resume['technologies']
 }
 
-export function Toolkit({ toolkit, profiles, technologies }: ToolkitProps) {
+export function Toolkit({ toolkit, technologies }: ToolkitProps) {
   return (
     <>
-      <Box className={styles['print-contact']}>
-        {profiles.map((profile) => (
-          <Text component="p" key={profile.network} size="xs">
-            {profile.network}:{' '}
-            <Anchor href={profile.url} inherit>
-              {profile.url}
-            </Anchor>
-          </Text>
-        ))}
-      </Box>
-
       <Box className={styles['technology-strip']}>
         <Box
           component="span"
@@ -43,6 +31,19 @@ export function Toolkit({ toolkit, profiles, technologies }: ToolkitProps) {
           {toolkit.note}
         </Box>
       </Box>
+      {toolkit.areas.length > 0 && (
+        <SimpleGrid className={styles['areas']} cols={{ base: 1, sm: 3 }} spacing="lg">
+          {toolkit.areas.map((area) => (
+            <Stack key={area.label} gap="xs">
+              <Text fw={700}>{area.label}</Text>
+              <Text size="sm">{area.summary}</Text>
+              <Text size="xs" className={styles['area-tools']}>
+                {area.tools.join(' · ')}
+              </Text>
+            </Stack>
+          ))}
+        </SimpleGrid>
+      )}
     </>
   )
 }

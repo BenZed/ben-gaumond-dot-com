@@ -39,6 +39,7 @@
 }
 @media print {
   .about-section {
+    display: block;
     padding-bottom: 0;
     break-inside: avoid;
   }

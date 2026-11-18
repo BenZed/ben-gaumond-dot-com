@@ -1,0 +1,10 @@
+.profiles {
+  display: none;
+}
+
+@media print {
+  .profiles {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}

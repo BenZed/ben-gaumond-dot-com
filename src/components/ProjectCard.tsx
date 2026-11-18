@@ -41,7 +41,7 @@ export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
         >
           {project.company} / {project.start.slice(0, 4)}
         </Text>
-        <Title order={3}>{project.projectTitle}</Title>
+        <Title order={4}>{project.projectTitle}</Title>
         <Text component="p">{project.highlights[0]}</Text>
         {project.url && (
           <Anchor href={project.url} className={typography['text-link']}>

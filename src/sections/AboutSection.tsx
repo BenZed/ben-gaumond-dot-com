@@ -28,7 +28,11 @@ export function AboutSection({ about, location, technologies }: AboutSectionProp
     >
       <Section.Header className={styles['about-header']} />
       <Box className={styles['about-copy']}>
-        <Text component="p">{about.paragraphs[0]}</Text>
+        {about.paragraphs.map((paragraph) => (
+          <Text component="p" key={paragraph}>
+            {paragraph}
+          </Text>
+        ))}
         <Text component="p">{about.approach}</Text>
         <Text component="p" className={styles['about-footnote']}>
           {technologyList} · {location}

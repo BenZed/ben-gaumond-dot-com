@@ -1,6 +1,4 @@
-import { Box } from '@mantine/core'
-
-import { ProjectCard } from '../components/ProjectCard'
+import { CaseStudy } from '../components/CaseStudy'
 import { Section } from '../components/Section'
 import type { Position, Resume } from '../Resume'
 
@@ -13,7 +11,7 @@ export type WorkSectionProps = {
 }
 
 export function WorkSection({ work, positions }: WorkSectionProps) {
-  const projects = positions.filter((position) => position.projectTitle !== undefined)
+  const positionsById = new Map(positions.map((position) => [position.id, position]))
   return (
     <Section
       id={work.section.id}
@@ -22,11 +20,22 @@ export function WorkSection({ work, positions }: WorkSectionProps) {
       title={work.section.title}
     >
       <Section.Header aside={work.aside} />
-      <Box className={styles['project-grid']}>
-        {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} artwork={work.artwork} index={index} />
-        ))}
-      </Box>
+      {work.caseStudies.map((study) => {
+        const relatedPositions = study.positionIds.map((id) => {
+          const position = positionsById.get(id)
+          if (!position)
+            throw new Error(`Case study "${study.title}" references unknown position "${id}"`)
+          return position
+        })
+        return (
+          <CaseStudy
+            key={study.title}
+            study={study}
+            positions={relatedPositions}
+            artwork={work.artwork}
+          />
+        )
+      })}
     </Section>
   )
 }

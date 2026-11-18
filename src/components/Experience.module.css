@@ -72,6 +72,11 @@ h3.company {
   line-height: inherit;
   margin: 8px 0 14px;
 }
+.skills {
+  list-style: none;
+  padding: 0;
+  margin-block: 0.625rem;
+}
 @media (max-width: 800px) {
   .experience-row {
     grid-template-columns: 175px 1fr;
@@ -103,7 +108,7 @@ h3.company {
   }
   .experience-row {
     grid-template-columns: 140px 1fr;
-    padding: 20px 0;
+    padding-block: 0.75rem;
     break-inside: avoid;
   }
   h3.company {
@@ -111,6 +116,6 @@ h3.company {
   }
   .highlights {
     font-size: 11px;
-    margin-bottom: 0;
+    margin-block: 0.625rem 0;
   }
 }

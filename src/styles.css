@@ -1,11 +1,16 @@
 :root {
+  /* Allow the browser to use the system scheme before Mantine sets its theme. */
   color-scheme: light dark;
   color: var(--site-text);
   background: var(--site-background);
+
+  /* Use the font's own weights and styles, with kerning and antialiasing hints. */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Keep native controls and light-dark() tokens in sync with the theme picker. */
 :root[data-mantine-color-scheme='light'] {
   color-scheme: light;
 }
@@ -14,6 +19,7 @@
 }
 html {
   scroll-behavior: smooth;
+  /* Leave room for the sticky header and a gap above hash-link targets. */
   scroll-padding-top: calc(var(--site-header-height) + 24px);
   --site-header-height: 60px;
 }
@@ -25,6 +31,8 @@ body {
 a {
   text-underline-offset: 5px;
 }
+
+/* Suppress WebKit's default tap flash over interactive elements. */
 a,
 button,
 summary {
@@ -34,12 +42,15 @@ summary {
   outline: 3px solid var(--site-focus);
   outline-offset: 5px;
 }
+
+/* Hash links should jump immediately when the visitor requests reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 }
 @media print {
+  /* Override the screen theme so printed résumés and PDFs use the light palette. */
   :root[data-mantine-color-scheme],
   :root {
     color-scheme: light;
@@ -53,6 +64,8 @@ summary {
     color: black;
   }
 }
+
+/* Match the breakpoint where SiteHeader.module.css switches to two rows. */
 @media (max-width: 880px) {
   html {
     --site-header-height: 68px;

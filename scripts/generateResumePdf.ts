@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 import { preview } from 'vite'
 
-const directory = new URL('../workbench/', import.meta.url)
+const directory = new URL('../output/pdf/', import.meta.url)
 const output = new URL('resume.pdf', directory)
 const temporary = new URL(`resume-${randomUUID()}.pdf`, directory)
 

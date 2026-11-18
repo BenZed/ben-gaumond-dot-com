@@ -21,7 +21,7 @@ npm run build
 npm run preview
 ```
 
-`check` verifies types, lint, and formatting, then tests prerendering. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
+`check` verifies types, lint, and formatting, then runs `npm test`. The tests use Vitest to verify prerendering. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
 The build writes the static site to `dist`. It prerenders `content/resume.json` into `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the resume data embedded during the build.
 

@@ -1,25 +1,24 @@
-import assert from 'node:assert/strict'
-import { test } from 'node:test'
+import { assert, expect, test } from 'vitest'
 
 import resume from '../content/resume.json' with { type: 'json' }
 import { prerender } from './prerender'
 
-await test('the prerendered page includes resume HTML and matching hydration data', async () => {
+test('the prerendered page includes resume HTML and matching hydration data', async () => {
   const template = '<!doctype html><div id="root"><!--app-html--></div>'
   const page = await prerender(template, resume)
-  assert.match(page, /<main\b/u)
-  assert.ok(page.includes(resume.basics.summary))
-  assert.match(page, /<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")[^>]*>/u)
+  expect(page).toMatch(/<main\b/u)
+  expect(page).toContain(resume.basics.summary)
+  expect(page).toMatch(/<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")[^>]*>/u)
 
   const snapshot = /<script type="application\/json" id="resume-data">(.*?)<\/script>/u.exec(
     page,
   )?.[1]
   assert.ok(snapshot)
   const payload: unknown = JSON.parse(snapshot)
-  assert.deepEqual(payload, resume)
+  expect(payload).toEqual(resume)
 })
 
-await test('renders toolkit areas, case studies, biography paragraphs and role skills', async () => {
+test('renders toolkit areas, case studies, biography paragraphs and role skills', async () => {
   const fixture = structuredClone(resume)
   const area = fixture.toolkit.areas.find(({ toolIds }) => toolIds.includes('extendscript'))
   const study = fixture.work.caseStudies[0]
@@ -63,14 +62,14 @@ await test('renders toolkit areas, case studies, biography paragraphs and role s
     ...fixture.about.paragraphs,
     ...skilledRole.skills,
   ]) {
-    assert.ok(markup.includes(text), text)
+    expect(markup).toContain(text)
   }
   const toolLinks = [
     ...markup.matchAll(
       /<a\b[^>]*\bhref="(https:\/\/example\.com\/tools\/[^"]+)"[^>]*>([^<]+)<\/a>/gu,
     ),
   ].map(([, url, label]) => ({ label, url }))
-  assert.deepEqual(toolLinks, [
+  expect(toolLinks).toEqual([
     fixture.tools.react,
     fixture.tools.typescript,
     fixture.tools.extendscript,
@@ -78,20 +77,19 @@ await test('renders toolkit areas, case studies, biography paragraphs and role s
   ])
   const featured = markup.split(fixture.toolkit.label)[1]?.split(fixture.toolkit.note)[0]
   assert.ok(featured)
-  assert.doesNotMatch(featured, /ExtendScript/u)
-  assert.match(markup, /Example framework and Example compiler/u)
-  assert.ok(markup.includes(`href="${study.url}"`))
-  assert.ok(markup.includes(`href="#${skilledRole.id}"`))
+  expect(featured).not.toMatch(/ExtendScript/u)
+  expect(markup).toMatch(/Example framework and Example compiler/u)
+  expect(markup).toContain(`href="${study.url}"`)
+  expect(markup).toContain(`href="#${skilledRole.id}"`)
   const emptyRoleMarkup = markup.split(`id="${emptyRole.id}"`)[1]?.split('</article>')[0]
   assert.ok(emptyRoleMarkup)
-  assert.doesNotMatch(emptyRoleMarkup, /<details\b/u)
+  expect(emptyRoleMarkup).not.toMatch(/<details\b/u)
 })
 
-await test('rejects unknown tool IDs during prerendering', async () => {
+test('rejects unknown tool IDs during prerendering', async () => {
   const fixture = structuredClone(resume)
   fixture.toolkit.featuredToolIds = ['missing-tool']
-  await assert.rejects(
-    prerender('<div id="root"><!--app-html--></div>', fixture),
+  await expect(prerender('<div id="root"><!--app-html--></div>', fixture)).rejects.toThrow(
     /Unknown toolkit tool ID: "missing-tool"/u,
   )
 })

@@ -30,9 +30,6 @@
   font-size: 12px;
   font-weight: 500;
 }
-.print-icon {
-  margin-left: 8px;
-}
 @media (max-width: 800px) {
   .hero {
     column-gap: 30px;

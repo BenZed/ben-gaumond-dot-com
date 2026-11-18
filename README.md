@@ -25,22 +25,21 @@ npm run preview
 
 The build writes the static site to `dist`. It prerenders `content/resume.json` into `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the resume data embedded during the build.
 
-The Print resume button uses the browser print dialog and a dedicated print stylesheet. Choose Save as PDF for a PDF copy.
-
-## Local PDF export
+## Resume PDF
 
 Install headless Chromium once after `npm ci`, or again when Playwright is upgraded.
 
 ```sh
 npx playwright install chromium --only-shell
 npm run resume:pdf
+npm run preview
 ```
 
-The command rebuilds the site from `content/resume.json` and uses the same print layout to write a US Letter PDF to `dist/resume.pdf`. A regular `npm run build`, including the one used by GitHub Pages, recreates `dist` without generating the PDF.
+The export rebuilds the site from `content/resume.json` and uses its print layout to write a US Letter PDF to `dist/resume.pdf`. Open the preview and select **Download resume** to test the link locally. A regular `npm run build` recreates `dist` without the PDF.
 
 ## GitHub Pages
 
-In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow publishes `dist` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.
+In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow runs `npm run resume:pdf` and publishes `dist` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.
 
 ## Content
 

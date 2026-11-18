@@ -9,6 +9,7 @@ await test('the prerendered page includes resume HTML and matching hydration dat
   const page = await prerender(template, resume)
   assert.match(page, /<main\b/u)
   assert.ok(page.includes(resume.basics.summary))
+  assert.match(page, /<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")[^>]*>/u)
 
   const snapshot = /<script type="application\/json" id="resume-data">(.*?)<\/script>/u.exec(
     page,

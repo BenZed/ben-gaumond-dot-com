@@ -1,5 +1,5 @@
 import { Box, Button, Group, Text } from '@mantine/core'
-import { IconArrowDown, IconMapPin, IconPrinter } from '@tabler/icons-react'
+import { IconArrowDown, IconDownload, IconMapPin } from '@tabler/icons-react'
 
 import { HeroNote } from '../components/HeroNote'
 import { Section } from '../components/Section'
@@ -51,13 +51,16 @@ export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
             Explore my experience
           </Button>
           <Button
+            component="a"
+            href="./resume.pdf"
+            download
             variant="subtle"
             classNames={{ root: styles['hero-button'] }}
             color="ember.9"
             size="md"
-            onClick={() => window.print()}
+            rightSection={<SiteIcon icon={IconDownload} />}
           >
-            Print resume <SiteIcon icon={IconPrinter} className={styles['print-icon']} />
+            Download resume
           </Button>
         </Group>
       </Box>

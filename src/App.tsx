@@ -39,7 +39,6 @@ export function App({
       <Container size={1120} className={styles['page-shell']} id="top">
         <SiteHeader
           name={basics.name}
-          wordmark={basics.wordmark}
           sections={[experience.section, work.section, about.section, contact.section]}
         />
 

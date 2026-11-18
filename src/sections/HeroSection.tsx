@@ -11,7 +11,7 @@ import styles from './HeroSection.module.css'
 export type HeroSectionProps = {
   readonly basics: Pick<
     Resume['basics'],
-    'section' | 'summary' | 'role' | 'shortLocation' | 'wordmark' | 'pronouns'
+    'section' | 'summary' | 'role' | 'shortLocation' | 'pronouns'
   >
   readonly note: Resume['heroNote']
   readonly experienceId: string
@@ -64,7 +64,7 @@ export function HeroSection({ basics, experienceId, note }: HeroSectionProps) {
           </Button>
         </Group>
       </Box>
-      <HeroNote note={note} wordmark={basics.wordmark} />
+      <HeroNote note={note} />
     </Section>
   )
 }

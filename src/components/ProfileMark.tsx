@@ -1,0 +1,11 @@
+import { Image } from '@mantine/core'
+
+export type ProfileMarkProps = {
+  readonly size: string
+}
+
+export function ProfileMark({ size }: ProfileMarkProps) {
+  return (
+    <Image src="./profile-logo.png" alt="" w={size} h={size} radius="sm" width={160} height={160} />
+  )
+}

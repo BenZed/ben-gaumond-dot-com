@@ -11,25 +11,6 @@
   border-bottom: 1px solid var(--site-border);
   gap: 24px;
 }
-.wordmark {
-  font:
-    700 34px Georgia,
-    serif;
-  letter-spacing: -4px;
-  text-decoration: none;
-}
-.wordmark span {
-  color: var(--site-copper);
-}
-.active-section-label {
-  font-stretch: 82%;
-  word-spacing: 0.08em;
-}
-@media (max-width: 600px) {
-  .wordmark {
-    font-size: 34px;
-  }
-}
 @media print {
   .site-header {
     display: none;

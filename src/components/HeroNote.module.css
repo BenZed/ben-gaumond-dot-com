@@ -49,10 +49,6 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font:
-    italic 37px Georgia,
-    serif;
-  letter-spacing: -3px;
 }
 .orbit-dot {
   position: absolute;

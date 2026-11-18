@@ -35,7 +35,7 @@ npm run resume:pdf
 npm run preview
 ```
 
-The export rebuilds the site from `content/resume.json` and uses its print layout to write a US Letter PDF to `dist/resume.pdf`. Open the preview and select **Download resume** to test the link locally. A regular `npm run build` recreates `dist` without the PDF.
+The export rebuilds the site from `content/resume.json` and uses its print layout to write a US Letter PDF to `dist/ben-gaumond-resume.pdf`. Open the preview and select **Download resume** to test the link locally. A regular `npm run build` recreates `dist` without the PDF.
 
 Use `--output` (or `-o`) to choose a different file. Relative paths are resolved from the project directory. The export creates parent directories as needed.
 

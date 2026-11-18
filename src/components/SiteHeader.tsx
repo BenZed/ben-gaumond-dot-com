@@ -62,7 +62,7 @@ export function SiteHeader({ name, sections }: SiteHeaderProps) {
         <ColorModeControl />
         <ActionIcon
           component="a"
-          href="./resume.pdf"
+          href="./ben-gaumond-resume.pdf"
           download
           aria-label="Download resume"
           title="Download resume"

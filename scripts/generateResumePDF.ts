@@ -15,7 +15,7 @@ export async function generateResumePDF({ output }: GenerateResumePDFParams = {}
   if (output === '') throw new Error('Supply a file path for the PDF output')
   const outputPath =
     output === undefined
-      ? fileURLToPath(new URL('../dist/resume.pdf', import.meta.url))
+      ? fileURLToPath(new URL('../dist/ben-gaumond-resume.pdf', import.meta.url))
       : resolve(output)
 
   const server = await preview({

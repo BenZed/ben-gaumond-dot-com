@@ -11,7 +11,7 @@ test('the prerendered page includes resume HTML and matching hydration data', as
   const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
   assert.ok(header)
   expect(header).toMatch(
-    /<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="Download resume")[^>]*>/u,
+    /<a\b(?=[^>]*\bhref="\.\/ben-gaumond-resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="Download resume")[^>]*>/u,
   )
   expect(resume.toolkit.featuredToolIds).not.toContain('extendscript')
   expect(

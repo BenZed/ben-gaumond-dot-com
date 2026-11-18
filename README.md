@@ -36,7 +36,7 @@ npx playwright install chromium --only-shell
 npm run resume:pdf
 ```
 
-The command rebuilds the site from `content/resume.json` and uses the same print layout to write a US Letter PDF to `output/pdf/resume.pdf`. It creates the output directory as needed and replaces the previous PDF on each run. Git ignores `output/`, and GitHub Pages publishes only `dist`.
+The command rebuilds the site from `content/resume.json` and uses the same print layout to write a US Letter PDF to `dist/resume.pdf`. A regular `npm run build`, including the one used by GitHub Pages, recreates `dist` without generating the PDF.
 
 ## GitHub Pages
 

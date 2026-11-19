@@ -1,7 +1,7 @@
 import { Anchor, Box, Group, Stack, Text, Title } from '@mantine/core'
 
 import { isProjectPosition } from '../ProjectPosition'
-import type { Position, Resume } from '../types/Resume'
+import type { Position, Resume } from '../util/Resume'
 import { ExternalLink } from './ExternalLink'
 import { ProjectCard } from './ProjectCard'
 

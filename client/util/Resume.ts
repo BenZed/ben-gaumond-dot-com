@@ -1,5 +1,5 @@
 import type source from '../../content/resume.json'
-import type { Immutable } from '../util/Immutable'
+import type { Immutable } from './Immutable'
 
 export type Resume = Immutable<
   Omit<ResumeSource, 'experience'> & {

@@ -1,7 +1,7 @@
 import { Box, Text } from '@mantine/core'
 
 import { Section } from '../components/Section'
-import type { Resume } from '../types/Resume'
+import type { Resume } from '../util/Resume'
 
 import sectionStyles from '../components/Section.module.css'
 import styles from './AboutSection.module.css'

@@ -2,7 +2,7 @@ import { Anchor, Box, Group, Menu, UnstyledButton } from '@mantine/core'
 import { IconChevronDown } from '@tabler/icons-react'
 import type { ReactNode } from 'react'
 
-import type { ResumeSection } from '../types/Resume'
+import type { ResumeSection } from '../util/Resume'
 import { SiteIcon } from './SiteIcon'
 
 import styles from './SectionNavigation.module.css'

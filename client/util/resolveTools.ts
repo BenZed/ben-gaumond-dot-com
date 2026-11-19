@@ -1,4 +1,4 @@
-import type { Tool } from '../types/Resume'
+import type { Tool } from './Resume'
 
 export function resolveTools(tools: readonly Tool[], ids: readonly string[]): Tool[] {
   return ids.map((id) => {

@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import { useActiveSection } from '../hooks/useActiveSection'
 import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
-import type { Resume, ResumeSection } from '../types/Resume'
+import type { Resume, ResumeSection } from '../util/Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { ExternalLink } from './ExternalLink'
 import { HeaderTooltip } from './HeaderTooltip'

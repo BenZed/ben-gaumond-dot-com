@@ -1,6 +1,6 @@
 import { Anchor, Text } from '@mantine/core'
 
-import type { Resume } from '../types/Resume'
+import type { Resume } from '../util/Resume'
 
 import styles from './PrintContact.module.css'
 

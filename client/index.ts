@@ -1,2 +1,2 @@
 export { App } from './App'
-export type { Resume } from './types/Resume'
+export type { Resume } from './util/Resume'

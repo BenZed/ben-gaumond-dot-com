@@ -82,7 +82,7 @@ Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalP
 
 Put module constants at the top, then public props and the component. Put private types, hooks, and helpers below under `// Internal`.
 
-Keep standalone client helpers and utility types in `client/util/`, and shared résumé types in `client/types/`. Colocate tests with the modules they cover.
+Keep standalone client helpers and shared types in `client/util/`. Colocate tests with the modules they cover.
 
 Define props in a named `<ComponentName>Props` type. Export the type for public components and keep it local for private components. Components without props need no props type.
 

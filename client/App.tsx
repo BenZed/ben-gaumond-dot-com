@@ -10,8 +10,8 @@ import { ExperienceSection } from './sections/ExperienceSection'
 import { HeroSection } from './sections/HeroSection'
 import { WorkSection } from './sections/WorkSection'
 import { cssVariablesResolver, theme } from './theme'
-import type { Resume } from './types/Resume'
 import { resolveTools } from './util/resolveTools'
+import type { Resume } from './util/Resume'
 
 import styles from './App.module.css'
 

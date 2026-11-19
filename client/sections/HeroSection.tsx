@@ -1,4 +1,4 @@
-import { Text } from '@mantine/core'
+import { Box, Image, Text } from '@mantine/core'
 import { IconMapPin } from '@tabler/icons-react'
 
 import { Section } from '../components/Section'
@@ -8,7 +8,10 @@ import type { Resume } from '../Resume'
 import styles from './HeroSection.module.css'
 
 export type HeroSectionProps = {
-  readonly basics: Pick<Resume['basics'], 'section' | 'summary' | 'role' | 'shortLocation'>
+  readonly basics: Pick<
+    Resume['basics'],
+    'name' | 'section' | 'summary' | 'role' | 'shortLocation' | 'portrait'
+  >
 }
 
 export function HeroSection({ basics }: HeroSectionProps) {
@@ -24,13 +27,18 @@ export function HeroSection({ basics }: HeroSectionProps) {
       }
       title={basics.section.title}
     >
-      <Section.Header
-        className={styles['hero-heading']}
-        classNames={{ eyebrow: styles['hero-eyebrow'] }}
-      />
-      <Text component="p" className={styles['hero-summary']}>
-        {basics.summary}
-      </Text>
+      <Box>
+        <Section.Header
+          className={styles['hero-heading']}
+          classNames={{ eyebrow: styles['hero-eyebrow'] }}
+        />
+        <Text component="p" className={styles['hero-summary']}>
+          {basics.summary}
+        </Text>
+      </Box>
+      <Box className={styles['portrait']}>
+        <Image src={basics.portrait} alt={basics.name} width={399} height={400} />
+      </Box>
     </Section>
   )
 }

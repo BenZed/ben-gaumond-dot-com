@@ -51,12 +51,12 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
           ))}
         </Group>
       )}
-      {projectPositions.some(({ url }) => url) && (
+      {projectPositions.some(({ project }) => project.url) && (
         <Group className={styles['print-project-links']} gap="xs">
-          {projectPositions.map(({ id, projectTitle, url }) =>
+          {projectPositions.map(({ id, project: { title, url } }) =>
             url ? (
               <Anchor key={id} href={url} inherit>
-                {projectTitle}
+                {title}
               </Anchor>
             ) : null,
           )}
@@ -64,8 +64,8 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
       )}
       {projectPositions.length > 0 && (
         <Box className={styles['project-grid']}>
-          {projectPositions.map((project, index) => (
-            <ProjectCard key={project.id} project={project} artwork={artwork} index={index} />
+          {projectPositions.map((position, index) => (
+            <ProjectCard key={position.id} position={position} artwork={artwork} index={index} />
           ))}
         </Box>
       )}

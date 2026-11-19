@@ -10,7 +10,7 @@
     "location": "Vancouver, British Columbia, Canada",
     "shortLocation": "Vancouver, BC",
     "linkedinUrl": "https://www.linkedin.com/in/ben-gaumond/",
-    "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation.",
+    "summary": "I press buttons and make things happen.",
     "siteRepositoryUrl": "https://github.com/BenZed/ben-gaumond-dot-com"
   },
   "toolkit": {
@@ -91,7 +91,7 @@
     "section": {
       "id": "experience",
       "label": "Experience",
-      "title": "From animation to software development",
+      "title": "Work history",
       "eyebrow": "01 / Experience"
     },
     "aside": "Web applications, technical direction, and interactive games",
@@ -99,11 +99,10 @@
       {
         "company": "eDynamic Learning",
         "title": "Full-stack Software Developer",
-        "start": "2023-04",
-        "end": null,
-        "location": "Canada · Remote",
+        "dates": { "start": "2023-04", "end": null },
+        "location": { "place": "Canada", "mode": "Remote" },
         "id": "edynamic-learning",
-        "employmentType": "Permanent Full-time",
+        "employment": { "type": "Permanent", "schedule": "Full-time" },
         "description": [],
         "skills": [],
         "highlights": ["Develop interactive simulations for educational software."]
@@ -111,12 +110,11 @@
       {
         "company": "Global Mechanic",
         "title": "Technical Director",
-        "start": "2014-08",
-        "end": "2023-01",
-        "location": "Vancouver · Hybrid",
+        "dates": { "start": "2014-08", "end": "2023-01" },
+        "location": { "place": "Vancouver", "mode": "Hybrid" },
         "url": "https://globalmechanic.com/",
         "id": "global-mechanic",
-        "employmentType": "Permanent Full-time",
+        "employment": { "type": "Permanent", "schedule": "Full-time" },
         "description": [
           "I had the most fun at Global Mechanic, a small animation studio where technical direction covered everything from onboarding and tech support to building software for artists and producers.",
           "The work I kept coming back to was the animation pipeline. I led the design of successive versions of the studio's internal tools and learned full-stack development by working on applications tied to how a production actually ran.",
@@ -136,12 +134,10 @@
       {
         "company": "PBS",
         "title": "Scribbles and Ink S2 - Developer",
-        "start": "2020-01",
-        "end": "2020-12",
-        "location": "Vancouver · Hybrid",
-        "url": "https://pbskids.org/scribblesandink/far-and-away",
+        "dates": { "start": "2020-01", "end": "2020-12" },
+        "location": { "place": "Vancouver", "mode": "Hybrid" },
         "id": "pbs-scribbles-ink-s2",
-        "employmentType": "Contract Full-time",
+        "employment": { "type": "Contract", "schedule": "Full-time" },
         "description": [
           "I led development on Far and Away, the second Scribbles and Ink drawing game for PBS KIDS. The sequel needed a way to keep adding content, so our small team rewrote the original codebase around reusable behaviors and editor tools that artists could use.",
           "Much of the engine documentation was in another language. Coding in the dark was, honestly, quite fun.",
@@ -153,23 +149,24 @@
           "Rewrote the original codebase around reusable behaviors and built editor tools to make it easier for artists to add content.",
           "Set up Google Analytics and used it to report on how the game was being played."
         ],
-        "projectTitle": "Far and Away",
-        "preview": {
-          "src": "./scribbles-and-ink-2.mp4",
-          "poster": "./scribbles-and-ink-2.webp",
-          "width": 576,
-          "height": 370
+        "project": {
+          "title": "Far and Away",
+          "url": "https://pbskids.org/scribblesandink/far-and-away",
+          "preview": {
+            "src": "./scribbles-and-ink-2.mp4",
+            "poster": "./scribbles-and-ink-2.webp",
+            "width": 576,
+            "height": 370
+          }
         }
       },
       {
         "company": "PBS",
         "title": "Scribbles and Ink S1 - Lead Developer",
-        "start": "2019-01",
-        "end": "2019-12",
-        "location": "Remote",
-        "url": "https://pbskids.org/scribblesandink/in-and-out",
+        "dates": { "start": "2019-01", "end": "2019-12" },
+        "location": { "mode": "Remote" },
         "id": "pbs-scribbles-ink-s1",
-        "employmentType": "Contract Full-time",
+        "employment": { "type": "Contract", "schedule": "Full-time" },
         "description": [
           "In and Out was the first Scribbles and Ink game for PBS KIDS. Kids could draw on a mobile device while interacting with animated characters.",
           "The tricky part was getting it to run on a wide range of devices. I worked through how the engine's editor serialized assets so we could load them dynamically and manage memory at runtime."
@@ -179,23 +176,25 @@
           "Developed In and Out, a PBS KIDS mobile drawing game with interactive animated characters.",
           "Worked around the engine editor's serialization constraints to load assets dynamically and manage memory across devices."
         ],
-        "projectTitle": "In and Out",
-        "preview": {
-          "src": "./scribbles-and-ink-1.mp4",
-          "poster": "./scribbles-and-ink-1.webp",
-          "width": 576,
-          "height": 370
+        "project": {
+          "title": "In and Out",
+          "url": "https://pbskids.org/scribblesandink/in-and-out",
+          "preview": {
+            "src": "./scribbles-and-ink-1.mp4",
+            "poster": "./scribbles-and-ink-1.webp",
+            "width": 576,
+            "height": 370
+          }
         }
       },
       {
         "company": "SoMedia Networks",
         "title": "Software Developer",
-        "start": "2010-07",
-        "end": "2013-03",
-        "location": "Vancouver · On-site",
+        "dates": { "start": "2010-07", "end": "2013-03" },
+        "location": { "place": "Vancouver", "mode": "On-site" },
         "repository_label": "BenZed/after-effects",
         "id": "somedia-networks",
-        "employmentType": "Permanent Part-time",
+        "employment": { "type": "Permanent", "schedule": "Part-time" },
         "description": [
           "My first developer job involved automating renders in Adobe After Effects. Its scripting engine was already old enough to have opinions about which JavaScript I was allowed to write.",
           "That work later led me to build an open-source Node.js library for running scripts inside After Effects. Publishing it led to contract work."

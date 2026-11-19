@@ -78,6 +78,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   fixture.about.paragraphs = ['Example first paragraph', 'Example second paragraph']
   skilledRole.skills = ['Example role skill']
   emptyRole.description = []
+  emptyRole.dates = { start: '2023-04', end: null }
   emptyRole.skills = []
   delete emptyRole.url
 
@@ -112,19 +113,26 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   expect(markup).toContain(`href="#${skilledRole.id}"`)
   const emptyRoleMarkup = markup.split(`id="${emptyRole.id}"`)[1]?.split('</article>')[0]
   assert.ok(emptyRoleMarkup)
+  expect(emptyRoleMarkup.replaceAll('<!-- -->', '')).toContain('Apr 2023 — Present')
   expect(emptyRoleMarkup).not.toMatch(/<details\b/u)
 })
 
 test('offers an inline player for an embeddable project without loading the iframe', () => {
-  const project = resume.experience.positions.find(({ id }) => id === 'pbs-scribbles-ink-s1')
-  assert.ok(project?.url)
+  const projectPosition = resume.experience.positions.find(
+    ({ id }) => id === 'pbs-scribbles-ink-s1',
+  )
+  assert.ok(projectPosition?.project?.url)
+  const { project } = projectPosition
+  const companyUrl = 'https://example.com/company'
   const embedUrl = 'https://example.com/embed/in-and-out'
   const fixture: Resume = {
     ...resume,
     experience: {
       ...resume.experience,
       positions: resume.experience.positions.map((position) =>
-        position.id === project.id ? { ...position, embedUrl } : position,
+        position.id === projectPosition.id
+          ? { ...position, url: companyUrl, project: { ...project, embedUrl } }
+          : position,
       ),
     },
   }
@@ -132,7 +140,13 @@ test('offers an inline player for an embeddable project without loading the ifra
   const page = renderResumePage(template, fixture, App)
   const [, markup = ''] = page.split('<body>')
   expect(markup).toContain('Play inline')
-  expect(markup).toContain(`href="${project.url}"`)
+  expect(markup).toContain(`href="${project.url}">${project.title}</a>`)
+  expect(markup).toContain(`aria-label="${project.title} gameplay preview"`)
+  const experienceMarkup = markup.split(`id="${projectPosition.id}"`)[1]?.split('</article>')[0]
+  assert.ok(experienceMarkup)
+  expect(experienceMarkup).toContain(`href="${project.url}"`)
+  expect(experienceMarkup).toContain('Visit the project')
+  expect(markup).not.toContain(companyUrl)
   expect(markup).not.toContain('<iframe')
   expect(markup).not.toContain(embedUrl)
 })

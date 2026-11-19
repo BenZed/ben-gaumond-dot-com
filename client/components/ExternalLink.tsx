@@ -7,6 +7,8 @@ import { SiteIcon } from './SiteIcon'
 
 import typography from '../Typography.module.css'
 
+const GITHUB_REGEXP = /^https?:\/\/github\.com(?:[/?#]|$)/iu
+
 export type ExternalLinkProps = {
   readonly href: string
   readonly label: string
@@ -14,7 +16,7 @@ export type ExternalLinkProps = {
 }
 
 export function ExternalLink({ href, label, iconOnly = false }: ExternalLinkProps) {
-  const isGitHub = /^https?:\/\/github\.com(?:[/?#]|$)/iu.test(href)
+  const isGitHub = GITHUB_REGEXP.test(href)
   const icon = isGitHub ? <GitHubMark /> : <SiteIcon icon={IconArrowUpRight} />
 
   if (iconOnly) {

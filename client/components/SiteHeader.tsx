@@ -3,7 +3,7 @@ import { IconBrandLinkedin, IconDownload } from '@tabler/icons-react'
 import { useRef } from 'react'
 
 import { useActiveSection } from '../hooks/useActiveSection'
-import { useWriteOn } from '../hooks/useWriteOn'
+import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
 import type { Resume, ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { ExternalLink } from './ExternalLink'
@@ -14,27 +14,10 @@ import { SiteIcon } from './SiteIcon'
 
 import styles from './SiteHeader.module.css'
 
-const linkedinLabel = 'LinkedIn'
-const downloadLabel = 'Download resume'
-const writeIn = { from: 0, to: 1, delay: 150, duration: 260, steps: 14 } as const
-const writeOut = { from: 1, to: 0, duration: 150, steps: 10 } as const
-
-type HeaderLabelProps = {
-  readonly label: string
-  readonly motion?: 'in' | 'out' | undefined
-}
-
-function HeaderLabel({ label, motion }: HeaderLabelProps) {
-  const writeOn = useWriteOn<HTMLSpanElement>(
-    motion === 'in' ? writeIn : motion === 'out' ? writeOut : undefined,
-  )
-
-  return (
-    <Box component="span" {...writeOn}>
-      {label}
-    </Box>
-  )
-}
+const LINKED_IN_LABEL = 'See what programming taught me about B2B Sales'
+const DOWNLOAD_LABEL = 'Download My Resume'
+const WRITE_IN: WriteOnAnimation = { from: 0, to: 1, delay: 150, duration: 260, steps: 14 } as const
+const WRITE_OUT: WriteOnAnimation = { from: 1, to: 0, duration: 150, steps: 10 } as const
 
 export type SiteHeaderProps = {
   readonly name: string
@@ -75,27 +58,32 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
       <Anchor className={styles['home-link']} href="#top" aria-label={`${name}, back to top`}>
         {title}
       </Anchor>
+
       <SectionNavigation sections={sections} activeId={current} compactTitle={title} />
+
       <Group className={styles['header-actions']} gap={4} wrap="nowrap">
         <ColorModeControl />
-        <HeaderTooltip label={linkedinLabel}>
+
+        <HeaderTooltip label={LINKED_IN_LABEL}>
           <ActionIcon
             component="a"
             href={linkedinUrl}
-            aria-label={linkedinLabel}
+            aria-label={LINKED_IN_LABEL}
             variant="subtle"
             size={36}
           >
             <SiteIcon icon={IconBrandLinkedin} />
           </ActionIcon>
         </HeaderTooltip>
-        <ExternalLink href={siteRepositoryUrl} label="Site source on GitHub" iconOnly />
-        <HeaderTooltip label={downloadLabel}>
+
+        <ExternalLink href={siteRepositoryUrl} label="View on GitHub" iconOnly />
+
+        <HeaderTooltip label={DOWNLOAD_LABEL}>
           <ActionIcon
             component="a"
             href="./ben-gaumond-resume.pdf"
             download
-            aria-label={downloadLabel}
+            aria-label={DOWNLOAD_LABEL}
             variant="subtle"
             size={36}
           >
@@ -103,6 +91,25 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
           </ActionIcon>
         </HeaderTooltip>
       </Group>
+    </Box>
+  )
+}
+
+// Internal
+
+type HeaderLabelProps = {
+  readonly label: string
+  readonly motion?: 'in' | 'out' | undefined
+}
+
+function HeaderLabel({ label, motion }: HeaderLabelProps) {
+  const writeOn = useWriteOn<HTMLSpanElement>(
+    motion === 'in' ? WRITE_IN : motion === 'out' ? WRITE_OUT : undefined,
+  )
+
+  return (
+    <Box component="span" {...writeOn}>
+      {label}
     </Box>
   )
 }

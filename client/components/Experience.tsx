@@ -12,17 +12,18 @@ export type ExperienceProps = {
 }
 
 export function Experience({ position }: ExperienceProps) {
-  const { description, skills, url } = position
-  const hasDetails = description.length > 0 || skills.length > 0 || Boolean(url)
+  const { dates, description, project, skills, url } = position
+  const location = [position.location.place, position.location.mode].filter(Boolean).join(' · ')
+  const detailsUrl = project?.url ?? url
+  const hasDetails = description.length > 0 || skills.length > 0 || Boolean(detailsUrl)
 
   return (
     <Box component="article" className={styles['experience-row']} id={position.id}>
       <Stack className={styles['experience-date']} gap={14} align="flex-start">
         <Box component="span">
-          {formatMonth(position.start)} —{' '}
-          {position.end === null ? 'Present' : formatMonth(position.end)}
+          {formatMonth(dates.start)} — {dates.end === null ? 'Present' : formatMonth(dates.end)}
         </Box>
-        {position.end === null && (
+        {dates.end === null && (
           <Badge variant="light" color="ember.9" size="sm">
             Current
           </Badge>
@@ -34,11 +35,15 @@ export function Experience({ position }: ExperienceProps) {
         </Title>
         <Text className={styles['position-title']}>{position.title}</Text>
         <Text className={styles['position-location']}>
-          {position.location}{' '}
-          <Box component="span" aria-hidden="true">
-            /
-          </Box>{' '}
-          {position.employmentType}
+          {location && (
+            <>
+              {location}{' '}
+              <Box component="span" aria-hidden="true">
+                /
+              </Box>{' '}
+            </>
+          )}
+          {`${position.employment.type} ${position.employment.schedule}`}
         </Text>
         <List className={styles['highlights']}>
           {position.highlights.map((item) => (
@@ -66,10 +71,10 @@ export function Experience({ position }: ExperienceProps) {
                   ))}
                 </Group>
               )}
-              {url && (
+              {detailsUrl && (
                 <ExternalLink
-                  href={url}
-                  label={`Visit ${position.projectTitle !== undefined ? 'the project' : position.company}`}
+                  href={detailsUrl}
+                  label={`Visit ${project?.url ? 'the project' : position.company}`}
                 />
               )}
             </Box>

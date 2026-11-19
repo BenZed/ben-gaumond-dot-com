@@ -10,13 +10,19 @@ import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
 
 import styles from './CodeBackgroundScene.module.css'
 
-const parallax = 0.2
-const columnWidth = 360
-const intro: WriteOnAnimation = { from: 0, to: 1, duration: 2200, steps: 60, axis: 'block' }
+const PARALLAX = 0.2
+const COLUMN_WIDTH = 360
+const FIRST_WRITE_ON: WriteOnAnimation = {
+  from: 0,
+  to: 1,
+  duration: 2200,
+  steps: 60,
+  axis: 'block',
+}
 
 export function CodeBackgroundScene() {
   const { viewport, resizeRef } = useCodeViewport()
-  const writeOn = useWriteOn<HTMLDivElement>(viewport.columns > 0 ? intro : undefined)
+  const writeOn = useWriteOn<HTMLDivElement>(viewport.columns > 0 ? FIRST_WRITE_ON : undefined)
   const ref = useMergedRef(writeOn.ref, resizeRef)
   useCodeParallax(writeOn.ref)
 
@@ -33,7 +39,7 @@ export function CodeBackgroundScene() {
           const file = files[index % files.length]
           return file ? (
             <CodeColumn key={`${file.path}-${index}`} file={file} viewportLines={viewport.lines} />
-          ) : null
+          ) : undefined
         })}
       </Box>
     </Box>
@@ -46,7 +52,7 @@ function useCodeViewport() {
   const [viewport, setViewport] = useState({ columns: 0, lines: 0 })
   const measure = useCallback((scene: HTMLDivElement) => {
     const lineHeight = Number.parseFloat(getComputedStyle(scene).lineHeight)
-    const columns = Math.max(1, Math.floor(scene.clientWidth / columnWidth))
+    const columns = Math.max(1, Math.floor(scene.clientWidth / COLUMN_WIDTH))
     const lines = Math.ceil(scene.clientHeight / lineHeight)
     setViewport((current) =>
       current.columns === columns && current.lines === lines ? current : { columns, lines },
@@ -73,7 +79,7 @@ function useCodeParallax(ref: RefObject<HTMLDivElement | null>) {
     const update = () => {
       frame = 0
       const scroll = Math.max(0, window.scrollY)
-      scene.style.setProperty('--code-travel', `${parallax * scroll}px`)
+      scene.style.setProperty('--code-travel', `${PARALLAX * scroll}px`)
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)

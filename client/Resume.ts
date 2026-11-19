@@ -3,7 +3,16 @@ import type { Immutable } from './types/Immutable'
 
 type ResumeSource = typeof source
 
-type PositionSource = ResumeSource['experience']['positions'][number] & { embedUrl?: string }
+type SourcePosition = ResumeSource['experience']['positions'][number]
+type SourceProject = NonNullable<SourcePosition['project']>
+type PositionSource = Omit<SourcePosition, 'project'> & {
+  project?: {
+    title: SourceProject['title']
+    url?: SourceProject['url']
+    embedUrl?: string
+    preview?: SourceProject['preview']
+  }
+}
 
 export type Resume = Immutable<
   Omit<ResumeSource, 'experience'> & {

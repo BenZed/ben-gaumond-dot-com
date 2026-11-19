@@ -3,7 +3,7 @@ import { useIntersection, useMediaQuery } from '@mantine/hooks'
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
 
-import type { Position } from '../Resume'
+import type { ProjectPosition } from '../ProjectPosition'
 import { SiteIcon } from './SiteIcon'
 
 import styles from './ProjectPreview.module.css'
@@ -13,7 +13,7 @@ const visibilityThresholds = [0, visibilityThreshold]
 
 export type ProjectPreviewProps = {
   readonly href: string
-  readonly preview: NonNullable<Position['preview']>
+  readonly preview: NonNullable<ProjectPosition['project']['preview']>
   readonly title: string
 }
 

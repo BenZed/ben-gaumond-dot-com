@@ -10,20 +10,15 @@ import typography from '../Typography.module.css'
 import styles from './ProjectCard.module.css'
 
 export type ProjectCardProps = {
-  readonly project: Pick<
-    ProjectPosition,
-    'company' | 'start' | 'projectTitle' | 'highlights' | 'url' | 'embedUrl' | 'preview'
-  >
+  readonly position: Pick<ProjectPosition, 'company' | 'dates' | 'highlights' | 'project'>
   readonly artwork: Resume['work']['artwork']
   readonly index: number
 }
 
-export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
-  const projectUrl = project.url ?? project.embedUrl
-  const linkedPreview =
-    projectUrl && project.preview
-      ? { href: projectUrl, preview: project.preview, title: project.projectTitle }
-      : undefined
+export function ProjectCard({ position, artwork, index }: ProjectCardProps) {
+  const { title, url, embedUrl, preview } = position.project
+  const projectUrl = url ?? embedUrl
+  const linkedPreview = projectUrl && preview ? { href: projectUrl, preview, title } : undefined
 
   return (
     <Box component="article" className={styles['project-card']}>
@@ -54,15 +49,13 @@ export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
           component="p"
           className={[typography['eyebrow'], styles['project-eyebrow']].join(' ')}
         >
-          {project.company} / {project.start.slice(0, 4)}
+          {position.company} / {position.dates.start.slice(0, 4)}
         </Text>
-        <Title order={4}>{project.projectTitle}</Title>
-        <Text component="p">{project.highlights[0]}</Text>
-        {projectUrl && (project.embedUrl || !linkedPreview) && (
+        <Title order={4}>{title}</Title>
+        <Text component="p">{position.highlights[0]}</Text>
+        {projectUrl && (embedUrl || !linkedPreview) && (
           <Stack align="flex-start" gap="xs">
-            {project.embedUrl && (
-              <IframePlayer src={project.embedUrl} title={project.projectTitle} />
-            )}
+            {embedUrl && <IframePlayer src={embedUrl} title={title} />}
             {!linkedPreview && <ExternalLink href={projectUrl} label="Explore the project" />}
           </Stack>
         )}

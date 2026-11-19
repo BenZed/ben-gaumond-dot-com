@@ -5,13 +5,17 @@ import type { Resume } from '../Resume'
 import styles from './PrintContact.module.css'
 
 export type PrintContactProps = {
+  readonly websiteUrl: Resume['basics']['websiteUrl']
   readonly linkedinUrl: Resume['basics']['linkedinUrl']
 }
 
-export function PrintContact({ linkedinUrl }: PrintContactProps) {
+export function PrintContact({ websiteUrl, linkedinUrl }: PrintContactProps) {
   return (
     <Text component="p" className={styles['print-contact']} size="xs">
-      LinkedIn:{' '}
+      <Anchor href={websiteUrl} inherit>
+        {new URL(websiteUrl).hostname}
+      </Anchor>
+      {' · LinkedIn: '}
       <Anchor href={linkedinUrl} inherit>
         {linkedinUrl}
       </Anchor>

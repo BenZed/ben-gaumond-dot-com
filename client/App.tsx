@@ -42,7 +42,7 @@ export function App({ basics, experience, work, about, tools, toolkit }: AppProp
         <Box component="main" id="main">
           <HeroSection basics={basics} />
 
-          <PrintContact linkedinUrl={basics.linkedinUrl} />
+          <PrintContact websiteUrl={basics.websiteUrl} linkedinUrl={basics.linkedinUrl} />
 
           <Toolkit toolkit={toolkit} tools={tools} featuredTools={featuredTools} />
 

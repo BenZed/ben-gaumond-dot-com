@@ -13,22 +13,8 @@ import { SiteIcon } from './SiteIcon'
 
 import styles from './SiteHeader.module.css'
 
-type HeaderLabelProps = {
-  readonly label: string | undefined
-}
-
 const linkedinLabel = 'LinkedIn'
 const downloadLabel = 'Download resume'
-
-function HeaderLabel({ label }: HeaderLabelProps) {
-  return label === undefined ? (
-    <ProfileMark size="var(--header-title-size)" />
-  ) : (
-    <Box component="span" className={styles['active-section-label']}>
-      {label}
-    </Box>
-  )
-}
 
 export type SiteHeaderProps = {
   readonly name: string
@@ -41,27 +27,30 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
   const header = useRef<HTMLElement>(null)
   const { current, previous } = useActiveSection(header, sections)
   const changing = current !== previous
+  const currentLabel = sections.find(({ id }) => id === current)?.label
+  const previousLabel = changing ? sections.find(({ id }) => id === previous)?.label : undefined
 
   const title = (
     <Box component="span" className={styles['header-title']}>
-      {changing && (
-        <Box
-          component="span"
-          key={`out-${previous}`}
-          className={styles['header-title-out']}
-          aria-hidden="true"
-        >
-          <HeaderLabel label={sections.find(({ id }) => id === previous)?.label} />
+      <ProfileMark size="var(--header-title-size)" />
+      {(currentLabel || previousLabel) && (
+        <Box component="span" className={styles['header-label']} aria-hidden="true">
+          {previousLabel && (
+            <Box component="span" key={`out-${previous}`} className={styles['header-title-out']}>
+              {previousLabel}
+            </Box>
+          )}
+          {currentLabel && (
+            <Box
+              component="span"
+              key={`in-${current}`}
+              className={changing ? styles['header-title-in'] : undefined}
+            >
+              {currentLabel}
+            </Box>
+          )}
         </Box>
       )}
-      <Box
-        component="span"
-        key={`in-${current}`}
-        className={changing ? styles['header-title-in'] : undefined}
-        aria-hidden="true"
-      >
-        <HeaderLabel label={sections.find(({ id }) => id === current)?.label} />
-      </Box>
     </Box>
   )
 

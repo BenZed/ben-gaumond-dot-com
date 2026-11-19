@@ -24,26 +24,17 @@
 }
 .header-title {
   --header-title-size: 2.125rem;
-  display: grid;
+  display: flex;
   align-items: center;
   min-width: 0;
 }
-.header-title > span {
-  display: flex;
+.header-title > img {
+  flex-shrink: 0;
+}
+.header-label {
+  display: grid;
   align-items: center;
-  grid-area: 1 / 1;
-  justify-self: start;
-  max-width: 100%;
-  white-space: nowrap;
-}
-.header-title-out {
-  pointer-events: none;
-  animation: header-write-off 150ms steps(10, end) both;
-}
-.header-title-in {
-  animation: header-write-on 260ms steps(14, end) 150ms both;
-}
-.active-section-label {
+  min-width: 0;
   font-family: var(--mantine-font-family-headings);
   font-stretch: 82%;
   word-spacing: 0.08em;
@@ -51,6 +42,18 @@
   font-weight: var(--mantine-h1-font-weight);
   line-height: 1;
   letter-spacing: -0.045em;
+}
+.header-label > span {
+  grid-area: 1 / 1;
+  min-width: 0;
+  margin-inline-start: 0.5rem;
+}
+.header-title-out {
+  pointer-events: none;
+  animation: header-write-off 150ms steps(10, end) both;
+}
+.header-title-in {
+  animation: header-write-on 260ms steps(14, end) 150ms both;
 }
 .header-actions {
   flex-shrink: 0;
@@ -69,6 +72,7 @@
   }
   to {
     clip-path: inset(0 100% 0 0);
+    display: none;
   }
 }
 @keyframes header-write-on {
@@ -86,9 +90,9 @@
   .home-link {
     display: none;
   }
-  .active-section-label {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .header-label {
+    font-size: clamp(1rem, 5vw, var(--header-title-size));
+    overflow-wrap: anywhere;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -107,7 +111,7 @@
   .header-actions {
     gap: 0;
   }
-  .active-section-label {
-    font-size: 1.625rem;
+  .header-label {
+    font-size: 0.875rem;
   }
 }

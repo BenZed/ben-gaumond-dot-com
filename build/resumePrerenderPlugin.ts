@@ -7,7 +7,7 @@ import type { Plugin } from 'vite'
 import type { App as ResumeApp } from '../client/App'
 import type { Resume } from '../client/Resume'
 
-const appPlaceholder = '<div id="root"><!--app-html--></div>'
+const appPlaceholder = '<!--app-html-->'
 const dataPlaceholder = '<!--resume-data-->'
 
 export function renderResumePage(template: string, resume: Resume, App: typeof ResumeApp) {
@@ -21,7 +21,7 @@ export function renderResumePage(template: string, resume: Resume, App: typeof R
       dataPlaceholder,
       () => `<script type="application/json" id="resume-data">${snapshot}</script>`,
     )
-    .replace(appPlaceholder, () => `<div id="root">${markup}</div>`)
+    .replace(appPlaceholder, () => markup)
 }
 
 export function resumePrerenderPlugin(resume: Resume): Plugin {

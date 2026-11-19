@@ -6,11 +6,12 @@ import resume from '../content/resume.json' with { type: 'json' }
 import { renderResumePage } from './resumePrerenderPlugin'
 
 const template =
-  '<!doctype html><html><head><!--resume-data--></head><body><div id="root"><!--app-html--></div></body></html>'
+  '<!doctype html><html><head><!--resume-data--></head><body><div id="root" data-template-root><!--app-html--></div></body></html>'
 
 test('the prerendered page includes resume HTML and matching hydration data', () => {
   const page = renderResumePage(template, resume, App)
-  expect(page).toMatch(/<main\b/u)
+  expect(page).toMatch(/<div id="root" data-template-root>[\s\S]*?<main\b/u)
+  expect(page.match(/<div\b[^>]*\bid="root"/gu)).toHaveLength(1)
   expect(page).toContain(resume.basics.summary)
   const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
   assert.ok(header)

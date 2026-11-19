@@ -75,5 +75,3 @@ export function renderResumePage(template: string, resume: Client.Resume, App: t
     )
     .replace(APP_PLACEHOLDER, () => markup)
 }
-
-// Internal

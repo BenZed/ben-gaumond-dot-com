@@ -80,6 +80,8 @@ Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalP
 
 ## UI organization
 
+Put module constants at the top, then public props and the component. Put private types, hooks, and helpers below under `// Internal`.
+
 Define props in a named `<ComponentName>Props` type. Export the type for public components and keep it local for private components. Components without props need no props type.
 
 `client/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `client/sections/` and custom hooks in `client/hooks/`. Put UI pieces with a distinct responsibility in `client/components/`, such as the shared `Section` primitive and `ProjectCard`. `client/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `client/styles.css` contains document-wide styles.

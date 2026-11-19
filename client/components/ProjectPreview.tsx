@@ -8,6 +8,9 @@ import { SiteIcon } from './SiteIcon'
 
 import styles from './ProjectPreview.module.css'
 
+const visibilityThreshold = 0.4
+const visibilityThresholds = [0, visibilityThreshold]
+
 export type ProjectPreviewProps = {
   readonly href: string
   readonly preview: NonNullable<Position['preview']>
@@ -51,8 +54,7 @@ export function ProjectPreview({ href, preview, title }: ProjectPreviewProps) {
   )
 }
 
-const visibilityThreshold = 0.4
-const visibilityThresholds = [0, visibilityThreshold]
+// Internal
 
 type PlaybackIntent = 'auto' | 'play' | 'pause'
 

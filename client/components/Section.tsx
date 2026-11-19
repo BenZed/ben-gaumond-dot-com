@@ -5,11 +5,7 @@ import type { ReactNode } from 'react'
 import typography from '../Typography.module.css'
 import styles from './Section.module.css'
 
-type SectionHeading = {
-  readonly title: ReactNode
-  readonly eyebrow?: ReactNode
-  readonly headingOrder?: 1 | 2
-}
+const SectionContext = createContext<SectionContextValue | null>(null)
 
 export type SectionProps = SectionHeading & {
   readonly id: string
@@ -17,8 +13,28 @@ export type SectionProps = SectionHeading & {
   readonly children: ReactNode
 }
 
+export type SectionHeaderProps = {
+  readonly aside?: ReactNode
+  readonly classNames?: { readonly eyebrow?: string | undefined }
+  readonly className?: string | undefined
+}
+
+/**
+ * A named page region. Render one Section.Header inside it; the header may be nested
+ * to suit the layout. Section owns heading IDs and levels so callers cannot drift
+ * out of sync with aria-labelledby. Layout and content stay with the composing section.
+ */
+export const Section = Object.assign(SectionRoot, { Header: SectionHeader })
+
+// Internal
+
+type SectionHeading = {
+  readonly title: ReactNode
+  readonly eyebrow?: ReactNode
+  readonly headingOrder?: 1 | 2
+}
+
 type SectionContextValue = SectionHeading & { readonly headingId: string }
-const SectionContext = createContext<SectionContextValue | null>(null)
 
 function SectionRoot({ id, title, eyebrow, headingOrder = 2, className, children }: SectionProps) {
   return (
@@ -28,12 +44,6 @@ function SectionRoot({ id, title, eyebrow, headingOrder = 2, className, children
       </Box>
     </SectionContext.Provider>
   )
-}
-
-export type SectionHeaderProps = {
-  readonly aside?: ReactNode
-  readonly classNames?: { readonly eyebrow?: string | undefined }
-  readonly className?: string | undefined
 }
 
 function SectionHeader({
@@ -72,10 +82,3 @@ function SectionHeader({
     </Box>
   )
 }
-
-/**
- * A named page region. Render one Section.Header inside it; the header may be nested
- * to suit the layout. Section owns heading IDs and levels so callers cannot drift
- * out of sync with aria-labelledby. Layout and content stay with the composing section.
- */
-export const Section = Object.assign(SectionRoot, { Header: SectionHeader })

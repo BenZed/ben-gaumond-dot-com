@@ -58,7 +58,7 @@ export function ColorModeControl() {
 
 // Internal
 
-const isColorMode = (i: string): i is ColorMode => i in COLOR_MODES
+const isColorMode = (value: string): value is ColorMode => Object.hasOwn(COLOR_MODES, value)
 
 const useColorMode = (mounted: boolean) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme()

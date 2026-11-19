@@ -1,7 +1,6 @@
 import { assert, expect, test } from 'vitest'
 
-import { App } from '../client/App'
-import type { Resume } from '../client/Resume'
+import { App, type Resume } from '../client'
 import resume from '../content/resume.json' with { type: 'json' }
 import { renderResumePage } from './resumePrerenderPlugin'
 

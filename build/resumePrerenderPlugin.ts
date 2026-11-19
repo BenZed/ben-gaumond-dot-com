@@ -4,8 +4,7 @@ import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
 import type { Plugin } from 'vite'
 
-import type { App as ResumeApp } from '../client/App'
-import type { Resume } from '../client/Resume'
+import type { App as ResumeApp, Resume } from '../client'
 
 const appPlaceholder = '<!--app-html-->'
 const dataPlaceholder = '<!--resume-data-->'

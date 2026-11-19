@@ -5,8 +5,7 @@ import './client/styles.css'
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 
-import { App } from './client/App'
-import type { Resume } from './client/Resume'
+import { App, type Resume } from './client'
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Root element is missing')

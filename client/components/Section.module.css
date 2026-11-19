@@ -22,12 +22,20 @@
   flex-shrink: 0;
 }
 @media screen and (prefers-reduced-motion: no-preference) {
-  .region[data-section-waiting]:not(:focus-within) {
-    clip-path: inset(0 100% 0 0);
+  .section-title[data-heading-reveal='waiting'] {
+    opacity: 0;
+  }
+  .heading-character {
+    animation: reveal-character 1ms step-end both;
   }
 }
-.region[data-write]:focus-within {
-  clip-path: none;
+@keyframes reveal-character {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @media (max-width: 600px) {
   .section {
@@ -41,10 +49,6 @@
   }
 }
 @media print {
-  .region[data-write] {
-    animation: none;
-    clip-path: none;
-  }
   .section {
     padding-top: 28px;
   }

@@ -1,5 +1,6 @@
 import { Anchor, Box, Container, MantineProvider } from '@mantine/core'
 
+import { CodeBackground } from './components/CodeBackground'
 import { PrintContact } from './components/PrintContact'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
@@ -25,6 +26,7 @@ export function App({ basics, experience, work, about, tools, toolkit }: AppProp
       cssVariablesResolver={cssVariablesResolver}
       defaultColorScheme="auto"
     >
+      <CodeBackground />
       <Anchor className={styles['skip-link']} href="#main">
         Skip to content
       </Anchor>

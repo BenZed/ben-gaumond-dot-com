@@ -3,6 +3,7 @@ import { IconBrandLinkedin, IconDownload } from '@tabler/icons-react'
 import { useRef } from 'react'
 
 import { useActiveSection } from '../hooks/useActiveSection'
+import { useWriteOn } from '../hooks/useWriteOn'
 import type { Resume, ResumeSection } from '../Resume'
 import { ColorModeControl } from './ColorModeControl'
 import { ExternalLink } from './ExternalLink'
@@ -15,6 +16,25 @@ import styles from './SiteHeader.module.css'
 
 const linkedinLabel = 'LinkedIn'
 const downloadLabel = 'Download resume'
+const writeIn = { from: 0, to: 1, delay: 150, duration: 260, steps: 14 } as const
+const writeOut = { from: 1, to: 0, duration: 150, steps: 10 } as const
+
+type HeaderLabelProps = {
+  readonly label: string
+  readonly motion?: 'in' | 'out' | undefined
+}
+
+function HeaderLabel({ label, motion }: HeaderLabelProps) {
+  const { ref } = useWriteOn<HTMLSpanElement>(
+    motion === 'in' ? writeIn : motion === 'out' ? writeOut : undefined,
+  )
+
+  return (
+    <Box component="span" ref={ref} data-write={motion}>
+      {label}
+    </Box>
+  )
+}
 
 export type SiteHeaderProps = {
   readonly name: string
@@ -36,18 +56,14 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
       {(currentLabel || previousLabel) && (
         <Box component="span" className={styles['header-label']} aria-hidden="true">
           {previousLabel && (
-            <Box component="span" key={`out-${previous}`} className={styles['header-title-out']}>
-              {previousLabel}
-            </Box>
+            <HeaderLabel key={`out-${previous}`} label={previousLabel} motion="out" />
           )}
           {currentLabel && (
-            <Box
-              component="span"
+            <HeaderLabel
               key={`in-${current}`}
-              className={changing ? styles['header-title-in'] : undefined}
-            >
-              {currentLabel}
-            </Box>
+              label={currentLabel}
+              motion={changing ? 'in' : undefined}
+            />
           )}
         </Box>
       )}

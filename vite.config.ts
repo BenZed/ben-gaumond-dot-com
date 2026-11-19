@@ -4,6 +4,7 @@ import { createElement, Fragment } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { defineConfig } from 'vite'
 
+import { codeBackgroundPlugin } from './build/codeBackgroundPlugin.ts'
 import { resumePrerenderPlugin } from './build/resumePrerenderPlugin.ts'
 import resume from './content/resume.json' with { type: 'json' }
 
@@ -28,6 +29,7 @@ export default defineConfig({
   build: { outDir: 'build/output' },
   plugins: [
     react(),
+    codeBackgroundPlugin(),
     resumePrerenderPlugin(resume),
     {
       name: 'resume-metadata',

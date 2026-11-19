@@ -1,0 +1,78 @@
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--site-code-opacity, 0.13);
+  mask-image: linear-gradient(transparent, #000 14%, #000 83%, transparent);
+}
+
+.scene {
+  --code-line-height: 1.125rem;
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 3rem);
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 3rem);
+  font: 0.75rem / var(--code-line-height) var(--mantine-font-family-monospace);
+  color: var(--site-code-foreground);
+  transform: translateY(var(--code-travel, 0px));
+}
+
+.file {
+  /* Reveal complete lines across the column, then reveal part of the next line. */
+  --row-top: calc(var(--write-on-lines, 0) * var(--code-line-height));
+  --row-bottom: calc(var(--row-top) + var(--code-line-height));
+  --row-width: var(--write-on-column, 0%);
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  font: inherit;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--row-top),
+    var(--row-width) var(--row-top),
+    var(--row-width) var(--row-bottom),
+    0 var(--row-bottom)
+  );
+}
+
+.line {
+  display: block;
+  min-height: var(--code-line-height);
+}
+
+.file code {
+  font: inherit;
+}
+
+@media (max-width: 900px) {
+  .scene {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .file:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .scene {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .file:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+@media print {
+  .background {
+    display: none;
+  }
+}

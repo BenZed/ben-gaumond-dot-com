@@ -1,4 +1,6 @@
 .page-shell {
+  position: relative;
+  z-index: 1;
   padding-inline: 40px;
 }
 .skip-link {

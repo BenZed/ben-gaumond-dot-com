@@ -21,9 +21,18 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     '--site-art-warm': 'light-dark(#f2b47e, #643114)',
     '--site-art-cool': 'light-dark(#e9d8c3, #382b20)',
     '--site-art-ink': 'light-dark(#472a18, #ffe4c6)',
+    '--site-code-foreground': 'var(--site-text)',
+    '--site-code-token-comment': 'var(--site-muted)',
+    '--site-code-token-constant': 'light-dark(#715083, #cf9be9)',
+    '--site-code-token-function': 'light-dark(#275c83, #8cc9f5)',
+    '--site-code-token-keyword': 'var(--site-accent)',
+    '--site-code-token-parameter': 'var(--site-secondary)',
+    '--site-code-token-punctuation': 'var(--site-muted)',
+    '--site-code-token-string': 'light-dark(#356445, #a4ce9f)',
+    '--site-code-token-string-expression': 'var(--site-code-token-string)',
   },
-  light: {},
-  dark: {},
+  light: { '--site-code-opacity': '0.13' },
+  dark: { '--site-code-opacity': '0.16' },
 })
 
 export const theme = createTheme({

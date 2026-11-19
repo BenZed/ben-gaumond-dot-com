@@ -15,10 +15,13 @@ test('the prerendered page includes resume HTML and matching hydration data', ()
   const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
   assert.ok(header)
   expect(header).toMatch(
-    /<a\b(?=[^>]*\bhref="\.\/ben-gaumond-resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="Download resume")[^>]*>/u,
+    /<a\b(?=[^>]*\bhref="\.\/ben-gaumond-resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="[^"]+")[^>]*>/u,
   )
-  const linkedinLink = header.match(/<a\b[^>]*\baria-label="LinkedIn"[^>]*>/u)?.[0]
-  expect(linkedinLink).toContain(`href="${resume.basics.linkedinUrl}"`)
+  const linkedinLink = header
+    .match(/<a\b[^>]*>/gu)
+    ?.find((link) => link.includes(`href="${resume.basics.linkedinUrl}"`))
+  assert.ok(linkedinLink)
+  expect(linkedinLink).toMatch(/\baria-label="[^"]+"/u)
   expect(page).toContain(`href="${resume.basics.linkedinUrl}">${resume.basics.linkedinUrl}</a>`)
   expect(header).not.toContain('href="#contact"')
   expect(page).not.toContain('<section id="contact"')

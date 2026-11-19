@@ -5,6 +5,7 @@ import { createCssVariablesTheme, createHighlighter } from 'shiki'
 import type { CodeBackgroundFile } from 'virtual:resume-code-background'
 import type { Plugin } from 'vite'
 
+const GRAPHEMES = new Intl.Segmenter(undefined, { granularity: 'grapheme' })
 const moduleId = 'virtual:resume-code-background'
 const resolvedId = `\0${moduleId}`
 
@@ -47,11 +48,20 @@ export function codeBackgroundPlugin(): Plugin {
           })
           return {
             path,
-            lines: lines.map((line) =>
-              line.map(({ content, offset, color }) =>
-                color === undefined ? { content, offset } : { content, offset, color },
-              ),
-            ),
+            lines: lines.map((line) => {
+              const text = line.map(({ content }) => content).join('')
+              let cells = 0
+              for (const { segment } of GRAPHEMES.segment(text)) {
+                cells += segment === '\t' ? 2 - (cells % 2) : 1
+              }
+
+              return {
+                cells,
+                tokens: line.map(({ content, offset, color }) =>
+                  color === undefined ? { content, offset } : { content, offset, color },
+                ),
+              }
+            }),
           }
         }),
       )

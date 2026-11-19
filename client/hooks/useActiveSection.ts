@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 
 import type { ResumeSection } from '../Resume'
+import { useResizeObserver } from './useResizeObserver'
 
 export type ActiveSection = ResumeSection['id'] | null
 
@@ -13,11 +14,12 @@ export function useActiveSection(
     current: null,
     previous: null,
   })
+  const frame = useRef(0)
 
-  useEffect(() => {
-    let frame = 0
-    const update = () => {
-      frame = 0
+  const schedule = useCallback(() => {
+    if (frame.current) return
+    frame.current = window.requestAnimationFrame(() => {
+      frame.current = 0
       const boundary = (header.current?.getBoundingClientRect().bottom ?? 0) + 25
       const current = sections.findLast(({ id }) => {
         const section = document.getElementById(id)
@@ -31,24 +33,22 @@ export function useActiveSection(
       setActive((state) =>
         state.current === next ? state : { current: next, previous: state.current },
       )
-    }
-    const schedule = () => {
-      if (!frame) frame = window.requestAnimationFrame(update)
-    }
+    })
+  }, [header, sections])
+  const observeLayout = useResizeObserver(schedule)
 
-    const layout = new ResizeObserver(schedule)
-    layout.observe(document.body)
-    if (header.current) layout.observe(header.current)
+  useEffect(() => {
+    const stopObserving = observeLayout(document.body, header.current)
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
-    schedule()
     return () => {
-      window.cancelAnimationFrame(frame)
-      layout.disconnect()
+      window.cancelAnimationFrame(frame.current)
+      frame.current = 0
+      stopObserving?.()
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
-  }, [header, sections])
+  }, [header, observeLayout, schedule])
 
   return active
 }

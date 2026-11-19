@@ -23,7 +23,7 @@ npm run preview
 
 `check` verifies types, lint, and formatting, then runs `npm test`. The Vitest suite covers prerendering and PDF export. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
-The Vite plugin in `build/` compiles `client/App.tsx` for SSR and renders it with `content/resume.json` while generating `build/output/index.html`. The page is readable before JavaScript loads. React hydrates it using the same resume data embedded in the document head.
+The Vite plugin in `build/` compiles `client/App.tsx` into Vite’s cache and renders it with `content/resume.json` while generating `build/output/index.html`. The page is readable before JavaScript loads. React hydrates it using the same resume data embedded in the document head.
 
 ## Resume PDF
 

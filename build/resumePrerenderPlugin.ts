@@ -1,4 +1,5 @@
-import { fileURLToPath } from 'node:url'
+import { join, resolve } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
@@ -29,18 +30,19 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
   return {
     name: 'resume-prerender',
     apply: 'build',
-    config: () => ({
+    config: ({ cacheDir = 'node_modules/.vite' }) => ({
       builder: { sharedConfigBuild: true },
       environments: {
         ssr: {
           build: {
             ssr: fileURLToPath(new URL('../client/App.tsx', import.meta.url)),
-            write: false,
+            outDir: join(cacheDir, 'resume-ssr'),
+            copyPublicDir: false,
+            write: true,
             rolldownOptions: {
               output: {
-                codeSplitting: false,
-                // A data URL has no directory for resolving bare package imports.
-                paths: (id) => import.meta.resolve(id),
+                entryFileNames: '[name]-[hash].mjs',
+                chunkFileNames: '[name]-[hash].mjs',
               },
             },
           },
@@ -56,12 +58,13 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
       const entry = build.output.find((chunk) => chunk.type === 'chunk' && chunk.isEntry)
       if (entry?.type !== 'chunk') throw new Error('The SSR build did not produce a resume entry')
 
-      const moduleUrl = `data:text/javascript;base64,${Buffer.from(entry.code).toString('base64')}`
+      const entryPath = resolve(ssr.config.root, ssr.config.build.outDir, entry.fileName)
       // The bundled config loader leaves this import to Node.
-      const module = (await import(/* @vite-ignore */ moduleUrl)) as {
+      const ssrModule = (await import(/* @vite-ignore */ pathToFileURL(entryPath).href)) as {
         readonly App: typeof ResumeApp
       }
-      App = module.App
+      App = ssrModule.App
+
       await builder.build(client)
     },
     transformIndexHtml(html) {

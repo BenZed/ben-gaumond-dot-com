@@ -6,11 +6,11 @@ import type { CodeBackgroundFile } from 'virtual:resume-code-background'
 import type { Plugin } from 'vite'
 
 const GRAPHEMES = new Intl.Segmenter(undefined, { granularity: 'grapheme' })
-const moduleId = 'virtual:resume-code-background'
-const resolvedId = `\0${moduleId}`
+const MODULE_ID = 'virtual:resume-code-background'
+const RESOLVED_ID = `\0${MODULE_ID}`
 
 // Only these public client files are included in the browser bundle.
-const sourcePaths = [
+const SOURCE_PATHS = [
   'client/components/SiteHeader.tsx',
   'client/components/ProjectPreview.tsx',
   'client/components/SectionNavigation.tsx',
@@ -27,10 +27,10 @@ export function codeBackgroundPlugin(): Plugin {
   return {
     name: 'resume-code-background',
     resolveId(id) {
-      return id === moduleId ? resolvedId : null
+      return id === MODULE_ID ? RESOLVED_ID : null
     },
     async load(id, options) {
-      if (id !== resolvedId) return
+      if (id !== RESOLVED_ID) return
       if (options?.ssr) return 'export const files = []'
 
       const tokenizer = await (highlighter ??= createHighlighter({
@@ -38,7 +38,7 @@ export function codeBackgroundPlugin(): Plugin {
         themes: [theme],
       }))
       const files: CodeBackgroundFile[] = await Promise.all(
-        sourcePaths.map(async (path) => {
+        SOURCE_PATHS.map(async (path) => {
           const filename = resolve(this.environment.config.root, path)
           this.addWatchFile(filename)
           const source = await readFile(filename, 'utf8')
@@ -70,10 +70,10 @@ export function codeBackgroundPlugin(): Plugin {
     },
     hotUpdate({ file, modules, timestamp }) {
       const root = this.environment.config.root
-      if (!sourcePaths.some((path) => resolve(root, path) === file)) return
+      if (!SOURCE_PATHS.some((path) => resolve(root, path) === file)) return
 
       const graph = this.environment.moduleGraph
-      const background = graph.getModuleById(resolvedId)
+      const background = graph.getModuleById(RESOLVED_ID)
       if (!background || modules.includes(background)) return
 
       graph.invalidateModule(background, new Set(), timestamp, true)

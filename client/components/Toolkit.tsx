@@ -17,12 +17,14 @@ export function Toolkit({ toolkit, tools, featuredTools }: ToolkitProps) {
   return (
     <>
       <Box className={styles['technology-strip']}>
+
         <Box
           component="span"
           className={[typography['eyebrow'], styles['toolkit-eyebrow']].join(' ')}
         >
           {toolkit.label}
         </Box>
+
         <Group className={styles['tools']} gap="xl">
           {featuredTools.map(({ id, label, url }) => (
             <Anchor key={id} href={url} inherit c="inherit" underline="always">
@@ -30,10 +32,13 @@ export function Toolkit({ toolkit, tools, featuredTools }: ToolkitProps) {
             </Anchor>
           ))}
         </Group>
+
         <Box component="span" className={styles['strip-note']}>
           {toolkit.note}
         </Box>
+
       </Box>
+
       {toolkit.areas.length > 0 && (
         <SimpleGrid className={styles['areas']} cols={{ base: 1, sm: 3 }} spacing="lg">
           {toolkit.areas.map((area) => (

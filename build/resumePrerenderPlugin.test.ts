@@ -81,7 +81,6 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   const page = renderResumePage(template, fixture, App)
   const [, markup = ''] = page.split('<body>')
   for (const text of [
-    fixture.basics.pronouns,
     area.summary,
     study.challenge,
     study.contribution,
@@ -112,6 +111,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   assert.ok(emptyRoleMarkup)
   expect(emptyRoleMarkup).not.toMatch(/<details\b/u)
 })
+
 test('offers an inline player for an embeddable project without loading the iframe', () => {
   const fixture: Resume = structuredClone(resume)
   const project = fixture.experience.positions.find(({ id }) => id === 'pbs-scribbles-ink-s1')

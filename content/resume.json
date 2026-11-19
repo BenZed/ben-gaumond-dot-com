@@ -5,19 +5,18 @@
       "title": "Ben Gaumond"
     },
     "name": "Ben Gaumond",
-    "role": "Software developer",
-    "pronouns": "He/Him",
+    "role": "Full-stack Software Developer",
     "headline": "Full-stack developer building creative tools and interactive experiences",
     "location": "Vancouver, British Columbia, Canada",
-    "linkedinUrl": "https://www.linkedin.com/in/ben-gaumond/",
     "shortLocation": "Vancouver, BC",
+    "linkedinUrl": "https://www.linkedin.com/in/ben-gaumond/",
     "summary": "I started in animation, writing code to make things move. That led to drawing games for PBS KIDS and full-stack tools for the artists and producers who make animation.",
     "siteRepositoryUrl": "https://github.com/BenZed/ben-gaumond-dot-com"
   },
   "toolkit": {
     "label": "Core toolkit",
     "note": "Web applications, animation pipelines, and interactive games.",
-    "featuredToolIds": ["typescript", "react", "node-js", "after-effects", "spine-2d", "blender"],
+    "featuredToolIds": ["typescript", "react", "node-js", "adobe", "spine-2d", "blender"],
     "areas": [
       {
         "label": "Full-stack web development",
@@ -26,7 +25,7 @@
       },
       {
         "label": "Animation and production tooling",
-        "toolIds": ["after-effects", "extendscript", "blender"],
+        "toolIds": ["adobe", "extendscript", "blender"],
         "summary": "Automate renders, script animation workflows, and build tools for studio production."
       },
       {
@@ -53,9 +52,9 @@
       "url": "https://nodejs.org/"
     },
     {
-      "id": "after-effects",
-      "label": "Adobe After Effects",
-      "url": "https://www.adobe.com/products/aftereffects.html"
+      "id": "adobe",
+      "label": "Adobe Creative Suite",
+      "url": "https://www.adobe.com/support/creativesuite/"
     },
     {
       "id": "extendscript",
@@ -92,14 +91,14 @@
     "section": {
       "id": "experience",
       "label": "Experience",
-      "title": "From animation to software engineering",
+      "title": "From animation to software development",
       "eyebrow": "01 / Experience"
     },
-    "aside": "Software engineering, technical direction, and game development",
+    "aside": "Web applications, technical direction, and interactive games",
     "positions": [
       {
         "company": "eDynamic Learning",
-        "title": "Software Engineer",
+        "title": "Full-stack Software Developer",
         "start": "2023-04",
         "end": null,
         "location": "Canada · Remote",

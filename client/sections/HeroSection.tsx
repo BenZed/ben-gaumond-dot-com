@@ -8,10 +8,7 @@ import type { Resume } from '../Resume'
 import styles from './HeroSection.module.css'
 
 export type HeroSectionProps = {
-  readonly basics: Pick<
-    Resume['basics'],
-    'section' | 'summary' | 'role' | 'shortLocation' | 'pronouns'
-  >
+  readonly basics: Pick<Resume['basics'], 'section' | 'summary' | 'role' | 'shortLocation'>
 }
 
 export function HeroSection({ basics }: HeroSectionProps) {
@@ -22,8 +19,7 @@ export function HeroSection({ basics }: HeroSectionProps) {
       headingOrder={1}
       eyebrow={
         <>
-          <SiteIcon icon={IconMapPin} size={14} /> {basics.role} · {basics.shortLocation} ·{' '}
-          {basics.pronouns}
+          <SiteIcon icon={IconMapPin} size={14} /> {basics.role} · {basics.shortLocation}
         </>
       }
       title={basics.section.title}

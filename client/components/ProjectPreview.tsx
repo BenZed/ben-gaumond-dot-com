@@ -3,7 +3,7 @@ import { useIntersection, useMediaQuery } from '@mantine/hooks'
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
 
-import type { ProjectPosition } from '../ProjectPosition'
+import type { ProjectPosition } from '../util/ProjectPosition'
 import { SiteIcon } from './SiteIcon'
 
 import styles from './ProjectPreview.module.css'

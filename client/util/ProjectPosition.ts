@@ -1,4 +1,4 @@
-import type { Position } from './util/Resume'
+import type { Position } from './Resume'
 
 export type ProjectPosition = Position & { readonly project: NonNullable<Position['project']> }
 

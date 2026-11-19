@@ -9,9 +9,9 @@ import { AboutSection } from './sections/AboutSection'
 import { ExperienceSection } from './sections/ExperienceSection'
 import { HeroSection } from './sections/HeroSection'
 import { WorkSection } from './sections/WorkSection'
-import { cssVariablesResolver, theme } from './theme'
 import { resolveTools } from './util/resolveTools'
 import type { Resume } from './util/Resume'
+import { cssVariablesResolver, theme } from './util/theme'
 
 import styles from './App.module.css'
 

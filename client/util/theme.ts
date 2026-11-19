@@ -1,7 +1,7 @@
 import { Badge, Button, Title, createTheme, rem } from '@mantine/core'
 import type { CSSVariablesResolver } from '@mantine/core'
 
-import typography from './Typography.module.css'
+import typography from '../Typography.module.css'
 
 export const cssVariablesResolver: CSSVariablesResolver = () => ({
   variables: {

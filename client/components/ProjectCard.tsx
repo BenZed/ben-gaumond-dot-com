@@ -1,6 +1,6 @@
 import { Box, Stack, Text, Title } from '@mantine/core'
 
-import type { ProjectPosition } from '../ProjectPosition'
+import type { ProjectPosition } from '../util/ProjectPosition'
 import type { Resume } from '../util/Resume'
 import { ExternalLink } from './ExternalLink'
 import { IframePlayer } from './IframePlayer'

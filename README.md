@@ -86,7 +86,7 @@ Keep standalone client helpers and shared types in `client/util/`. Colocate test
 
 Define props in a named `<ComponentName>Props` type. Export the type for public components and keep it local for private components. Components without props need no props type.
 
-`client/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `client/sections/` and custom hooks in `client/hooks/`. Put UI pieces with a distinct responsibility in `client/components/`, such as the shared `Section` primitive and `ProjectCard`. `client/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `client/styles.css` contains document-wide styles.
+`client/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `client/sections/` and custom hooks in `client/hooks/`. Put UI pieces with a distinct responsibility in `client/components/`, such as the shared `Section` primitive and `ProjectCard`. `client/util/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `client/styles.css` contains document-wide styles.
 
 Prefer Mantine components and hooks, including polymorphic semantic elements. Native details/summary semantics are intentionally preserved through `Box` for disclosure behavior without JavaScript. Keep career content in `content/resume.json` rather than in component files.
 

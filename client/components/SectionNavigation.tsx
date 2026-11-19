@@ -9,7 +9,7 @@ import styles from './SectionNavigation.module.css'
 
 export type SectionNavigationProps = {
   readonly sections: readonly ResumeSection[]
-  readonly activeId: ResumeSection['id'] | null
+  readonly activeId: ResumeSection['id'] | undefined
   readonly compactTitle: ReactNode
 }
 

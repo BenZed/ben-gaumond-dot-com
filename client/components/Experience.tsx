@@ -21,15 +21,16 @@ export function Experience({ position }: ExperienceProps) {
       href={detailsUrl}
       label={`Visit ${project?.url ? 'the project' : position.company}`}
     />
-  ) : null
+  ) : undefined
 
   return (
     <Box component="article" className={styles['experience-row']} id={position.id}>
       <Stack className={styles['experience-date']} gap={14} align="flex-start">
         <Box component="span">
-          {formatMonth(dates.start)} — {dates.end === null ? 'Present' : formatMonth(dates.end)}
+          {formatMonth(dates.start)} —{' '}
+          {dates.end === undefined ? 'Present' : formatMonth(dates.end)}
         </Box>
-        {dates.end === null && (
+        {dates.end === undefined && (
           <Badge variant="light" color="ember.9" size="sm">
             Current
           </Badge>

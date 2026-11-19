@@ -78,7 +78,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   study.url = 'https://example.com/project'
   fixture.about.paragraphs = ['Example first paragraph', 'Example second paragraph']
   emptyRole.description = []
-  emptyRole.dates = { start: '2023-04', end: null }
+  emptyRole.dates = { start: '2023-04' }
   emptyRole.skills = []
   delete emptyRole.url
 

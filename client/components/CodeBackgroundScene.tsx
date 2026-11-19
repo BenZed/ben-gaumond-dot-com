@@ -20,7 +20,7 @@ export function CodeBackgroundScene() {
   const scene = useRef<HTMLDivElement>(null)
   const ref = useMergedRef(scene, resizeRef)
   const [introFinished, setIntroFinished] = useState(false)
-  const intro = introFinished ? null : viewport.intro
+  const intro = introFinished ? undefined : viewport.intro
   useCodeParallax(scene)
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export function CodeBackgroundScene() {
     return () => window.clearTimeout(timer)
   }, [intro])
 
-  if (!files.length) return null
+  if (!files.length) return undefined
 
   return (
     <Box className={styles['background']} aria-hidden="true">
@@ -41,7 +41,7 @@ export function CodeBackgroundScene() {
               key={`${file.path}-${index}`}
               file={file}
               viewportLines={viewport.lines}
-              intro={intro && index < intro.columns ? intro : null}
+              intro={intro && index < intro.columns ? intro : undefined}
             />
           ) : undefined
         })}
@@ -61,12 +61,12 @@ type CodeIntro = {
 type CodeViewport = {
   readonly columns: number
   readonly lines: number
-  readonly intro: CodeIntro | null
+  readonly intro: CodeIntro | undefined
 }
 
 /** Measures the visible code grid and captures the starting rows for its one-time intro. */
 function useCodeViewport() {
-  const [viewport, setViewport] = useState<CodeViewport>({ columns: 0, lines: 0, intro: null })
+  const [viewport, setViewport] = useState<CodeViewport>({ columns: 0, lines: 0, intro: undefined })
   const measure = useCallback((scene: HTMLDivElement) => {
     const lineHeight = Number.parseFloat(getComputedStyle(scene).lineHeight)
     const columns = Math.max(1, Math.floor(scene.clientWidth / COLUMN_WIDTH))
@@ -77,7 +77,7 @@ function useCodeViewport() {
       if (current.columns === columns && current.lines === lines) return current
       // Capture the starting rows once. A resize can end the intro but never restart it.
       const intro =
-        current.columns === 0 && playIntro ? { columns, lines: lines + 1, offset } : null
+        current.columns === 0 && playIntro ? { columns, lines: lines + 1, offset } : undefined
       return { columns, lines, intro }
     })
   }, [])
@@ -109,12 +109,12 @@ function useCodeParallax(ref: RefObject<HTMLDivElement | null>) {
 type CodeColumnProps = {
   readonly file: CodeBackgroundFile
   readonly viewportLines: number
-  readonly intro: CodeIntro | null
+  readonly intro: CodeIntro | undefined
 }
 
 function CodeColumn({ file, viewportLines, intro }: CodeColumnProps) {
   const { lines } = file
-  if (!lines.length) return null
+  if (!lines.length) return undefined
 
   // Keep one extra copy above the viewport so a loop can wrap at any scroll position.
   const copies = Math.ceil(viewportLines / lines.length) + 1

@@ -7,7 +7,7 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import typography from '../Typography.module.css'
 import styles from './Section.module.css'
 
-const SectionContext = createContext<SectionContextValue | null>(null)
+const SectionContext = createContext<SectionContextValue | undefined>(undefined)
 const SECTION_MOTION = 'screen and (prefers-reduced-motion: no-preference)'
 
 export type SectionProps = SectionHeading & {

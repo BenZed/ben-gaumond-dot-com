@@ -27,7 +27,7 @@ export function codeBackgroundPlugin(): Plugin {
   return {
     name: 'resume-code-background',
     resolveId(id) {
-      return id === MODULE_ID ? RESOLVED_ID : null
+      return id === MODULE_ID ? RESOLVED_ID : undefined
     },
     async load(id, options) {
       if (id !== RESOLVED_ID) return

@@ -7,7 +7,7 @@ The initial content was imported from the rendered LinkedIn profile. Description
 ## Data conventions
 
 - Each position has a stable `id`; retain it when editing titles or descriptions.
-- Dates use `YYYY-MM`; `end: null` means current. Do not store calculated durations.
+- Dates use `YYYY-MM`. Omit `dates.end` for a current position. Do not store calculated durations.
 - `description` contains ordered paragraphs. `skills` currently contains only the visible preview skills, not exhaustive role requirements or proficiency ratings.
 - Preserve concurrent positions. Do not combine PBS and Global Mechanic without confirming their relationship.
 - Missing fields mean uncollected information, not a verified absence.

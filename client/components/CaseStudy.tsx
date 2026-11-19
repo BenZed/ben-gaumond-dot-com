@@ -38,7 +38,7 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
               </Text>
               <Text component="dd">{text}</Text>
             </Box>
-          ) : null,
+          ) : undefined,
         )}
       </Box>
       {study.url && <ExternalLink href={study.url} label="View project" />}
@@ -58,7 +58,7 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
               <Anchor key={id} href={url} inherit>
                 {title}
               </Anchor>
-            ) : null,
+            ) : undefined,
           )}
         </Group>
       )}

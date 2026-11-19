@@ -13,8 +13,8 @@ function renderResumeMetadata({ name, role, headline, summary }: (typeof resume)
   return renderToStaticMarkup(
     createElement(
       Fragment,
-      null,
-      createElement('title', null, title),
+      undefined,
+      createElement('title', undefined, title),
       createElement('meta', { name: 'description', content: headline }),
       createElement('meta', { property: 'og:title', content: title }),
       createElement('meta', { property: 'og:description', content: summary }),

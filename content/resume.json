@@ -101,7 +101,7 @@
       {
         "company": "eDynamic Learning",
         "title": "Full-stack Software Developer",
-        "dates": { "start": "2023-04", "end": null },
+        "dates": { "start": "2023-04" },
         "location": { "place": "Canada", "mode": "Remote" },
         "id": "edynamic-learning",
         "employment": { "type": "Permanent", "schedule": "Full-time" },

@@ -26,10 +26,10 @@ export function CodeBackground() {
     }
   }, [])
 
-  if (import.meta.env.SSR || !seenOnScreen) return null
+  if (import.meta.env.SSR || !seenOnScreen) return undefined
 
   return (
-    <Suspense fallback={null}>
+    <Suspense>
       <CodeBackgroundScene />
     </Suspense>
   )

@@ -8,7 +8,7 @@ import { useScrollFrame } from './useScrollFrame'
 const HEADER_OFFSET = 25
 const BOTTOM_TOLERANCE = 1
 
-export type ActiveSection = ResumeSection['id'] | null
+export type ActiveSection = ResumeSection['id'] | undefined
 
 /**
  * Tracks the active page section on scroll and layout changes.
@@ -22,8 +22,8 @@ export function useActiveSection(
   sections: readonly ResumeSection[],
 ) {
   const [active, setActive] = useState<{ current: ActiveSection; previous: ActiveSection }>({
-    current: null,
-    previous: null,
+    current: undefined,
+    previous: undefined,
   })
   const update = useCallback(() => {
     const next = readActiveSection(header.current, sections)
@@ -61,5 +61,5 @@ function readActiveSection(
   // The final section can be shorter than the space below the bar.
   const atBottom =
     window.scrollY > 0 && window.scrollY + clientHeight >= scrollHeight - BOTTOM_TOLERANCE
-  return (atBottom ? sections.at(-1) : current)?.id ?? null
+  return (atBottom ? sections.at(-1) : current)?.id
 }

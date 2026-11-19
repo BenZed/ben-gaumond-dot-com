@@ -72,6 +72,8 @@ Keep conventional names for entry points, config files, declaration files, and m
 
 ## Type safety
 
+Use `undefined` for absent values in application code and omit absent fields in JSON. Keep `null` where an external API requires or returns it, such as React DOM refs.
+
 Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. TypeScript derives the resume types from `content/resume.json`.
 
 `workbench/` is local-only and ignored, including imported reference material. Do not publish or commit it.

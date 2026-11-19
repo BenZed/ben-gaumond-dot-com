@@ -1,10 +1,13 @@
-import { useState } from 'react'
-
-import { ActionIcon, Group, Menu, useMantineColorScheme, type MantineColorScheme as ColorMode } from '@mantine/core'
+import {
+  ActionIcon,
+  Group,
+  Menu,
+  useMantineColorScheme,
+  type MantineColorScheme as ColorMode,
+} from '@mantine/core'
 import { useMounted } from '@mantine/hooks'
-
 import { IconDeviceDesktop, IconMoon, IconSun, type TablerIcon } from '@tabler/icons-react'
-
+import { useState } from 'react'
 
 import { HeaderTooltip } from './HeaderTooltip'
 import { SiteIcon } from './SiteIcon'
@@ -14,18 +17,16 @@ import styles from './ColorModeControl.module.css'
 const COLOR_MODES = {
   light: { label: 'Light', icon: IconSun },
   dark: { label: 'Dark', icon: IconMoon },
-  auto: { label: 'System', icon: IconDeviceDesktop }
-} as const satisfies Record<ColorMode, { readonly label: string, readonly icon: TablerIcon }>
+  auto: { label: 'System', icon: IconDeviceDesktop },
+} as const satisfies Record<ColorMode, { readonly label: string; readonly icon: TablerIcon }>
 
 export function ColorModeControl() {
-
   const mounted = useMounted()
   const [menuOpened, setMenuOpened] = useState(false)
   const [{ selected, icon, label }, setColorMode] = useColorMode(mounted)
 
   return (
     <Menu position="bottom-end" offset={8} shadow="sm" onChange={setMenuOpened}>
-
       <HeaderTooltip label={label} disabled={!mounted || menuOpened}>
         <Menu.Target>
           <ActionIcon variant="subtle" aria-label={label} disabled={!mounted} size={36}>
@@ -41,7 +42,6 @@ export function ColorModeControl() {
             if (isColorMode(value)) setColorMode(value)
           }}
         >
-
           {Object.entries(COLOR_MODES).map(([key, { label, icon }]) => (
             <Menu.RadioItem key={key} value={key} closeMenuOnClick>
               <Group gap="xs" wrap="nowrap">
@@ -50,14 +50,11 @@ export function ColorModeControl() {
               </Group>
             </Menu.RadioItem>
           ))}
-
         </Menu.RadioGroup>
       </Menu.Dropdown>
-
     </Menu>
   )
 }
-
 
 // Internal
 

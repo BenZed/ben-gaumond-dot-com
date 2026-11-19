@@ -8,7 +8,9 @@ export type SiteIconProps = {
   readonly className?: string | undefined
 }
 
-/** Decorative icons inherit their accessible name from the adjacent text or button. */
+/** 
+ * Decorative icons inherit their accessible name from the adjacent text or button. 
+ */
 export function SiteIcon({ icon: Icon, size = 17, className }: SiteIconProps) {
   return (
     <Icon

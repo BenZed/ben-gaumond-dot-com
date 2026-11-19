@@ -2,7 +2,11 @@ import { useCallback } from 'react'
 
 /**
  * Measures the primary element on attachment and when any observed element resizes.
- * Use the callback as a ref or pass additional layout targets directly.
+ *
+ * @typeParam Element - The primary element passed to the measurement callback.
+ * @param measure - A stable callback that reads the primary element.
+ * @returns A callback ref. When calling it directly with additional targets,
+ * call its returned cleanup function to disconnect the observer.
  */
 export function useResizeObserver<Element extends HTMLElement>(
   measure: (element: Element) => void,

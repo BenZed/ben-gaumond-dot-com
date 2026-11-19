@@ -24,7 +24,7 @@ export type SectionHeaderProps = {
 }
 
 /**
- * A named page region. Render one Section.Header inside it; the header may be nested
+ * A named page region. Render one {@link Section.Header} inside it; the header may be nested
  * to suit the layout. Section owns heading IDs and levels so callers cannot drift
  * out of sync with aria-labelledby. Layout and content stay with the composing section.
  */
@@ -91,9 +91,54 @@ type SectionTitleProps = {
 
 function SectionTitle({ section }: SectionTitleProps) {
   const { title, headingId, headingOrder = 2 } = section
+  const { heading, reveal, finishReveal } = useSectionHeadingReveal(title)
+
+  const writing = reveal === 'writing' && typeof title === 'string'
+  const { characters } = useWriteOn({
+    mode: 'characters',
+    text: writing ? title : undefined,
+    duration: 560,
+    maxInterval: 36,
+    onComplete: finishReveal,
+  })
+
+  return (
+    <Title
+      ref={heading}
+      order={headingOrder}
+      id={headingId}
+      className={styles['section-title']}
+      data-heading-reveal={reveal}
+      aria-label={writing ? title : undefined}
+    >
+      {writing ? (
+        <span aria-hidden="true">
+          {characters.map(({ key, text, props }) => (
+            <span key={key} {...props}>
+              {text}
+            </span>
+          ))}
+        </span>
+      ) : (
+        title
+      )}
+    </Title>
+  )
+}
+
+type HeadingReveal = 'initial' | 'waiting' | 'writing' | 'shown'
+
+/**
+ * Starts the reveal when a previously offscreen heading enters view.
+ * Initially visible headings and headings in a deep-linked section stay readable.
+ *
+ * @param title - The heading content. Only nonempty strings animate.
+ * @returns The heading ref, reveal state, and animation completion callback.
+ */
+function useSectionHeadingReveal(title: ReactNode) {
   const wasOffscreen = useRef(false)
   const skipReveal = useRef(false)
-  const [reveal, setReveal] = useState<'initial' | 'waiting' | 'writing' | 'shown'>('initial')
+  const [reveal, setReveal] = useState<HeadingReveal>('initial')
 
   const onIntersection = useCallback(
     (
@@ -138,35 +183,5 @@ function SectionTitle({ section }: SectionTitleProps) {
     return () => motion.removeEventListener('change', showImmediately)
   }, [])
 
-  const writing = reveal === 'writing' && typeof title === 'string'
-  const { characters } = useWriteOn({
-    mode: 'characters',
-    text: writing ? title : undefined,
-    duration: 560,
-    maxInterval: 36,
-    onComplete: () => setReveal('shown'),
-  })
-
-  return (
-    <Title
-      ref={heading}
-      order={headingOrder}
-      id={headingId}
-      className={styles['section-title']}
-      data-heading-reveal={reveal}
-      aria-label={writing ? title : undefined}
-    >
-      {writing ? (
-        <span aria-hidden="true">
-          {characters.map(({ key, text, props }) => (
-            <span key={key} {...props}>
-              {text}
-            </span>
-          ))}
-        </span>
-      ) : (
-        title
-      )}
-    </Title>
-  )
+  return { heading, reveal, finishReveal: () => setReveal('shown') }
 }

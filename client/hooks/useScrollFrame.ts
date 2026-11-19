@@ -1,6 +1,16 @@
 import { useCallback, useEffect, useRef } from 'react'
 
-/** Runs scroll updates at most once per frame. The returned callback queues the same update. */
+/**
+ * Coalesces scroll events and manual update requests into one update per frame.
+ *
+ * @remarks
+ * The hook cancels queued work when disabled, when the update callback changes,
+ * or when the caller unmounts. Callers choose when to perform their first update.
+ *
+ * @param update - The callback to run in the next animation frame.
+ * @param enabled - Whether scroll events and manual requests may queue updates.
+ * @returns A scheduler that resize observers and other layout events can share.
+ */
 export function useScrollFrame(update: () => void, enabled = true) {
   const frame = useRef<number | undefined>(undefined)
 

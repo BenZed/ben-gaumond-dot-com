@@ -60,6 +60,11 @@ export function ColorModeControl() {
 
 const isColorMode = (value: string): value is ColorMode => Object.hasOwn(COLOR_MODES, value)
 
+/**
+ * Looks up the color-mode label and icon, using System before mount so hydration matches.
+ *
+ * @param mounted - Whether the browser color preference can be displayed.
+ */
 const useColorMode = (mounted: boolean) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme()
 

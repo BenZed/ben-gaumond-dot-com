@@ -64,6 +64,7 @@ type CodeViewport = {
   readonly intro: CodeIntro | null
 }
 
+/** Measures the visible code grid and captures the starting rows for its one-time intro. */
 function useCodeViewport() {
   const [viewport, setViewport] = useState<CodeViewport>({ columns: 0, lines: 0, intro: null })
   const measure = useCallback((scene: HTMLDivElement) => {
@@ -85,6 +86,11 @@ function useCodeViewport() {
   return { viewport, resizeRef }
 }
 
+/**
+ * Sets the initial scroll offset and keeps the backdrop in sync on scroll.
+ *
+ * @param ref - The code scene that receives the CSS travel offset.
+ */
 function useCodeParallax(ref: RefObject<HTMLDivElement | null>) {
   const reducedMotion = useReducedMotion()
 

@@ -58,6 +58,7 @@ export function ProjectPreview({ href, preview, title }: ProjectPreviewProps) {
 
 type PlaybackIntent = 'auto' | 'play' | 'pause'
 
+/** Tracks actual video playback and applies autoplay rules or an explicit play/pause choice. */
 function useProjectPlayback() {
   const player = useRef<HTMLVideoElement>(null)
   const { ref: containerRef, entry } = useIntersection<HTMLDivElement>({

@@ -3,6 +3,8 @@ import type { CSSProperties, RefObject } from 'react'
 
 import styles from './useWriteOn.module.css'
 
+const GRAPHEMES = new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+
 /** Timing and direction for a stepped clipping animation. */
 export type WriteOnAnimation = {
   readonly from: 0 | 1
@@ -13,6 +15,7 @@ export type WriteOnAnimation = {
   readonly axis?: 'inline' | 'block'
 }
 
+/** Timing and completion callback for revealing text one grapheme at a time. */
 export type CharacterWriteOnAnimation = {
   readonly mode: 'characters'
   readonly text: string | undefined
@@ -22,7 +25,18 @@ export type CharacterWriteOnAnimation = {
 }
 
 /**
- * Binds a stepped reveal or erase to an element. The companion CSS module
+ * Splits text into graphemes and staggers their CSS reveal.
+ *
+ * @typeParam E - The element type attached to the returned ref.
+ * @param animation - Text and timing in milliseconds. Omit the text to skip the reveal.
+ * @returns The element ref and per-character props to spread onto aria-hidden spans.
+ */
+export function useWriteOn<E extends HTMLElement>(
+  animation: CharacterWriteOnAnimation,
+): { readonly ref: RefObject<E | null>; readonly characters: ReturnType<typeof characterBindings> }
+
+/**
+ * Binds a stepped clipping animation to an element. The companion CSS module
  * handles playback, the final state, and reduced motion.
  *
  * @typeParam E - The element type attached to the returned ref.
@@ -30,9 +44,6 @@ export type CharacterWriteOnAnimation = {
  * Omit it to render the element without animation.
  * @returns Props to spread onto the element, including its ref.
  */
-export function useWriteOn<E extends HTMLElement>(
-  animation: CharacterWriteOnAnimation,
-): { readonly ref: RefObject<E | null>; readonly characters: ReturnType<typeof characterBindings> }
 export function useWriteOn<E extends HTMLElement>(
   animation?: WriteOnAnimation,
 ): { readonly ref: RefObject<E | null> } & ReturnType<typeof clipBindings>
@@ -49,8 +60,6 @@ export function useWriteOn<E extends HTMLElement>(
 }
 
 // Internal
-
-const GRAPHEMES = new Intl.Segmenter(undefined, { granularity: 'grapheme' })
 
 function clipBindings(animation?: WriteOnAnimation) {
   return {

@@ -72,6 +72,8 @@ Keep conventional names for entry points, config files, declaration files, and m
 
 ## Type safety
 
+Typechecking generates exact CSS Module class names in the ignored `build/cache/css-types/` directory. TypeScript's `rootDirs` resolves those declarations through the existing CSS imports. Run `npm run css:types` to refresh the declarations for your editor.
+
 Use `undefined` for absent values in application code and omit absent fields in JSON. Keep `null` where an external API requires or returns it, such as React DOM refs.
 
 Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`, `noImplicitOverride`, `noImplicitReturns`, unused-code checks, and unreachable-code checks. Oxlint rejects explicit `any`, non-null and redundant type assertions, unsafe type flows, non-exhaustive switches, and unhandled or misused promises. It also flags duplicate imports and unused lint suppressions. TypeScript derives the resume types from `content/resume.json`.

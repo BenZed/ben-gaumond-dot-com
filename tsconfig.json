@@ -16,6 +16,8 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "rootDirs": ["client", "build/cache/css-types"],
     "allowUnusedLabels": false,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,

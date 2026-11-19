@@ -1,5 +1,6 @@
 import { Anchor, Box, Group, Stack, Text, Title } from '@mantine/core'
 
+import { isProjectPosition } from '../ProjectPosition'
 import type { Position, Resume } from '../Resume'
 import { ExternalLink } from './ExternalLink'
 import { ProjectCard } from './ProjectCard'
@@ -14,8 +15,8 @@ export type CaseStudyProps = {
 }
 
 export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
-  const projectPositions = positions.filter(({ projectTitle }) => projectTitle !== undefined)
-  const relatedRoles = positions.filter(({ projectTitle }) => projectTitle === undefined)
+  const projectPositions = positions.filter(isProjectPosition)
+  const relatedRoles = positions.filter((position) => !isProjectPosition(position))
   const details = [
     { label: 'Challenge', text: study.challenge },
     { label: 'Contribution', text: study.contribution },

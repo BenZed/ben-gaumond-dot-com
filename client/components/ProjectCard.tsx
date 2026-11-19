@@ -1,6 +1,7 @@
 import { Box, Stack, Text, Title } from '@mantine/core'
 
-import type { Position, Resume } from '../Resume'
+import type { ProjectPosition } from '../ProjectPosition'
+import type { Resume } from '../Resume'
 import { ExternalLink } from './ExternalLink'
 import { IframePlayer } from './IframePlayer'
 import { ProjectPreview } from './ProjectPreview'
@@ -10,7 +11,7 @@ import styles from './ProjectCard.module.css'
 
 export type ProjectCardProps = {
   readonly project: Pick<
-    Position,
+    ProjectPosition,
     'company' | 'start' | 'projectTitle' | 'highlights' | 'url' | 'embedUrl' | 'preview'
   >
   readonly artwork: Resume['work']['artwork']
@@ -20,7 +21,7 @@ export type ProjectCardProps = {
 export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
   const projectUrl = project.url ?? project.embedUrl
   const linkedPreview =
-    projectUrl && project.preview && project.projectTitle
+    projectUrl && project.preview
       ? { href: projectUrl, preview: project.preview, title: project.projectTitle }
       : undefined
 
@@ -59,7 +60,7 @@ export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
         <Text component="p">{project.highlights[0]}</Text>
         {projectUrl && (project.embedUrl || !linkedPreview) && (
           <Stack align="flex-start" gap="xs">
-            {project.embedUrl && project.projectTitle && (
+            {project.embedUrl && (
               <IframePlayer src={project.embedUrl} title={project.projectTitle} />
             )}
             {!linkedPreview && <ExternalLink href={projectUrl} label="Explore the project" />}

@@ -17,7 +17,6 @@ export function Toolkit({ toolkit, tools, featuredTools }: ToolkitProps) {
   return (
     <>
       <Box className={styles['technology-strip']}>
-
         <Box
           component="span"
           className={[typography['eyebrow'], styles['toolkit-eyebrow']].join(' ')}
@@ -36,7 +35,6 @@ export function Toolkit({ toolkit, tools, featuredTools }: ToolkitProps) {
         <Box component="span" className={styles['strip-note']}>
           {toolkit.note}
         </Box>
-
       </Box>
 
       {toolkit.areas.length > 0 && (

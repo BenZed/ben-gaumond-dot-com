@@ -21,6 +21,14 @@
   text-align: right;
   flex-shrink: 0;
 }
+@media screen and (prefers-reduced-motion: no-preference) {
+  .region[data-section-waiting]:not(:focus-within) {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+.region[data-write]:focus-within {
+  clip-path: none;
+}
 @media (max-width: 600px) {
   .section {
     padding-top: 55px;
@@ -33,6 +41,10 @@
   }
 }
 @media print {
+  .region[data-write] {
+    animation: none;
+    clip-path: none;
+  }
   .section {
     padding-top: 28px;
   }

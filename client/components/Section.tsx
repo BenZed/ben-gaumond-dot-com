@@ -1,11 +1,14 @@
 import { Box, Text, Title } from '@mantine/core'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
+
+import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
 
 import typography from '../Typography.module.css'
 import styles from './Section.module.css'
 
 const SectionContext = createContext<SectionContextValue | null>(null)
+const sectionReveal: WriteOnAnimation = { from: 0, to: 1, duration: 560, steps: 28 }
 
 export type SectionProps = SectionHeading & {
   readonly id: string
@@ -37,9 +40,52 @@ type SectionHeading = {
 type SectionContextValue = SectionHeading & { readonly headingId: string }
 
 function SectionRoot({ id, title, eyebrow, headingOrder = 2, className, children }: SectionProps) {
+  const [reveal, setReveal] = useState<'initial' | 'waiting' | 'writing'>('initial')
+  const writeOn = useWriteOn<HTMLElement>(reveal === 'writing' ? sectionReveal : undefined)
+  const { ref } = writeOn
+
+  useEffect(() => {
+    const element = ref.current
+    if (
+      !element ||
+      typeof IntersectionObserver === 'undefined' ||
+      !window.matchMedia('screen and (prefers-reduced-motion: no-preference)').matches
+    ) {
+      return
+    }
+
+    const linkedTarget = document.getElementById(window.location.hash.slice(1))
+    if (linkedTarget && element.contains(linkedTarget)) return
+
+    let wasOffscreen = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return
+        if (entry.isIntersecting) {
+          observer.disconnect()
+          if (wasOffscreen) setReveal('writing')
+        } else {
+          wasOffscreen = true
+          setReveal('waiting')
+        }
+      },
+      // Let the section move past its leading padding before the reveal starts.
+      { rootMargin: '0px 0px -48px 0px' },
+    )
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [ref])
+
   return (
     <SectionContext.Provider value={{ title, eyebrow, headingOrder, headingId: `${id}-title` }}>
-      <Box component="section" id={id} aria-labelledby={`${id}-title`} className={className}>
+      <Box
+        {...writeOn}
+        component="section"
+        id={id}
+        aria-labelledby={`${id}-title`}
+        data-section-waiting={reveal === 'waiting' || undefined}
+        className={[styles['region'], className, writeOn.className].filter(Boolean).join(' ')}
+      >
         {children}
       </Box>
     </SectionContext.Provider>

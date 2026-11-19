@@ -1,27 +1,50 @@
+@property --write-on-progress {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+
 .write-on {
-  --write-on-progress: 100%;
+  --write-on-progress: var(--write-on-from);
+  --write-on-final-clip: initial;
   /* Clip the area beyond the visible width or depth. */
-  clip-path: inset(0 calc(100% - var(--write-on-progress)) 0 0);
+  clip-path: var(--write-on-final-clip, inset(0 calc(100% - var(--write-on-progress)) 0 0));
+  animation-name: write-on-progress, write-on-unclip;
+  animation-timing-function: steps(var(--write-on-steps), end), step-end;
+  /* Hold the starting clip during the delay and the final state afterward. */
+  animation-fill-mode: both;
 }
 .write-on[data-write-axis='block'] {
   --write-on-depth: round(down, var(--write-on-progress), var(--write-on-block-step, 1px));
-  clip-path: inset(0 0 calc(100% - var(--write-on-depth)) 0);
-}
-.write-on[data-write='in'] {
-  /* Hide the incoming label before its first animation frame. */
-  --write-on-progress: 0%;
-}
-.write-on[data-write='in'][data-write-complete] {
-  clip-path: none;
+  clip-path: var(--write-on-final-clip, inset(0 0 calc(100% - var(--write-on-depth)) 0));
 }
 .write-on[data-write='out'] {
+  animation-name: write-on-progress, write-on-hide;
   pointer-events: none;
 }
-.write-on[data-write='out'][data-write-complete] {
-  display: none;
+
+@keyframes write-on-progress {
+  from {
+    --write-on-progress: var(--write-on-from);
+  }
+  to {
+    --write-on-progress: var(--write-on-to);
+  }
 }
+@keyframes write-on-unclip {
+  to {
+    --write-on-final-clip: none;
+  }
+}
+@keyframes write-on-hide {
+  to {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .write-on[data-write='in'] {
+  .write-on[data-write] {
+    animation-name: none;
     clip-path: none;
   }
   .write-on[data-write='out'] {

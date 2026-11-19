@@ -25,6 +25,7 @@ export function ColorModeControl() {
 
   return (
     <Menu position="bottom-end" offset={8} shadow="sm" onChange={setMenuOpened}>
+
       <HeaderTooltip label={label} disabled={!mounted || menuOpened}>
         <Menu.Target>
           <ActionIcon variant="subtle" aria-label={label} disabled={!mounted} size={36}>
@@ -32,6 +33,7 @@ export function ColorModeControl() {
           </ActionIcon>
         </Menu.Target>
       </HeaderTooltip>
+
       <Menu.Dropdown className={styles['color-mode-menu']} aria-label="Color mode">
         <Menu.RadioGroup
           value={selected}
@@ -51,6 +53,7 @@ export function ColorModeControl() {
 
         </Menu.RadioGroup>
       </Menu.Dropdown>
+
     </Menu>
   )
 }

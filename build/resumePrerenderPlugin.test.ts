@@ -15,7 +15,7 @@ test('the prerendered page includes resume HTML and matching hydration data', ()
   const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
   assert.ok(header)
   expect(header).toMatch(
-    /<a\b(?=[^>]*\bhref="\.\/ben-gaumond-resume\.pdf")(?=[^>]*\bdownload="")(?=[^>]*\baria-label="[^"]+")[^>]*>/u,
+    /<a\b(?=[^>]*\bhref="\.\/resume\.pdf")(?=[^>]*\bdownload="ben-gaumond-resume\.pdf")(?=[^>]*\baria-label="[^"]+")[^>]*>/u,
   )
   const linkedinLink = header
     .match(/<a\b[^>]*>/gu)

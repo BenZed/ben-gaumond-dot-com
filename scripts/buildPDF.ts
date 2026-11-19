@@ -24,7 +24,7 @@ export async function buildPDF({ output }: BuildPDFParams = {}) {
 
     const outputPath =
       output === undefined
-        ? resolve(server.config.root, server.config.build.outDir, 'ben-gaumond-resume.pdf')
+        ? resolve(server.config.root, server.config.build.outDir, 'resume.pdf')
         : resolve(output)
     const pdf = await renderResumePdf(url)
     await writeResumePdf(pdf, outputPath)

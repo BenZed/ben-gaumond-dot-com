@@ -47,7 +47,7 @@ afterEach(async () => {
 })
 
 test('writes the default PDF to the configured site output directory', async () => {
-  const output = join(directory, 'build', 'output', 'ben-gaumond-resume.pdf')
+  const output = join(directory, 'build', 'output', 'resume.pdf')
 
   await expect(buildPDF()).resolves.toBe(output)
   expect(await readFile(output)).toEqual(pdfBytes)

@@ -81,8 +81,8 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
         <HeaderTooltip label={DOWNLOAD_LABEL}>
           <ActionIcon
             component="a"
-            href="./ben-gaumond-resume.pdf"
-            download
+            href="./resume.pdf"
+            download="ben-gaumond-resume.pdf"
             aria-label={DOWNLOAD_LABEL}
             variant="subtle"
             size={36}

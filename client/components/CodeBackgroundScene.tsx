@@ -1,18 +1,22 @@
 import { Box } from '@mantine/core'
 import { useReducedMotion } from '@mantine/hooks'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { files } from 'virtual:resume-code-background'
 import type { CodeBackgroundFile } from 'virtual:resume-code-background'
+
+import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
 
 import styles from './CodeBackgroundScene.module.css'
 
 const parallax = 0.2
 const columnWidth = 360
+const intro: WriteOnAnimation = { from: 0, to: 1, duration: 2200, steps: 60, axis: 'block' }
 
 export function CodeBackgroundScene() {
   const reducedMotion = useReducedMotion()
-  const ref = useRef<HTMLDivElement>(null)
   const [viewport, setViewport] = useState({ columns: 0, lines: 0 })
+  const writeOn = useWriteOn<HTMLDivElement>(viewport.columns > 0 ? intro : undefined)
+  const { ref } = writeOn
 
   useEffect(() => {
     const scene = ref.current
@@ -49,13 +53,13 @@ export function CodeBackgroundScene() {
       window.removeEventListener('scroll', schedule)
       cancelAnimationFrame(frame)
     }
-  }, [reducedMotion])
+  }, [reducedMotion, ref])
 
   if (!files.length) return null
 
   return (
     <Box className={styles['background']} aria-hidden="true">
-      <Box ref={ref} className={styles['scene']}>
+      <Box {...writeOn} className={[styles['scene'], writeOn.className].filter(Boolean).join(' ')}>
         {Array.from({ length: viewport.columns }, (_, index) => {
           const file = files[index % files.length]
           return file ? (

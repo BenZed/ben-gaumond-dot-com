@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 
 import styles from './useWriteOn.module.css'
 
-const PROGRESS_PROPERTY = '--write-on-column'
+const PROGRESS_PROPERTY = '--write-on-progress'
 const COMPLETE_ATTRIBUTE = 'data-write-complete'
 
 export type WriteOnAnimation = {
@@ -11,6 +11,7 @@ export type WriteOnAnimation = {
   readonly duration: number
   readonly steps: number
   readonly delay?: number
+  readonly axis?: 'inline' | 'block'
 }
 
 /**
@@ -31,6 +32,7 @@ export function useWriteOn<E extends HTMLElement>(animation?: WriteOnAnimation) 
     ref,
     className: animation ? styles['write-on'] : undefined,
     'data-write': animation ? (animation.to === 1 ? 'in' : 'out') : undefined,
+    'data-write-axis': animation?.axis,
   } as const
 }
 
@@ -40,7 +42,6 @@ function animateWriteOn(
   element: HTMLElement,
   { from, to, duration, steps, delay = 0 }: WriteOnAnimation,
 ) {
-
   const write = (progress: number) =>
     element.style.setProperty(PROGRESS_PROPERTY, `${progress * 100}%`)
 

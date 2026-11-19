@@ -20,6 +20,7 @@
 
 .scene {
   --code-line-height: 1.125rem;
+  --write-on-block-step: var(--code-line-height);
   position: absolute;
   inset: 0;
   display: grid;
@@ -58,6 +59,6 @@
 
 @media print {
   .background {
-    display: none;
+    visibility: hidden;
   }
 }

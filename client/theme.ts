@@ -1,10 +1,11 @@
-import { Badge, Button, Title, createTheme } from '@mantine/core'
+import { Badge, Button, Title, createTheme, rem } from '@mantine/core'
 import type { CSSVariablesResolver } from '@mantine/core'
 
 import typography from './Typography.module.css'
 
 export const cssVariablesResolver: CSSVariablesResolver = () => ({
   variables: {
+    '--site-page-width': rem(1120),
     '--site-background': 'light-dark(#faf4eb, #191613)',
     '--site-text': 'light-dark(#29221c, #f5e9da)',
     '--site-secondary': 'light-dark(#61554b, #d1bdab)',

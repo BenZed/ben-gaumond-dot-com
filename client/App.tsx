@@ -31,7 +31,7 @@ export function App({ basics, experience, work, about, tools, toolkit }: AppProp
         Skip to content
       </Anchor>
 
-      <Container size={1120} className={styles['page-shell']} id="top">
+      <Container size="var(--site-page-width)" className={styles['page-shell']} id="top">
         <SiteHeader
           name={basics.name}
           linkedinUrl={basics.linkedinUrl}

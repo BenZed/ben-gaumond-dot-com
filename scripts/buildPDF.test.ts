@@ -4,7 +4,7 @@ import { join } from 'node:path'
 
 import { afterEach, beforeEach, expect, test, vi } from 'vitest'
 
-import { generateResumePDF } from './generateResumePDF'
+import { buildPDF } from './buildPDF'
 
 const { launch, preview } = vi.hoisted(() => ({
   launch: vi.fn(),
@@ -45,7 +45,7 @@ afterEach(async () => {
 test('writes the rendered PDF to a nested output path', async () => {
   const output = join(directory, 'nested', 'resume.pdf')
 
-  await expect(generateResumePDF({ output })).resolves.toBe(output)
+  await expect(buildPDF({ output })).resolves.toBe(output)
   expect(await readFile(output)).toEqual(pdfBytes)
   expect(await readdir(join(directory, 'nested'))).toEqual(['resume.pdf'])
   expect(page.goto).toHaveBeenCalledWith(url)
@@ -61,7 +61,7 @@ test('preserves the previous PDF and closes resources if the preview fails to lo
   await writeFile(output, previous)
   page.goto.mockResolvedValue({ ok: () => false })
 
-  await expect(generateResumePDF({ output })).rejects.toThrow('Could not load the resume')
+  await expect(buildPDF({ output })).rejects.toThrow('Could not load the resume')
   expect(await readFile(output)).toEqual(previous)
   expect(page.pdf).not.toHaveBeenCalled()
   expect(closeBrowser).toHaveBeenCalledOnce()
@@ -72,7 +72,7 @@ test('removes the temporary PDF if the destination cannot be replaced', async ()
   const output = join(directory, 'resume.pdf')
   await mkdir(output)
 
-  await expect(generateResumePDF({ output })).rejects.toThrow()
+  await expect(buildPDF({ output })).rejects.toThrow()
   expect(await readdir(directory)).toEqual(['resume.pdf'])
   expect(closePreview).toHaveBeenCalledOnce()
 })

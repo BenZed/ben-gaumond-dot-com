@@ -30,7 +30,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npx playwright install --with-deps chromium --only-shell
-      - run: npm run resume:pdf
+      - run: npm run build:pdf
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

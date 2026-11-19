@@ -7,11 +7,11 @@ import { parseArgs } from 'node:util'
 import { chromium } from 'playwright'
 import { preview } from 'vite'
 
-export type GenerateResumePDFParams = {
+export type BuildPDFParams = {
   readonly output?: string
 }
 
-export async function generateResumePDF({ output }: GenerateResumePDFParams = {}) {
+export async function buildPDF({ output }: BuildPDFParams = {}) {
   if (output === '') throw new Error('Supply a file path for the PDF output')
   const outputPath =
     output === undefined
@@ -72,6 +72,6 @@ if (entry && pathToFileURL(entry).href === import.meta.url) {
   const { values } = parseArgs({
     options: { output: { type: 'string', short: 'o' } },
   })
-  const outputPath = await generateResumePDF(values)
+  const outputPath = await buildPDF(values)
   console.log(`Wrote ${outputPath}`)
 }

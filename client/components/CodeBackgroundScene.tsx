@@ -6,6 +6,7 @@ import { files } from 'virtual:resume-code-background'
 import type { CodeBackgroundFile } from 'virtual:resume-code-background'
 
 import { useResizeObserver } from '../hooks/useResizeObserver'
+import { useScrollFrame } from '../hooks/useScrollFrame'
 import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
 
 import styles from './CodeBackgroundScene.module.css'
@@ -66,32 +67,16 @@ function useCodeViewport() {
 function useCodeParallax(ref: RefObject<HTMLDivElement | null>) {
   const reducedMotion = useReducedMotion()
 
-  useEffect(() => {
+  const update = useCallback(() => {
     const scene = ref.current
     if (!scene) return
 
-    if (reducedMotion) {
-      scene.style.setProperty('--code-travel', '0px')
-      return
-    }
-
-    let frame = 0
-    const update = () => {
-      frame = 0
-      const scroll = Math.max(0, window.scrollY)
-      scene.style.setProperty('--code-travel', `${PARALLAX * scroll}px`)
-    }
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update)
-    }
-
-    window.addEventListener('scroll', schedule, { passive: true })
-    update()
-    return () => {
-      window.removeEventListener('scroll', schedule)
-      cancelAnimationFrame(frame)
-    }
+    const scroll = reducedMotion ? 0 : Math.max(0, window.scrollY)
+    scene.style.setProperty('--code-travel', `${PARALLAX * scroll}px`)
   }, [reducedMotion, ref])
+
+  useScrollFrame(update, !reducedMotion && files.length > 0)
+  useEffect(update, [update])
 }
 
 type CodeColumnProps = {

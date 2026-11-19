@@ -1,6 +1,7 @@
 import { ActionIcon, Anchor } from '@mantine/core'
-import { IconArrowUpRight, IconBrandGithub } from '@tabler/icons-react'
+import { IconArrowUpRight } from '@tabler/icons-react'
 
+import { GitHubMark } from './GitHubMark'
 import { HeaderTooltip } from './HeaderTooltip'
 import { SiteIcon } from './SiteIcon'
 
@@ -13,15 +14,14 @@ export type ExternalLinkProps = {
 }
 
 export function ExternalLink({ href, label, iconOnly = false }: ExternalLinkProps) {
-  const icon = /^https?:\/\/github\.com(?:[/?#]|$)/iu.test(href)
-    ? IconBrandGithub
-    : IconArrowUpRight
+  const isGitHub = /^https?:\/\/github\.com(?:[/?#]|$)/iu.test(href)
+  const icon = isGitHub ? <GitHubMark /> : <SiteIcon icon={IconArrowUpRight} />
 
   if (iconOnly) {
     return (
       <HeaderTooltip label={label}>
         <ActionIcon component="a" href={href} aria-label={label} variant="subtle" size={36}>
-          <SiteIcon icon={icon} />
+          {icon}
         </ActionIcon>
       </HeaderTooltip>
     )
@@ -29,7 +29,7 @@ export function ExternalLink({ href, label, iconOnly = false }: ExternalLinkProp
 
   return (
     <Anchor href={href} className={typography['text-link']}>
-      {label} <SiteIcon icon={icon} />
+      {isGitHub ? 'View on GitHub' : label} {icon}
     </Anchor>
   )
 }

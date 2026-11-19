@@ -1,12 +1,15 @@
 import { Box, Text, Title } from '@mantine/core'
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
+
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { useWriteOn } from '../hooks/useWriteOn'
 
 import typography from '../Typography.module.css'
 import styles from './Section.module.css'
 
 const SectionContext = createContext<SectionContextValue | null>(null)
-const GRAPHEMES = new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+const HEADING_MOTION = 'screen and (prefers-reduced-motion: no-preference)'
 
 export type SectionProps = SectionHeading & {
   readonly id: string
@@ -88,53 +91,61 @@ type SectionTitleProps = {
 
 function SectionTitle({ section }: SectionTitleProps) {
   const { title, headingId, headingOrder = 2 } = section
-  const heading = useRef<HTMLHeadingElement>(null)
+  const wasOffscreen = useRef(false)
+  const skipReveal = useRef(false)
   const [reveal, setReveal] = useState<'initial' | 'waiting' | 'writing' | 'shown'>('initial')
 
-  useEffect(() => {
-    const element = heading.current
-    if (
-      !element ||
-      typeof title !== 'string' ||
-      !title ||
-      typeof IntersectionObserver === 'undefined'
-    ) {
-      return
-    }
+  const onIntersection = useCallback(
+    (
+      entry: IntersectionObserverEntry,
+      element: HTMLHeadingElement,
+      observer: IntersectionObserver,
+    ) => {
+      const linkedTarget = document.getElementById(window.location.hash.slice(1))
+      if (
+        skipReveal.current ||
+        typeof title !== 'string' ||
+        !title ||
+        !window.matchMedia(HEADING_MOTION).matches ||
+        (!wasOffscreen.current &&
+          linkedTarget &&
+          element.closest('section')?.contains(linkedTarget))
+      ) {
+        observer.disconnect()
+        return
+      }
 
-    const motion = window.matchMedia('screen and (prefers-reduced-motion: no-preference)')
-    if (!motion.matches) return
-
-    const linkedTarget = document.getElementById(window.location.hash.slice(1))
-    if (linkedTarget && element.closest('section')?.contains(linkedTarget)) return
-
-    let wasOffscreen = false
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry) return
       if (entry.isIntersecting) {
         observer.disconnect()
-        if (wasOffscreen) setReveal('writing')
+        if (wasOffscreen.current) setReveal('writing')
       } else {
-        wasOffscreen = true
+        wasOffscreen.current = true
         setReveal('waiting')
       }
-    })
+    },
+    [title],
+  )
+  const heading = useIntersectionObserver(onIntersection)
+
+  useEffect(() => {
+    const motion = window.matchMedia(HEADING_MOTION)
     const showImmediately = () => {
       if (motion.matches) return
-      observer.disconnect()
+      skipReveal.current = true
       setReveal('shown')
     }
     motion.addEventListener('change', showImmediately)
-    observer.observe(element)
-    return () => {
-      observer.disconnect()
-      motion.removeEventListener('change', showImmediately)
-    }
-  }, [title])
+    return () => motion.removeEventListener('change', showImmediately)
+  }, [])
 
   const writing = reveal === 'writing' && typeof title === 'string'
-  const characters = writing ? Array.from(GRAPHEMES.segment(title)) : []
-  const interval = Math.min(36, 560 / Math.max(1, characters.length))
+  const { characters } = useWriteOn({
+    mode: 'characters',
+    text: writing ? title : undefined,
+    duration: 560,
+    maxInterval: 36,
+    onComplete: () => setReveal('shown'),
+  })
 
   return (
     <Title
@@ -147,16 +158,9 @@ function SectionTitle({ section }: SectionTitleProps) {
     >
       {writing ? (
         <span aria-hidden="true">
-          {characters.map(({ segment, index }, position) => (
-            <span
-              key={index}
-              className={styles['heading-character']}
-              style={{ animationDelay: `${position * interval}ms` }}
-              onAnimationEnd={
-                position === characters.length - 1 ? () => setReveal('shown') : undefined
-              }
-            >
-              {segment}
+          {characters.map(({ key, text, props }) => (
+            <span key={key} {...props}>
+              {text}
             </span>
           ))}
         </span>

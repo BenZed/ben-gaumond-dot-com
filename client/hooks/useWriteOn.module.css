@@ -51,3 +51,18 @@
     display: none;
   }
 }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .character {
+    animation: reveal-character 1ms step-end both;
+  }
+}
+
+@keyframes reveal-character {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

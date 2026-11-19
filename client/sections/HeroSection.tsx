@@ -3,7 +3,7 @@ import { IconMapPin } from '@tabler/icons-react'
 
 import { Section } from '../components/Section'
 import { SiteIcon } from '../components/SiteIcon'
-import type { Resume } from '../Resume'
+import type { Resume } from '../types/Resume'
 
 import styles from './HeroSection.module.css'
 

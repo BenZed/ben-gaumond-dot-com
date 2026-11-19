@@ -1,7 +1,7 @@
 import { Badge, Box, Group, List, Stack, Text, Title } from '@mantine/core'
 import { IconChevronDown } from '@tabler/icons-react'
 
-import type { Position } from '../Resume'
+import type { Position } from '../types/Resume'
 import { ExternalLink } from './ExternalLink'
 import { SiteIcon } from './SiteIcon'
 

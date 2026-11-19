@@ -2,7 +2,7 @@ import { Box } from '@mantine/core'
 
 import { Experience } from '../components/Experience'
 import { Section } from '../components/Section'
-import type { Resume } from '../Resume'
+import type { Resume } from '../types/Resume'
 
 import styles from '../components/Section.module.css'
 

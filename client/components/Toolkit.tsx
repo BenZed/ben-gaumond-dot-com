@@ -1,8 +1,8 @@
 import { Anchor, Box, Group, SimpleGrid, Stack, Text } from '@mantine/core'
 import { Fragment } from 'react'
 
-import { resolveTools } from '../resolveTools'
-import type { Resume, Tool } from '../Resume'
+import type { Resume, Tool } from '../types/Resume'
+import { resolveTools } from '../util/resolveTools'
 
 import typography from '../Typography.module.css'
 import styles from './Toolkit.module.css'

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { RefObject } from 'react'
 
-import type { ResumeSection } from '../Resume'
+import type { ResumeSection } from '../types/Resume'
 import { useResizeObserver } from './useResizeObserver'
 import { useScrollFrame } from './useScrollFrame'
 

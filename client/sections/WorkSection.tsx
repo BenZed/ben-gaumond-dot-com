@@ -1,6 +1,6 @@
 import { CaseStudy } from '../components/CaseStudy'
 import { Section } from '../components/Section'
-import type { Position, Resume } from '../Resume'
+import type { Position, Resume } from '../types/Resume'
 
 import sectionStyles from '../components/Section.module.css'
 import styles from './WorkSection.module.css'

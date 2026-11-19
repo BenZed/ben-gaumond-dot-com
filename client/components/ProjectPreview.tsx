@@ -1,4 +1,4 @@
-import { ActionIcon, Box } from '@mantine/core'
+import { ActionIcon, Anchor, Box } from '@mantine/core'
 import { useIntersection, useMediaQuery } from '@mantine/hooks'
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
@@ -12,11 +12,12 @@ const visibilityThreshold = 0.4
 const visibilityThresholds = [0, visibilityThreshold]
 
 export type ProjectPreviewProps = {
+  readonly href: string
   readonly preview: NonNullable<Position['preview']>
   readonly title: string
 }
 
-export function ProjectPreview({ preview, title }: ProjectPreviewProps) {
+export function ProjectPreview({ href, preview, title }: ProjectPreviewProps) {
   const player = useRef<HTMLVideoElement>(null)
   const { ref, entry } = useIntersection<HTMLDivElement>({ threshold: visibilityThresholds })
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)', true)
@@ -51,22 +52,24 @@ export function ProjectPreview({ preview, title }: ProjectPreviewProps) {
 
   return (
     <Box ref={ref} className={styles['preview']}>
-      <Box
-        component="video"
-        ref={player}
-        src={preview.src}
-        poster={preview.poster}
-        width={preview.width}
-        height={preview.height}
-        aria-label={`${title} gameplay preview`}
-        className={styles['video']}
-        preload="none"
-        muted
-        playsInline
-        loop
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-      />
+      <Anchor href={href} display="block" aria-label={`Open ${title} project`}>
+        <Box
+          component="video"
+          ref={player}
+          src={preview.src}
+          poster={preview.poster}
+          width={preview.width}
+          height={preview.height}
+          aria-label={`${title} gameplay preview`}
+          className={styles['video']}
+          preload="none"
+          muted
+          playsInline
+          loop
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+        />
+      </Anchor>
       <ActionIcon
         type="button"
         variant="default"

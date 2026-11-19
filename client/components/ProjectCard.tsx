@@ -19,11 +19,15 @@ export type ProjectCardProps = {
 
 export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
   const projectUrl = project.url ?? project.embedUrl
+  const linkedPreview =
+    projectUrl && project.preview && project.projectTitle
+      ? { href: projectUrl, preview: project.preview, title: project.projectTitle }
+      : undefined
 
   return (
     <Box component="article" className={styles['project-card']}>
-      {project.preview && project.projectTitle ? (
-        <ProjectPreview preview={project.preview} title={project.projectTitle} />
+      {linkedPreview ? (
+        <ProjectPreview {...linkedPreview} />
       ) : (
         <Box
           className={[styles['project-art'], index === 1 && styles['project-art-1']]
@@ -53,12 +57,12 @@ export function ProjectCard({ project, artwork, index }: ProjectCardProps) {
         </Text>
         <Title order={4}>{project.projectTitle}</Title>
         <Text component="p">{project.highlights[0]}</Text>
-        {projectUrl && (
+        {projectUrl && (project.embedUrl || !linkedPreview) && (
           <Stack align="flex-start" gap="xs">
             {project.embedUrl && project.projectTitle && (
               <IframePlayer src={project.embedUrl} title={project.projectTitle} />
             )}
-            <ExternalLink href={projectUrl} label="Explore the project" />
+            {!linkedPreview && <ExternalLink href={projectUrl} label="Explore the project" />}
           </Stack>
         )}
       </Box>

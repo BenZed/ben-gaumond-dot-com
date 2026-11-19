@@ -15,6 +15,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
+    "allowImportingTsExtensions": true,
     "allowUnusedLabels": false,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,

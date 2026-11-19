@@ -1,7 +1,6 @@
 import { mkdtemp, rm, writeFile } from 'node:fs/promises'
-import { createRequire } from 'node:module'
 import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
@@ -59,7 +58,8 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
       try {
         const entryPath = join(directory, 'App.mjs')
         await writeFile(entryPath, entry.code)
-        const module = createRequire(import.meta.url)(entryPath) as {
+        // The bundled config loader leaves this import to Node.
+        const module = (await import(/* @vite-ignore */ pathToFileURL(entryPath).href)) as {
           readonly App: typeof ResumeApp
         }
         App = module.App

@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Use http://127.0.0.1:5173 during development. Vite serves the app with hot reload and loads the resume from `content/resume.json`. Use extensionless imports for local TypeScript modules.
+Use http://127.0.0.1:5173 during development. Vite serves the app with hot reload and loads the resume from `content/resume.json`. Use extensionless imports for local TypeScript modules. Imports from `vite.config.ts` use explicit extensions so Node can resolve them directly.
 
 ## Checks and production
 

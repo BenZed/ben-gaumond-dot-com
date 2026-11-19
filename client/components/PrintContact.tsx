@@ -15,9 +15,9 @@ export function PrintContact({ websiteUrl, linkedinUrl }: PrintContactProps) {
       <Anchor href={websiteUrl} inherit>
         {new URL(websiteUrl).hostname}
       </Anchor>
-      {' · LinkedIn: '}
+      {' · '}
       <Anchor href={linkedinUrl} inherit>
-        {linkedinUrl}
+        LinkedIn
       </Anchor>
     </Text>
   )

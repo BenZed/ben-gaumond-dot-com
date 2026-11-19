@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --configLoader runner --host 127.0.0.1",
-    "build": "npm run typecheck && vite build --configLoader runner && node --import tsx scripts/prerender.tsx",
+    "build": "npm run typecheck && vite build --configLoader runner",
     "build:pdf": "npm run build && node --import tsx scripts/buildPDF.ts",
     "preview": "vite preview --configLoader runner --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint --type-aware --deny-warnings --report-unused-disable-directives-severity=error .",
     "fmt": "oxfmt --write .",
     "fmt:check": "oxfmt --check .",
-    "test": "vitest run",
+    "test": "vitest run --configLoader runner",
     "check": "npm run typecheck && npm run lint && npm run fmt:check && npm test"
   },
   "dependencies": {

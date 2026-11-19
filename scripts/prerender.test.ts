@@ -4,9 +4,9 @@ import resume from '../content/resume.json' with { type: 'json' }
 import type { Resume } from '../src/Resume'
 import { prerender } from './prerender'
 
-test('the prerendered page includes resume HTML and matching hydration data', async () => {
+test('the prerendered page includes resume HTML and matching hydration data', () => {
   const template = '<!doctype html><div id="root"><!--app-html--></div>'
-  const page = await prerender(template, resume)
+  const page = prerender(template, resume)
   expect(page).toMatch(/<main\b/u)
   expect(page).toContain(resume.basics.summary)
   const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
@@ -36,7 +36,7 @@ test('the prerendered page includes resume HTML and matching hydration data', as
   expect(payload).toEqual(resume)
 })
 
-test('renders toolkit areas, case studies, biography paragraphs and role skills', async () => {
+test('renders toolkit areas, case studies, biography paragraphs and role skills', () => {
   const fixture = structuredClone(resume)
   const area = fixture.toolkit.areas.find(({ toolIds }) => toolIds.includes('extendscript'))
   const study = fixture.work.caseStudies[0]
@@ -74,7 +74,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   delete emptyRole.url
 
   const template = '<div id="root"><!--app-html--></div>'
-  const page = await prerender(template, fixture)
+  const page = prerender(template, fixture)
   const [markup = ''] = page.split('<script type="application/json"')
   for (const text of [
     fixture.basics.pronouns,
@@ -108,13 +108,13 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   assert.ok(emptyRoleMarkup)
   expect(emptyRoleMarkup).not.toMatch(/<details\b/u)
 })
-test('offers an inline player for an embeddable project without loading the iframe', async () => {
+test('offers an inline player for an embeddable project without loading the iframe', () => {
   const fixture: Resume = structuredClone(resume)
   const project = fixture.experience.positions.find(({ id }) => id === 'pbs-scribbles-ink-s1')
   assert.ok(project?.url)
   project.embedUrl = 'https://example.com/embed/in-and-out'
 
-  const page = await prerender('<div id="root"><!--app-html--></div>', fixture)
+  const page = prerender('<div id="root"><!--app-html--></div>', fixture)
   const [markup = ''] = page.split('<script type="application/json"')
   expect(markup).toContain('Play inline')
   expect(markup).toContain(`href="${project.url}"`)
@@ -124,14 +124,14 @@ test('offers an inline player for an embeddable project without loading the ifra
 
 test.each(['featured', 'grouped'] as const)(
   'rejects unknown %s tool IDs during prerendering',
-  async (list) => {
+  (list) => {
     const fixture = structuredClone(resume)
     const area = fixture.toolkit.areas[0]
     assert.ok(area)
     const ids = list === 'featured' ? fixture.toolkit.featuredToolIds : area.toolIds
     ids.push('missing-tool')
 
-    await expect(prerender('<div id="root"><!--app-html--></div>', fixture)).rejects.toThrow(
+    expect(() => prerender('<div id="root"><!--app-html--></div>', fixture)).toThrow(
       /Unknown toolkit tool ID: "missing-tool"/u,
     )
   },

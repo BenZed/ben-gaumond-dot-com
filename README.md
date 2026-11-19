@@ -59,9 +59,10 @@ Edit `content/resume.json` first. It is the source of truth for the website and 
 - `tools` lists entries with a stable `id`, `label`, and `url`. `toolkit.featuredToolIds` orders the compact list and the About footnote. Each `toolkit.areas[].toolIds` orders the links in its group.
 - `work.caseStudies` links projects to experience entries by position ID. Add an `outcome` or a public `url` when available.
 - For an interactive project that supports embedding, set `experience.positions[].embedUrl` to the iframe URL. The player loads when a visitor selects **Play inline**. Keep the public project `url` for direct access and print.
+- For a gameplay recording, set `experience.positions[].preview` with an MP4 `src`, a still `poster`, and the recording’s `width` and `height`. Use relative paths for assets in `public/` so previews work under the GitHub Pages repository path.
 - Each `section` field defines its anchor ID and heading. Navigable sections also define their navigation label.
 
-The initial project artwork is decorative typography and CSS, not a screenshot of the games. External project links came from the profile and may depend on third-party availability.
+Project cards without a preview use decorative typography and CSS. External project links came from the profile and may depend on third-party availability.
 
 ## Source filenames
 

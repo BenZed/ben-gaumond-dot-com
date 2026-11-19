@@ -154,7 +154,13 @@
           "Rewrote the original codebase around reusable behaviors and built editor tools to make it easier for artists to add content.",
           "Set up Google Analytics and used it to report on how the game was being played."
         ],
-        "projectTitle": "Far and Away"
+        "projectTitle": "Far and Away",
+        "preview": {
+          "src": "./scribbles-and-ink-2.mp4",
+          "poster": "./scribbles-and-ink-2.webp",
+          "width": 576,
+          "height": 370
+        }
       },
       {
         "company": "PBS",
@@ -174,7 +180,13 @@
           "Developed In and Out, a PBS KIDS mobile drawing game with interactive animated characters.",
           "Worked around the engine editor's serialization constraints to load assets dynamically and manage memory across devices."
         ],
-        "projectTitle": "In and Out"
+        "projectTitle": "In and Out",
+        "preview": {
+          "src": "./scribbles-and-ink-1.mp4",
+          "poster": "./scribbles-and-ink-1.webp",
+          "width": 576,
+          "height": 370
+        }
       },
       {
         "company": "SoMedia Networks",

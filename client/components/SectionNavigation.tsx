@@ -7,6 +7,8 @@ import { SiteIcon } from './SiteIcon'
 
 import styles from './SectionNavigation.module.css'
 
+const SECTION_CHEVRON_SIZE = 14
+
 export type SectionNavigationProps = {
   readonly sections: readonly ResumeSection[]
   readonly activeId: ResumeSection['id'] | undefined
@@ -38,7 +40,7 @@ export function SectionNavigation({ sections, activeId, compactTitle }: SectionN
           <Menu.Target>
             <UnstyledButton className={styles['section-trigger']} aria-label="Sections">
               {compactTitle}
-              <SiteIcon icon={IconChevronDown} size={14} />
+              <SiteIcon icon={IconChevronDown} size={SECTION_CHEVRON_SIZE} />
             </UnstyledButton>
           </Menu.Target>
           <Menu.Dropdown className={styles['section-menu']} aria-label="Sections">

@@ -9,10 +9,13 @@ import { useMounted } from '@mantine/hooks'
 import { IconDeviceDesktop, IconMoon, IconSun, type TablerIcon } from '@tabler/icons-react'
 import { useState } from 'react'
 
+import { HEADER_ACTION_SIZE } from '../util/theme'
 import { HeaderTooltip } from './HeaderTooltip'
 import { SiteIcon } from './SiteIcon'
 
 import styles from './ColorModeControl.module.css'
+
+const MENU_ICON_SIZE = 15
 
 const COLOR_MODES = {
   light: { label: 'Light', icon: IconSun },
@@ -29,7 +32,12 @@ export function ColorModeControl() {
     <Menu position="bottom-end" offset={8} shadow="sm" onChange={setMenuOpened}>
       <HeaderTooltip label={label} disabled={!mounted || menuOpened}>
         <Menu.Target>
-          <ActionIcon variant="subtle" aria-label={label} disabled={!mounted} size={36}>
+          <ActionIcon
+            variant="subtle"
+            aria-label={label}
+            disabled={!mounted}
+            size={HEADER_ACTION_SIZE}
+          >
             <SiteIcon icon={icon} />
           </ActionIcon>
         </Menu.Target>
@@ -45,7 +53,7 @@ export function ColorModeControl() {
           {Object.entries(COLOR_MODES).map(([key, { label, icon }]) => (
             <Menu.RadioItem key={key} value={key} closeMenuOnClick>
               <Group gap="xs" wrap="nowrap">
-                <SiteIcon icon={icon} size={15} />
+                <SiteIcon icon={icon} size={MENU_ICON_SIZE} />
                 {label}
               </Group>
             </Menu.RadioItem>

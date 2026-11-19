@@ -1,6 +1,7 @@
 import { ActionIcon, Anchor } from '@mantine/core'
 import { IconArrowUpRight } from '@tabler/icons-react'
 
+import { HEADER_ACTION_SIZE } from '../util/theme'
 import { GitHubMark } from './GitHubMark'
 import { HeaderTooltip } from './HeaderTooltip'
 import { SiteIcon } from './SiteIcon'
@@ -22,7 +23,13 @@ export function ExternalLink({ href, label, iconOnly = false }: ExternalLinkProp
   if (iconOnly) {
     return (
       <HeaderTooltip label={label}>
-        <ActionIcon component="a" href={href} aria-label={label} variant="subtle" size={36}>
+        <ActionIcon
+          component="a"
+          href={href}
+          aria-label={label}
+          variant="subtle"
+          size={HEADER_ACTION_SIZE}
+        >
           {icon}
         </ActionIcon>
       </HeaderTooltip>

@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useActiveSection } from '../hooks/useActiveSection'
 import { useWriteOn, type WriteOnAnimation } from '../hooks/useWriteOn'
 import type { Resume, ResumeSection } from '../util/Resume'
+import { HEADER_ACTION_SIZE } from '../util/theme'
 import { ColorModeControl } from './ColorModeControl'
 import { ExternalLink } from './ExternalLink'
 import { HeaderTooltip } from './HeaderTooltip'
@@ -70,7 +71,7 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
             href={linkedinUrl}
             aria-label={LINKED_IN_LABEL}
             variant="subtle"
-            size={36}
+            size={HEADER_ACTION_SIZE}
           >
             <SiteIcon icon={IconBrandLinkedin} />
           </ActionIcon>
@@ -85,7 +86,7 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
             download="ben-gaumond-resume.pdf"
             aria-label={DOWNLOAD_LABEL}
             variant="subtle"
-            size={36}
+            size={HEADER_ACTION_SIZE}
           >
             <SiteIcon icon={IconDownload} />
           </ActionIcon>

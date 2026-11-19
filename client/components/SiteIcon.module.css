@@ -2,3 +2,8 @@
   flex-shrink: 0;
   vertical-align: middle;
 }
+
+.github-mark {
+  composes: icon;
+  color: light-dark(#000, #fff);
+}

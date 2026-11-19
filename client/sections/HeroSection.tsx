@@ -7,6 +7,8 @@ import type { Resume } from '../util/Resume'
 
 import styles from './HeroSection.module.css'
 
+const LOCATION_ICON_SIZE = 14
+
 export type HeroSectionProps = {
   readonly basics: Pick<
     Resume['basics'],
@@ -22,7 +24,8 @@ export function HeroSection({ basics }: HeroSectionProps) {
       headingOrder={1}
       eyebrow={
         <>
-          <SiteIcon icon={IconMapPin} size={14} /> {basics.role} · {basics.shortLocation}
+          <SiteIcon icon={IconMapPin} size={LOCATION_ICON_SIZE} /> {basics.role} ·{' '}
+          {basics.shortLocation}
         </>
       }
       title={basics.section.title}

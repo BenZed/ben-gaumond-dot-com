@@ -3,6 +3,8 @@ import type { CSSVariablesResolver } from '@mantine/core'
 
 import typography from '../Typography.module.css'
 
+export const HEADER_ACTION_SIZE = 36
+
 export const cssVariablesResolver: CSSVariablesResolver = () => ({
   variables: {
     '--site-page-width': rem(1120),

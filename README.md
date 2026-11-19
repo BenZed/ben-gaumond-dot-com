@@ -23,7 +23,7 @@ npm run preview
 
 `check` verifies types, lint, and formatting, then runs `npm test`. The Vitest suite covers prerendering and PDF export. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
-Vite builds a React SSR entry and uses it to prerender `content/resume.json` while generating `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the same resume data embedded in the HTML.
+The Vite plugin in `build/` compiles `client/App.tsx` for SSR and renders it with `content/resume.json` while generating `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the same resume data embedded in the HTML.
 
 ## Resume PDF
 
@@ -65,7 +65,7 @@ The initial project artwork is decorative typography and CSS, not a screenshot o
 
 ## Source filenames
 
-Match a source file’s name and casing to its primary export. For example, `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, as in `prerender.test.ts`.
+Match a source file’s name and casing to its primary export. For example, `useActiveSection.ts` exports `useActiveSection`. Name colocated tests after the module they cover, as in `resumePrerenderPlugin.test.ts`.
 
 Keep conventional names for entry points, config files, declaration files, and modules without a clear primary export.
 
@@ -81,7 +81,7 @@ Browser and build code use `strict`, `noUncheckedIndexedAccess`, `exactOptionalP
 
 Define props in a named `<ComponentName>Props` type. Export the type for public components and keep it local for private components. Components without props need no props type.
 
-`src/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `src/sections/` and custom hooks in `src/hooks/`. Put UI pieces with a distinct responsibility in `src/components/`, such as the shared `Section` primitive and `ProjectCard`. `src/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `src/styles.css` contains document-wide styles.
+`client/App.tsx` composes the page and its providers. Put page sections that compose `Section` in `client/sections/` and custom hooks in `client/hooks/`. Put UI pieces with a distinct responsibility in `client/components/`, such as the shared `Section` primitive and `ProjectCard`. `client/theme.ts` owns Mantine defaults and shared color tokens. Keep local styles in the component’s `.module.css` file and use Mantine’s `classNames` slots when styling component parts. `client/styles.css` contains document-wide styles.
 
 Prefer Mantine components and hooks, including polymorphic semantic elements. Native details/summary semantics are intentionally preserved through `Box` for disclosure behavior without JavaScript. Keep career content in `content/resume.json` rather than in component files.
 

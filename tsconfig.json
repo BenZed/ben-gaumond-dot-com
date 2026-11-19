@@ -26,5 +26,5 @@
     "skipLibCheck": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["index.tsx", "src", "vite.config.ts", "content/**/*.json", "scripts"]
+  "include": ["index.tsx", "client", "build", "vite.config.ts", "content/**/*.json", "scripts"]
 }

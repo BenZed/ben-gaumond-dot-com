@@ -1,12 +1,13 @@
 import { assert, expect, test } from 'vitest'
 
+import { App } from '../client/App'
+import type { Resume } from '../client/Resume'
 import resume from '../content/resume.json' with { type: 'json' }
-import type { Resume } from '../src/Resume'
-import { prerender } from './prerender'
+import { renderResumePage } from './resumePrerenderPlugin'
 
 test('the prerendered page includes resume HTML and matching hydration data', () => {
   const template = '<!doctype html><div id="root"><!--app-html--></div>'
-  const page = prerender(template, resume)
+  const page = renderResumePage(template, resume, App)
   expect(page).toMatch(/<main\b/u)
   expect(page).toContain(resume.basics.summary)
   const header = /<header\b[\s\S]*?<\/header>/u.exec(page)?.[0]
@@ -74,7 +75,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   delete emptyRole.url
 
   const template = '<div id="root"><!--app-html--></div>'
-  const page = prerender(template, fixture)
+  const page = renderResumePage(template, fixture, App)
   const [markup = ''] = page.split('<script type="application/json"')
   for (const text of [
     fixture.basics.pronouns,
@@ -114,7 +115,7 @@ test('offers an inline player for an embeddable project without loading the ifra
   assert.ok(project?.url)
   project.embedUrl = 'https://example.com/embed/in-and-out'
 
-  const page = prerender('<div id="root"><!--app-html--></div>', fixture)
+  const page = renderResumePage('<div id="root"><!--app-html--></div>', fixture, App)
   const [markup = ''] = page.split('<script type="application/json"')
   expect(markup).toContain('Play inline')
   expect(markup).toContain(`href="${project.url}"`)
@@ -131,7 +132,7 @@ test.each(['featured', 'grouped'] as const)(
     const ids = list === 'featured' ? fixture.toolkit.featuredToolIds : area.toolIds
     ids.push('missing-tool')
 
-    expect(() => prerender('<div id="root"><!--app-html--></div>', fixture)).toThrow(
+    expect(() => renderResumePage('<div id="root"><!--app-html--></div>', fixture, App)).toThrow(
       /Unknown toolkit tool ID: "missing-tool"/u,
     )
   },

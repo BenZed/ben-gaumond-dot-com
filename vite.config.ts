@@ -4,8 +4,8 @@ import { createElement, Fragment } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { defineConfig } from 'vite'
 
+import { resumePrerenderPlugin } from './build/resumePrerenderPlugin'
 import resume from './content/resume.json' with { type: 'json' }
-import { resumePrerenderPlugin } from './scripts/resumePrerenderPlugin'
 
 function renderResumeMetadata({ name, role, headline, summary }: (typeof resume)['basics']) {
   const title = `${name} — ${role}`

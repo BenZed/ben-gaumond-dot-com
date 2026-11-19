@@ -1,12 +1,12 @@
 import '@fontsource-variable/archivo/wdth.css'
 import '@fontsource-variable/instrument-sans'
 import '@mantine/core/styles.layer.css'
-import './src/styles.css'
+import './client/styles.css'
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 
-import { App } from './src/App'
-import type { Resume } from './src/Resume'
+import { App } from './client/App'
+import type { Resume } from './client/Resume'
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Root element is missing')

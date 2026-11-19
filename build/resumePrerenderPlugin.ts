@@ -3,13 +3,29 @@ import { createRequire } from 'node:module'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { createElement } from 'react'
+import { renderToString } from 'react-dom/server'
 import type { Plugin } from 'vite'
 
-import type { Resume } from '../src/Resume'
-import type { prerender } from './prerender'
+import type { App as ResumeApp } from '../client/App'
+import type { Resume } from '../client/Resume'
+
+const appPlaceholder = '<div id="root"><!--app-html--></div>'
+
+export function renderResumePage(template: string, resume: Resume, App: typeof ResumeApp) {
+  if (!template.includes(appPlaceholder)) throw new Error('Missing resume HTML placeholder')
+  const markup = renderToString(createElement(App, resume))
+  // Escape tag openers so a value cannot close the script element.
+  const snapshot = JSON.stringify(resume).replaceAll('<', '\\u003c')
+  return template.replace(
+    appPlaceholder,
+    () =>
+      `<div id="root">${markup}</div><script type="application/json" id="resume-data">${snapshot}</script>`,
+  )
+}
 
 export function resumePrerenderPlugin(resume: Resume): Plugin {
-  let renderPage: typeof prerender | undefined
+  let App: typeof ResumeApp | undefined
 
   return {
     name: 'resume-prerender',
@@ -19,7 +35,7 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
       environments: {
         ssr: {
           build: {
-            ssr: fileURLToPath(new URL('prerender.tsx', import.meta.url)),
+            ssr: fileURLToPath(new URL('../client/App.tsx', import.meta.url)),
             write: false,
             rolldownOptions: { output: { codeSplitting: false } },
           },
@@ -38,21 +54,20 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
       // Keep the temporary entry under the project so Node can resolve its package imports.
       const directory = await mkdtemp(join(builder.config.root, 'node_modules', '.resume-ssr-'))
       try {
-        const entryPath = join(directory, 'prerender.mjs')
+        const entryPath = join(directory, 'App.mjs')
         await writeFile(entryPath, entry.code)
-        const renderer = createRequire(import.meta.url)(entryPath) as {
-          readonly prerender: typeof prerender
+        const module = createRequire(import.meta.url)(entryPath) as {
+          readonly App: typeof ResumeApp
         }
-        renderPage = renderer.prerender
+        App = module.App
         await builder.build(client)
       } finally {
         await rm(directory, { recursive: true, force: true })
       }
     },
     transformIndexHtml(html) {
-      if (!renderPage)
-        throw new Error('The resume SSR entry must be built before transforming HTML')
-      return renderPage(html, resume)
+      if (!App) throw new Error('The resume SSR entry must be built before transforming HTML')
+      return renderResumePage(html, resume, App)
     },
   }
 }

@@ -8,9 +8,6 @@ import { SiteIcon } from './SiteIcon'
 
 import styles from './ProjectPreview.module.css'
 
-const visibilityThreshold = 0.4
-const visibilityThresholds = [0, visibilityThreshold]
-
 export type ProjectPreviewProps = {
   readonly href: string
   readonly preview: NonNullable<Position['preview']>
@@ -18,16 +15,62 @@ export type ProjectPreviewProps = {
 }
 
 export function ProjectPreview({ href, preview, title }: ProjectPreviewProps) {
+  const { containerRef, player, playing, onPlay, onPause, togglePlayback } = useProjectPlayback()
+
+  return (
+    <Box ref={containerRef} className={styles['preview']}>
+      <Anchor href={href} display="block" aria-label={`Open ${title} project`}>
+        <Box
+          component="video"
+          ref={player}
+          src={preview.src}
+          poster={preview.poster}
+          width={preview.width}
+          height={preview.height}
+          aria-label={`${title} gameplay preview`}
+          className={styles['video']}
+          preload="none"
+          muted
+          playsInline
+          loop
+          onPlay={onPlay}
+          onPause={onPause}
+        />
+      </Anchor>
+      <ActionIcon
+        type="button"
+        variant="default"
+        className={styles['playback-control']}
+        size="lg"
+        aria-label={`${playing ? 'Pause' : 'Play'} ${title} preview`}
+        onClick={togglePlayback}
+      >
+        <SiteIcon icon={playing ? IconPlayerPause : IconPlayerPlay} />
+      </ActionIcon>
+    </Box>
+  )
+}
+
+const visibilityThreshold = 0.4
+const visibilityThresholds = [0, visibilityThreshold]
+
+type PlaybackIntent = 'auto' | 'play' | 'pause'
+
+function useProjectPlayback() {
   const player = useRef<HTMLVideoElement>(null)
-  const { ref, entry } = useIntersection<HTMLDivElement>({ threshold: visibilityThresholds })
+  const { ref: containerRef, entry } = useIntersection<HTMLDivElement>({
+    threshold: visibilityThresholds,
+  })
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)', true)
-  const [playbackPreference, setPlaybackPreference] = useState<boolean>()
+  const [intent, setIntent] = useState<PlaybackIntent>('auto')
   const [playing, setPlaying] = useState(false)
   const visible = (entry?.intersectionRatio ?? 0) >= visibilityThreshold
-  const shouldPlay =
-    playbackPreference === true
-      ? entry?.isIntersecting === true
-      : playbackPreference !== false && !reducedMotion && visible
+  const playByIntent = {
+    auto: !reducedMotion && visible,
+    play: entry?.isIntersecting === true,
+    pause: false,
+  } satisfies Record<PlaybackIntent, boolean>
+  const shouldPlay = playByIntent[intent]
 
   useEffect(() => {
     const video = player.current
@@ -45,41 +88,17 @@ export function ProjectPreview({ href, preview, title }: ProjectPreviewProps) {
     const video = player.current
     if (!video) return
 
-    setPlaybackPreference(!playing)
+    setIntent(playing ? 'pause' : 'play')
     if (playing) video.pause()
     else void video.play().catch(() => undefined)
   }
 
-  return (
-    <Box ref={ref} className={styles['preview']}>
-      <Anchor href={href} display="block" aria-label={`Open ${title} project`}>
-        <Box
-          component="video"
-          ref={player}
-          src={preview.src}
-          poster={preview.poster}
-          width={preview.width}
-          height={preview.height}
-          aria-label={`${title} gameplay preview`}
-          className={styles['video']}
-          preload="none"
-          muted
-          playsInline
-          loop
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
-        />
-      </Anchor>
-      <ActionIcon
-        type="button"
-        variant="default"
-        className={styles['playback-control']}
-        size="lg"
-        aria-label={`${playing ? 'Pause' : 'Play'} ${title} preview`}
-        onClick={togglePlayback}
-      >
-        <SiteIcon icon={playing ? IconPlayerPause : IconPlayerPlay} />
-      </ActionIcon>
-    </Box>
-  )
+  return {
+    containerRef,
+    player,
+    playing,
+    onPlay: () => setPlaying(true),
+    onPause: () => setPlaying(false),
+    togglePlayback,
+  }
 }

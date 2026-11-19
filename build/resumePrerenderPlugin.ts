@@ -11,17 +11,20 @@ import type { App as ResumeApp } from '../client/App'
 import type { Resume } from '../client/Resume'
 
 const appPlaceholder = '<div id="root"><!--app-html--></div>'
+const dataPlaceholder = '<!--resume-data-->'
 
 export function renderResumePage(template: string, resume: Resume, App: typeof ResumeApp) {
   if (!template.includes(appPlaceholder)) throw new Error('Missing resume HTML placeholder')
+  if (!template.includes(dataPlaceholder)) throw new Error('Missing resume data placeholder')
   const markup = renderToString(createElement(App, resume))
   // Escape tag openers so a value cannot close the script element.
   const snapshot = JSON.stringify(resume).replaceAll('<', '\\u003c')
-  return template.replace(
-    appPlaceholder,
-    () =>
-      `<div id="root">${markup}</div><script type="application/json" id="resume-data">${snapshot}</script>`,
-  )
+  return template
+    .replace(
+      dataPlaceholder,
+      () => `<script type="application/json" id="resume-data">${snapshot}</script>`,
+    )
+    .replace(appPlaceholder, () => `<div id="root">${markup}</div>`)
 }
 
 export function resumePrerenderPlugin(resume: Resume): Plugin {

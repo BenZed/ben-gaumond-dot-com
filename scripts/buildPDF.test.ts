@@ -31,7 +31,11 @@ let directory: string
 beforeEach(async () => {
   vi.resetAllMocks()
   directory = await mkdtemp(join(tmpdir(), 'resume-pdf-test-'))
-  preview.mockResolvedValue({ resolvedUrls: { local: [url] }, close: closePreview })
+  preview.mockResolvedValue({
+    config: { root: directory, build: { outDir: 'build/output' } },
+    resolvedUrls: { local: [url] },
+    close: closePreview,
+  })
   launch.mockResolvedValue({ newPage: vi.fn().mockResolvedValue(page), close: closeBrowser })
   page.goto.mockResolvedValue({ ok: () => true })
   page.getByRole.mockReturnValue({ waitFor: vi.fn() })
@@ -40,6 +44,13 @@ beforeEach(async () => {
 
 afterEach(async () => {
   await rm(directory, { recursive: true, force: true })
+})
+
+test('writes the default PDF to the configured site output directory', async () => {
+  const output = join(directory, 'build', 'output', 'ben-gaumond-resume.pdf')
+
+  await expect(buildPDF()).resolves.toBe(output)
+  expect(await readFile(output)).toEqual(pdfBytes)
 })
 
 test('writes the rendered PDF to a nested output path', async () => {

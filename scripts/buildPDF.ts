@@ -13,11 +13,6 @@ export type BuildPDFParams = {
 
 export async function buildPDF({ output }: BuildPDFParams = {}) {
   if (output === '') throw new Error('Supply a file path for the PDF output')
-  const outputPath =
-    output === undefined
-      ? fileURLToPath(new URL('../dist/ben-gaumond-resume.pdf', import.meta.url))
-      : resolve(output)
-
   const server = await preview({
     root: fileURLToPath(new URL('..', import.meta.url)),
     configLoader: 'runner',
@@ -27,12 +22,16 @@ export async function buildPDF({ output }: BuildPDFParams = {}) {
     const url = server.resolvedUrls?.local[0]
     if (!url) throw new Error('Vite did not provide a local preview URL')
 
+    const outputPath =
+      output === undefined
+        ? resolve(server.config.root, server.config.build.outDir, 'ben-gaumond-resume.pdf')
+        : resolve(output)
     const pdf = await renderResumePdf(url)
     await writeResumePdf(pdf, outputPath)
+    return outputPath
   } finally {
     await server.close()
   }
-  return outputPath
 }
 
 async function renderResumePdf(url: string) {

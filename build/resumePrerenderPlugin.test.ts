@@ -5,8 +5,10 @@ import type { Resume } from '../client/Resume'
 import resume from '../content/resume.json' with { type: 'json' }
 import { renderResumePage } from './resumePrerenderPlugin'
 
+const template =
+  '<!doctype html><html><head><!--resume-data--></head><body><div id="root"><!--app-html--></div></body></html>'
+
 test('the prerendered page includes resume HTML and matching hydration data', () => {
-  const template = '<!doctype html><div id="root"><!--app-html--></div>'
   const page = renderResumePage(template, resume, App)
   expect(page).toMatch(/<main\b/u)
   expect(page).toContain(resume.basics.summary)
@@ -29,8 +31,10 @@ test('the prerendered page includes resume HTML and matching hydration data', ()
   const extendScriptLink = `href="${extendScript.url}">${extendScript.label}</a>`
   expect(page.split(extendScriptLink)).toHaveLength(2)
 
+  const head = /<head>[\s\S]*?<\/head>/u.exec(page)?.[0]
+  assert.ok(head)
   const snapshot = /<script type="application\/json" id="resume-data">(.*?)<\/script>/u.exec(
-    page,
+    head,
   )?.[1]
   assert.ok(snapshot)
   const payload: unknown = JSON.parse(snapshot)
@@ -74,9 +78,8 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   emptyRole.skills = []
   delete emptyRole.url
 
-  const template = '<div id="root"><!--app-html--></div>'
   const page = renderResumePage(template, fixture, App)
-  const [markup = ''] = page.split('<script type="application/json"')
+  const [, markup = ''] = page.split('<body>')
   for (const text of [
     fixture.basics.pronouns,
     area.summary,
@@ -115,8 +118,8 @@ test('offers an inline player for an embeddable project without loading the ifra
   assert.ok(project?.url)
   project.embedUrl = 'https://example.com/embed/in-and-out'
 
-  const page = renderResumePage('<div id="root"><!--app-html--></div>', fixture, App)
-  const [markup = ''] = page.split('<script type="application/json"')
+  const page = renderResumePage(template, fixture, App)
+  const [, markup = ''] = page.split('<body>')
   expect(markup).toContain('Play inline')
   expect(markup).toContain(`href="${project.url}"`)
   expect(markup).not.toContain('<iframe')
@@ -132,7 +135,7 @@ test.each(['featured', 'grouped'] as const)(
     const ids = list === 'featured' ? fixture.toolkit.featuredToolIds : area.toolIds
     ids.push('missing-tool')
 
-    expect(() => renderResumePage('<div id="root"><!--app-html--></div>', fixture, App)).toThrow(
+    expect(() => renderResumePage(template, fixture, App)).toThrow(
       /Unknown toolkit tool ID: "missing-tool"/u,
     )
   },

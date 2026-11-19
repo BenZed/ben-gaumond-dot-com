@@ -24,6 +24,7 @@ function renderResumeMetadata({ name, role, headline, summary }: (typeof resume)
 export default defineConfig({
   appType: 'mpa',
   base: './',
+  build: { outDir: 'build/output' },
   plugins: [
     react(),
     resumePrerenderPlugin(resume),

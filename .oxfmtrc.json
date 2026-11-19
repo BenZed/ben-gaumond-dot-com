@@ -4,5 +4,5 @@
   "singleQuote": true,
   "printWidth": 100,
   "sortImports": { "sortSideEffects": false },
-  "ignorePatterns": ["dist/**", "workbench/**", "node_modules/**", "package-lock.json"]
+  "ignorePatterns": ["build/output/**", "workbench/**", "node_modules/**", "package-lock.json"]
 }

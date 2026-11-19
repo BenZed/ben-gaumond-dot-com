@@ -1,6 +1,7 @@
 /workbench/
 /node_modules/
 /dist/
+/build/output/
 /coverage/
 .env
 .env.*

@@ -23,7 +23,7 @@ npm run preview
 
 `check` verifies types, lint, and formatting, then runs `npm test`. The Vitest suite covers prerendering and PDF export. `npm run fmt` formats source files and sorts imports while preserving side-effect import order.
 
-The Vite plugin in `build/` compiles `client/App.tsx` for SSR and renders it with `content/resume.json` while generating `dist/index.html`. The page is readable before JavaScript loads. React hydrates it using the same resume data embedded in the HTML.
+The Vite plugin in `build/` compiles `client/App.tsx` for SSR and renders it with `content/resume.json` while generating `build/output/index.html`. The page is readable before JavaScript loads. React hydrates it using the same resume data embedded in the document head.
 
 ## Resume PDF
 
@@ -35,7 +35,7 @@ npm run build:pdf
 npm run preview
 ```
 
-The export rebuilds the site from `content/resume.json` and uses its print layout to write a US Letter PDF to `dist/ben-gaumond-resume.pdf`. Open the preview and select **Download resume** to test the link locally. A regular `npm run build` recreates `dist` without the PDF.
+The export rebuilds the site from `content/resume.json` and uses its print layout to write a US Letter PDF to `build/output/ben-gaumond-resume.pdf`. Open the preview and select **Download resume** to test the link locally. A regular `npm run build` recreates `build/output`. Use `npm run build:pdf` to include the PDF.
 
 Use `--output` (or `-o`) to choose a different file. Relative paths are resolved from the project directory. The export creates parent directories as needed.
 
@@ -47,7 +47,7 @@ Build scripts can import `buildPDF({ output })` from `scripts/buildPDF.ts` once 
 
 ## GitHub Pages
 
-In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow runs `npm run build:pdf` and publishes `dist` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.
+In the GitHub repository, open **Settings → Pages** and select **GitHub Actions** as the publishing source. The deployment workflow runs `npm run build:pdf` and publishes `build/output` on pushes to `main`. You can also run it from the Actions tab. Relative asset paths support the repository subpath and a custom domain. Set up the custom domain in Pages settings when DNS is ready.
 
 ## Content
 

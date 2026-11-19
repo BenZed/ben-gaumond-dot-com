@@ -17,5 +17,5 @@
     "typescript/switch-exhaustiveness-check": "error",
     "typescript/consistent-type-imports": "error"
   },
-  "ignorePatterns": ["dist/**", "workbench/**", "node_modules/**"]
+  "ignorePatterns": ["build/output/**", "workbench/**", "node_modules/**"]
 }

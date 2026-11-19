@@ -6,42 +6,35 @@
   pointer-events: none;
   user-select: none;
   opacity: var(--site-code-opacity, 0.13);
-  mask-image: linear-gradient(transparent, #000 14%, #000 83%, transparent);
 }
 
 .scene {
   --code-line-height: 1.125rem;
   position: absolute;
-  inset-inline: 0;
-  inset-block-start: 0.75rem;
+  inset: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.25rem, 3vw, 3rem);
-  max-width: 100rem;
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 3vw, 3rem);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+  padding-inline: clamp(0.5rem, 1.75vw, 1.5rem);
   font: 0.75rem / var(--code-line-height) var(--mantine-font-family-monospace);
   color: var(--site-code-foreground);
-  transform: translateY(var(--code-travel, 0px));
+}
+
+.column {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.track {
+  /* Shift by less than one copy so the repeated source always covers the viewport. */
+  --code-file-height: calc(var(--code-file-lines) * var(--code-line-height));
+  transform: translateY(calc(0px - mod(var(--code-travel, 0px), var(--code-file-height))));
 }
 
 .file {
-  /* Reveal complete lines across the column, then reveal part of the next line. */
-  --row-top: calc(var(--write-on-lines, 0) * var(--code-line-height));
-  --row-bottom: calc(var(--row-top) + var(--code-line-height));
-  --row-width: var(--write-on-column, 0%);
   margin: 0;
-  min-width: 0;
-  overflow: hidden;
   font: inherit;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% var(--row-top),
-    var(--row-width) var(--row-top),
-    var(--row-width) var(--row-bottom),
-    0 var(--row-bottom)
-  );
 }
 
 .line {
@@ -51,24 +44,6 @@
 
 .file code {
   font: inherit;
-}
-
-@media (max-width: 900px) {
-  .scene {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .file:nth-child(n + 3) {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .scene {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .file:nth-child(n + 2) {
-    display: none;
-  }
 }
 
 @media print {

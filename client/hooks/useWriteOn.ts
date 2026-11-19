@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-type WriteOnAnimation = {
+export type WriteOnAnimation = {
   readonly from: 0 | 1
   readonly to: 0 | 1
   readonly duration: number
@@ -11,22 +11,13 @@ type WriteOnAnimation = {
 export function useWriteOn<Element extends HTMLElement>(animation?: WriteOnAnimation) {
   const ref = useRef<Element>(null)
 
-  // The same reveal coordinates describe one header label or a column of code.
-  const write = useCallback((progress: number, lines = 1) => {
-    const element = ref.current
-    if (!element) return
-
-    const position = Math.min(1, Math.max(0, progress)) * lines
-    const completed = Math.min(lines - 1, Math.floor(position))
-    element.style.setProperty('--write-on-lines', `${completed}`)
-    element.style.setProperty('--write-on-column', `${(position - completed) * 100}%`)
-  }, [])
-
   useEffect(() => {
     const element = ref.current
     if (!animation || !element) return
 
     const { from, to, duration, steps, delay = 0 } = animation
+    const write = (progress: number) =>
+      element.style.setProperty('--write-on-column', `${progress * 100}%`)
     const finish = () => {
       write(to)
       element.setAttribute('data-write-complete', '')
@@ -53,7 +44,7 @@ export function useWriteOn<Element extends HTMLElement>(animation?: WriteOnAnima
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [animation, write])
+  }, [animation])
 
-  return { ref, write }
+  return { ref }
 }

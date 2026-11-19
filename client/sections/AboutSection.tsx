@@ -31,7 +31,6 @@ export function AboutSection({ about, location, technologyLabels }: AboutSection
             {paragraph}
           </Text>
         ))}
-        <Text component="p">{about.approach}</Text>
         <Text component="p" className={styles['about-footnote']}>
           {technologyList} · {location}
         </Text>

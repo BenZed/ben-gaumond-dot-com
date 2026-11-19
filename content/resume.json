@@ -116,20 +116,10 @@
         "url": "https://globalmechanic.com/",
         "id": "global-mechanic",
         "employment": { "type": "Permanent", "schedule": "Full-time" },
-        "description": [
-          "I had the most fun at Global Mechanic, a small animation studio where technical direction covered everything from onboarding and tech support to building software for artists and producers.",
-          "The work I kept coming back to was the animation pipeline. I led the design of successive versions of the studio's internal tools and learned full-stack development by working on applications tied to how a production actually ran.",
-          "I also rebuilt the studio website several times and put together short-turnaround sites for proposals and client deliverables."
-        ],
-        "skills": [
-          "Full-stack web development",
-          "Animation pipeline tooling",
-          "Technical direction"
-        ],
+        "description": [],
+        "skills": [],
         "highlights": [
-          "Led the design of multiple generations of full-stack tools for the studio's animation pipeline.",
-          "Managed security, technical support, and onboarding while overseeing production workflows for artists and producers.",
-          "Built several versions of the studio website and short-turnaround sites for proposals and client deliverables."
+          "Oversaw studio technology and production workflows, including security, onboarding, technical support, and web projects."
         ]
       },
       {
@@ -139,17 +129,9 @@
         "location": { "place": "Vancouver", "mode": "Hybrid" },
         "id": "pbs-scribbles-ink-s2",
         "employment": { "type": "Contract", "schedule": "Full-time" },
-        "description": [
-          "I led development on Far and Away, the second Scribbles and Ink drawing game for PBS KIDS. The sequel needed a way to keep adding content, so our small team rewrote the original codebase around reusable behaviors and editor tools that artists could use.",
-          "Much of the engine documentation was in another language. Coding in the dark was, honestly, quite fun.",
-          "I also set up Google Analytics and used the data to answer questions for the client. Seeing how a game I'd worked on was actually being played felt like a career milestone."
-        ],
-        "skills": ["Game development", "Editor tooling", "Google Analytics"],
-        "highlights": [
-          "Led a small development team on Far and Away, a PBS KIDS game that lets kids draw and interact with animated characters.",
-          "Rewrote the original codebase around reusable behaviors and built editor tools to make it easier for artists to add content.",
-          "Set up Google Analytics and used it to report on how the game was being played."
-        ],
+        "description": [],
+        "skills": [],
+        "highlights": ["Led a small development team on the second Scribbles and Ink game."],
         "project": {
           "title": "Far and Away",
           "url": "https://pbskids.org/scribblesandink/far-and-away",
@@ -168,14 +150,10 @@
         "location": { "mode": "Remote" },
         "id": "pbs-scribbles-ink-s1",
         "employment": { "type": "Contract", "schedule": "Full-time" },
-        "description": [
-          "In and Out was the first Scribbles and Ink game for PBS KIDS. Kids could draw on a mobile device while interacting with animated characters.",
-          "The tricky part was getting it to run on a wide range of devices. I worked through how the engine's editor serialized assets so we could load them dynamically and manage memory at runtime."
-        ],
-        "skills": ["Game development", "Dynamic asset loading", "Memory management", "Spine 2D"],
+        "description": [],
+        "skills": [],
         "highlights": [
-          "Developed In and Out, a PBS KIDS mobile drawing game with interactive animated characters.",
-          "Worked around the engine editor's serialization constraints to load assets dynamically and manage memory across devices."
+          "Developed the first Scribbles and Ink game, where kids draw alongside animated characters."
         ],
         "project": {
           "title": "In and Out",
@@ -193,18 +171,11 @@
         "title": "Software Developer",
         "dates": { "start": "2010-07", "end": "2013-03" },
         "location": { "place": "Vancouver", "mode": "On-site" },
-        "repository_label": "BenZed/after-effects",
         "id": "somedia-networks",
         "employment": { "type": "Permanent", "schedule": "Part-time" },
-        "description": [
-          "My first developer job involved automating renders in Adobe After Effects. Its scripting engine was already old enough to have opinions about which JavaScript I was allowed to write.",
-          "That work later led me to build an open-source Node.js library for running scripts inside After Effects. Publishing it led to contract work."
-        ],
-        "skills": ["After Effects scripting", "Render automation", "Node.js"],
-        "highlights": [
-          "Automated Adobe After Effects rendering through Adobe's scripting engine.",
-          "Later published a Node.js library that runs scripts inside After Effects and exchanges JSON-compatible data between the two environments."
-        ]
+        "description": [],
+        "skills": [],
+        "highlights": ["Developed software to automate video rendering."]
       }
     ]
   },
@@ -223,8 +194,8 @@
         "title": "Scribbles and Ink",
         "summary": "Two drawing games for PBS KIDS, with a different engineering challenge in each release.",
         "challenge": "In and Out had to run across a wide range of devices. Far and Away needed to make it easier for artists to create more content.",
-        "contribution": "I solved asset-loading and memory problems for the first game. For the sequel, I led a small team through a rewrite that introduced reusable behaviors and editor tools for artists.",
-        "outcome": "Both games shipped. For Far and Away, I also set up analytics so we could see how people were playing."
+        "contribution": "For In and Out, I worked around the engine editor's asset serialization constraints so we could load assets dynamically and manage memory at runtime. For Far and Away, we rewrote the original codebase around reusable behaviors and built editor tools so artists could add content themselves.",
+        "outcome": "Both games shipped. I set up Google Analytics for Far and Away and used it to report to PBS KIDS on how the game was being played."
       },
       {
         "positionIds": ["global-mechanic"],
@@ -237,7 +208,7 @@
         "positionIds": ["somedia-networks"],
         "title": "after-effects",
         "summary": "An open-source Node.js library for scripting Adobe After Effects.",
-        "challenge": "Node.js and After Effects run separate JavaScript engines. Each process has its own runtime state.",
+        "challenge": "Automating renders at SoMedia meant working with the older JavaScript engine inside After Effects. It runs separately from Node.js, with its own runtime state.",
         "contribution": "I packaged a bridge that sends JavaScript functions to After Effects and exchanges JSON-compatible arguments and results. The library supports synchronous calls and asynchronous calls that return promises.",
         "outcome": "Publishing the library led to contract work.",
         "url": "https://github.com/BenZed/after-effects"
@@ -253,8 +224,7 @@
     },
     "paragraphs": [
       "I learned to program as an animator. Writing expressions let me automate some of the motion I'd been setting up by hand. I still like finding the part of a creative workflow where a little code can save someone a lot of fiddling.",
-      "I like a clean abstraction, and I've lost enough time chasing one to know what it costs. I put that effort where someone will feel it, like giving an artist a way to add content without waiting on a developer."
-    ],
-    "approach": "I think most engineering decisions come down to choosing a degree of wrong you can live with. There's always another way to structure the code, and there is, inconveniently, a deadline. I spend the extra time on changes that make the next person's work easier."
+      "I like a clean abstraction, and I've lost enough time chasing one to know what it costs. There's always another way to structure the code, and there is, inconveniently, a deadline."
+    ]
   }
 }

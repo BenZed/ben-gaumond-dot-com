@@ -15,7 +15,13 @@ export function Experience({ position }: ExperienceProps) {
   const { dates, description, project, skills, url } = position
   const location = [position.location.place, position.location.mode].filter(Boolean).join(' · ')
   const detailsUrl = project?.url ?? url
-  const hasDetails = description.length > 0 || skills.length > 0 || Boolean(detailsUrl)
+  const hasDetails = description.length > 0 || skills.length > 0
+  const detailsLink = detailsUrl ? (
+    <ExternalLink
+      href={detailsUrl}
+      label={`Visit ${project?.url ? 'the project' : position.company}`}
+    />
+  ) : null
 
   return (
     <Box component="article" className={styles['experience-row']} id={position.id}>
@@ -50,7 +56,7 @@ export function Experience({ position }: ExperienceProps) {
             <List.Item key={item}>{item}</List.Item>
           ))}
         </List>
-        {hasDetails && (
+        {hasDetails ? (
           <Box component="details" className={styles['role-details']}>
             <Box component="summary">
               More about this role{' '}
@@ -71,14 +77,11 @@ export function Experience({ position }: ExperienceProps) {
                   ))}
                 </Group>
               )}
-              {detailsUrl && (
-                <ExternalLink
-                  href={detailsUrl}
-                  label={`Visit ${project?.url ? 'the project' : position.company}`}
-                />
-              )}
+              {detailsLink}
             </Box>
           </Box>
+        ) : (
+          detailsLink && <Box className={styles['role-details']}>{detailsLink}</Box>
         )}
       </Box>
     </Box>

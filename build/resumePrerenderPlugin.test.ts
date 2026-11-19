@@ -48,8 +48,8 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   const fixture = structuredClone(resume)
   const area = fixture.toolkit.areas.find(({ toolIds }) => toolIds.includes('extendscript'))
   const study = fixture.work.caseStudies[0]
-  const emptyRole = fixture.experience.positions[0]
-  const skilledRole = fixture.experience.positions[1]
+  const emptyRole = fixture.experience.positions.find(({ id }) => id === 'edynamic-learning')
+  const skilledRole = fixture.experience.positions.find(({ id }) => id === 'global-mechanic')
   assert.ok(area && study && emptyRole && skilledRole)
 
   const compiler = {
@@ -76,13 +76,22 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
   study.outcome = 'Example project outcome'
   study.url = 'https://example.com/project'
   fixture.about.paragraphs = ['Example first paragraph', 'Example second paragraph']
-  skilledRole.skills = ['Example role skill']
   emptyRole.description = []
   emptyRole.dates = { start: '2023-04', end: null }
   emptyRole.skills = []
   delete emptyRole.url
 
-  const page = renderResumePage(template, fixture, App)
+  const skill = 'Example role skill'
+  const fixtureWithRoleSkill: Resume = {
+    ...fixture,
+    experience: {
+      ...fixture.experience,
+      positions: fixture.experience.positions.map((position) =>
+        position.id === skilledRole.id ? { ...position, skills: [skill] } : position,
+      ),
+    },
+  }
+  const page = renderResumePage(template, fixtureWithRoleSkill, App)
   const [, markup = ''] = page.split('<body>')
   for (const text of [
     area.summary,
@@ -90,7 +99,7 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
     study.contribution,
     study.outcome,
     ...fixture.about.paragraphs,
-    ...skilledRole.skills,
+    skill,
   ]) {
     expect(markup).toContain(text)
   }
@@ -146,6 +155,7 @@ test('offers an inline player for an embeddable project without loading the ifra
   assert.ok(experienceMarkup)
   expect(experienceMarkup).toContain(`href="${project.url}"`)
   expect(experienceMarkup).toContain('Visit the project')
+  expect(experienceMarkup).not.toMatch(/<details\b/u)
   expect(markup).not.toContain(companyUrl)
   expect(markup).not.toContain('<iframe')
   expect(markup).not.toContain(embedUrl)

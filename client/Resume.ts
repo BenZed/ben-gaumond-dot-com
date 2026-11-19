@@ -5,7 +5,9 @@ type ResumeSource = typeof source
 
 type SourcePosition = ResumeSource['experience']['positions'][number]
 type SourceProject = NonNullable<SourcePosition['project']>
-type PositionSource = Omit<SourcePosition, 'project'> & {
+type PositionSource = Omit<SourcePosition, 'description' | 'skills' | 'project'> & {
+  description: string[]
+  skills: string[]
   project?: {
     title: SourceProject['title']
     url?: SourceProject['url']

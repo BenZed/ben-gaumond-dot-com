@@ -60,10 +60,3 @@ summary {
     color: black;
   }
 }
-
-/* Match the breakpoint where SiteHeader.module.css switches to two rows. */
-@media (max-width: 880px) {
-  html {
-    --site-header-height: 68px;
-  }
-}

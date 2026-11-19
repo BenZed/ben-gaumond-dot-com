@@ -1,43 +1,52 @@
 .section-nav {
-  display: flex;
-  gap: 32px;
   margin-left: auto;
+  min-width: 0;
 }
-.section-nav a {
+.section-links {
+  gap: 2rem;
+}
+.section-links a {
+  color: inherit;
   font-size: 13px;
   font-weight: 550;
   text-decoration: none;
   text-underline-offset: 5px;
 }
-.section-nav a:hover {
+.section-links a:hover,
+.section-links a[aria-current='location'] {
   text-decoration: underline;
 }
-@media (max-width: 800px) {
-  .section-nav {
-    gap: 20px;
-  }
+.section-nav [aria-current='location'] {
+  color: var(--site-accent);
 }
-@media (max-width: 600px) {
-  .section-nav {
-    gap: 12px;
-  }
-  .section-nav a {
-    font-size: 10px;
-  }
+.compact-nav {
+  display: none;
 }
-.section-nav a {
+.section-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  min-height: 2.25rem;
   color: inherit;
 }
-.section-nav a[aria-current='location'] {
-  color: var(--site-accent);
-  text-decoration: underline;
+.section-trigger > svg {
+  flex-shrink: 0;
 }
-@media (max-width: 880px) {
+.section-menu {
+  min-width: 10rem;
+  color: var(--site-text);
+  background: var(--site-background);
+  border-color: var(--site-border);
+}
+@media screen and (max-width: 880px) {
   .section-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
     margin-left: 0;
-    justify-content: space-between;
-    gap: 8px;
+  }
+  .section-links {
+    display: none;
+  }
+  .compact-nav {
+    display: block;
   }
 }

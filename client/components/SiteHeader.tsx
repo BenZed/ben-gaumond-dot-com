@@ -42,29 +42,35 @@ export function SiteHeader({ name, linkedinUrl, siteRepositoryUrl, sections }: S
   const { current, previous } = useActiveSection(header, sections)
   const changing = current !== previous
 
-  return (
-    <Box component="header" className={styles['site-header']} ref={header}>
-      <Anchor className={styles['header-title']} href="#top" aria-label={`${name}, back to top`}>
-        {changing && (
-          <Box
-            component="span"
-            key={`out-${previous}`}
-            className={styles['header-title-out']}
-            aria-hidden="true"
-          >
-            <HeaderLabel label={sections.find(({ id }) => id === previous)?.label} />
-          </Box>
-        )}
+  const title = (
+    <Box component="span" className={styles['header-title']}>
+      {changing && (
         <Box
           component="span"
-          key={`in-${current}`}
-          className={changing ? styles['header-title-in'] : undefined}
+          key={`out-${previous}`}
+          className={styles['header-title-out']}
           aria-hidden="true"
         >
-          <HeaderLabel label={sections.find(({ id }) => id === current)?.label} />
+          <HeaderLabel label={sections.find(({ id }) => id === previous)?.label} />
         </Box>
+      )}
+      <Box
+        component="span"
+        key={`in-${current}`}
+        className={changing ? styles['header-title-in'] : undefined}
+        aria-hidden="true"
+      >
+        <HeaderLabel label={sections.find(({ id }) => id === current)?.label} />
+      </Box>
+    </Box>
+  )
+
+  return (
+    <Box component="header" className={styles['site-header']} ref={header}>
+      <Anchor className={styles['home-link']} href="#top" aria-label={`${name}, back to top`}>
+        {title}
       </Anchor>
-      <SectionNavigation sections={sections} activeId={current} />
+      <SectionNavigation sections={sections} activeId={current} compactTitle={title} />
       <Group className={styles['header-actions']} gap={4} wrap="nowrap">
         <ColorModeControl />
         <HeaderTooltip label={linkedinLabel}>

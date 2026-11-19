@@ -25,12 +25,12 @@ type HeaderLabelProps = {
 }
 
 function HeaderLabel({ label, motion }: HeaderLabelProps) {
-  const { ref } = useWriteOn<HTMLSpanElement>(
+  const writeOn = useWriteOn<HTMLSpanElement>(
     motion === 'in' ? writeIn : motion === 'out' ? writeOut : undefined,
   )
 
   return (
-    <Box component="span" ref={ref} data-write={motion}>
+    <Box component="span" {...writeOn}>
       {label}
     </Box>
   )

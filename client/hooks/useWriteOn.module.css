@@ -1,0 +1,26 @@
+.write-on {
+  --write-on-column: 100%;
+  /* The hook supplies the visible width. Clip the rest from the right. */
+  clip-path: inset(0 calc(100% - var(--write-on-column)) 0 0);
+}
+.write-on[data-write='in'] {
+  /* Hide the incoming label before its first animation frame. */
+  --write-on-column: 0%;
+}
+.write-on[data-write='in'][data-write-complete] {
+  clip-path: none;
+}
+.write-on[data-write='out'] {
+  pointer-events: none;
+}
+.write-on[data-write='out'][data-write-complete] {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .write-on[data-write='in'] {
+    clip-path: none;
+  }
+  .write-on[data-write='out'] {
+    display: none;
+  }
+}

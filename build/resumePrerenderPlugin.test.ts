@@ -113,17 +113,25 @@ test('renders toolkit areas, case studies, biography paragraphs and role skills'
 })
 
 test('offers an inline player for an embeddable project without loading the iframe', () => {
-  const fixture: Resume = structuredClone(resume)
-  const project = fixture.experience.positions.find(({ id }) => id === 'pbs-scribbles-ink-s1')
+  const project = resume.experience.positions.find(({ id }) => id === 'pbs-scribbles-ink-s1')
   assert.ok(project?.url)
-  project.embedUrl = 'https://example.com/embed/in-and-out'
+  const embedUrl = 'https://example.com/embed/in-and-out'
+  const fixture: Resume = {
+    ...resume,
+    experience: {
+      ...resume.experience,
+      positions: resume.experience.positions.map((position) =>
+        position.id === project.id ? { ...position, embedUrl } : position,
+      ),
+    },
+  }
 
   const page = renderResumePage(template, fixture, App)
   const [, markup = ''] = page.split('<body>')
   expect(markup).toContain('Play inline')
   expect(markup).toContain(`href="${project.url}"`)
   expect(markup).not.toContain('<iframe')
-  expect(markup).not.toContain(project.embedUrl)
+  expect(markup).not.toContain(embedUrl)
 })
 
 test.each(['featured', 'grouped'] as const)(

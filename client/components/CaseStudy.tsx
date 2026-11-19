@@ -1,4 +1,5 @@
 import { Anchor, Box, Group, Stack, Text, Title } from '@mantine/core'
+import { useMemo } from 'react'
 
 import { isProjectPosition } from '../util/ProjectPosition'
 import type { Position, Resume } from '../util/Resume'
@@ -15,13 +16,7 @@ export type CaseStudyProps = {
 }
 
 export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
-  const projectPositions = positions.filter(isProjectPosition)
-  const relatedRoles = positions.filter((position) => !isProjectPosition(position))
-  const details = [
-    { label: 'Challenge', text: study.challenge },
-    { label: 'Contribution', text: study.contribution },
-    { label: 'Outcome', text: study.outcome },
-  ]
+  const { projectPositions, relatedRoles, details } = useCaseStudyDetails(study, positions)
 
   return (
     <Stack component="article" className={styles['study']} gap="md">
@@ -29,6 +24,7 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
         <Title order={3}>{study.title}</Title>
         <Text>{study.summary}</Text>
       </Stack>
+
       <Box component="dl" className={styles['details']}>
         {details.map(({ label, text }) =>
           text ? (
@@ -41,7 +37,9 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
           ) : undefined,
         )}
       </Box>
+
       {study.url && <ExternalLink href={study.url} label="View project" />}
+
       {relatedRoles.length > 0 && (
         <Group className={styles['related-roles']} gap="sm">
           {relatedRoles.map((position) => (
@@ -51,6 +49,7 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
           ))}
         </Group>
       )}
+
       {projectPositions.some(({ project }) => project.url) && (
         <Group className={styles['print-project-links']} gap="xs">
           {projectPositions.map(({ id, project: { title, url } }) =>
@@ -62,6 +61,7 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
           )}
         </Group>
       )}
+
       {projectPositions.length > 0 && (
         <Box className={styles['project-grid']}>
           {projectPositions.map((position, index) => (
@@ -71,4 +71,21 @@ export function CaseStudy({ study, positions, artwork }: CaseStudyProps) {
       )}
     </Stack>
   )
+}
+
+// Internal
+
+/** Groups the linked positions and puts the case study details in display order. */
+function useCaseStudyDetails(study: CaseStudyProps['study'], positions: readonly Position[]) {
+  return useMemo(() => {
+    const projectPositions = positions.filter(isProjectPosition)
+    const relatedRoles = positions.filter((position) => !isProjectPosition(position))
+    const details = [
+      { label: 'Challenge', text: study.challenge },
+      { label: 'Contribution', text: study.contribution },
+      { label: 'Outcome', text: study.outcome },
+    ]
+
+    return { projectPositions, relatedRoles, details }
+  }, [study, positions])
 }

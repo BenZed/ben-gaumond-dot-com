@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 
+// Load the animated scene and highlighted source on demand to keep the initial bundle smaller.
+// Suspense leaves the background blank while it loads because the scene is decorative.
 const CodeBackgroundScene = lazy(() =>
   import('./CodeBackgroundScene').then(({ CodeBackgroundScene }) => ({
     default: CodeBackgroundScene,

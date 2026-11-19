@@ -1,6 +1,4 @@
-import { mkdtemp, rm, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { fileURLToPath } from 'node:url'
 
 import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
@@ -39,7 +37,13 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
           build: {
             ssr: fileURLToPath(new URL('../client/App.tsx', import.meta.url)),
             write: false,
-            rolldownOptions: { output: { codeSplitting: false } },
+            rolldownOptions: {
+              output: {
+                codeSplitting: false,
+                // A data URL has no directory for resolving bare package imports.
+                paths: (id) => import.meta.resolve(id),
+              },
+            },
           },
         },
       },
@@ -53,20 +57,13 @@ export function resumePrerenderPlugin(resume: Resume): Plugin {
       const entry = build.output.find((chunk) => chunk.type === 'chunk' && chunk.isEntry)
       if (entry?.type !== 'chunk') throw new Error('The SSR build did not produce a resume entry')
 
-      // Keep the temporary entry under the project so Node can resolve its package imports.
-      const directory = await mkdtemp(join(builder.config.root, 'node_modules', '.resume-ssr-'))
-      try {
-        const entryPath = join(directory, 'App.mjs')
-        await writeFile(entryPath, entry.code)
-        // The bundled config loader leaves this import to Node.
-        const module = (await import(/* @vite-ignore */ pathToFileURL(entryPath).href)) as {
-          readonly App: typeof ResumeApp
-        }
-        App = module.App
-        await builder.build(client)
-      } finally {
-        await rm(directory, { recursive: true, force: true })
+      const moduleUrl = `data:text/javascript;base64,${Buffer.from(entry.code).toString('base64')}`
+      // The bundled config loader leaves this import to Node.
+      const module = (await import(/* @vite-ignore */ moduleUrl)) as {
+        readonly App: typeof ResumeApp
       }
+      App = module.App
+      await builder.build(client)
     },
     transformIndexHtml(html) {
       if (!App) throw new Error('The resume SSR entry must be built before transforming HTML')
